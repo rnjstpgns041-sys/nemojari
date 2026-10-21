@@ -716,7 +716,7 @@ body{padding-bottom:76px}}
     </div>
   </div>
 </footer>
-<nav class="mcta" aria-label="빠른 문의"><a class="p" href="sms:01021938204">문자 견적</a><a href="tel:01021938204">전화</a><a href="https://talk.naver.com/w5v40h" target="_blank" rel="noopener">톡톡</a></nav>
+<nav class="mcta" aria-label="빠른 문의"><a class="p" id="mSms" href="sms:01021938204">문자 견적</a><a href="tel:01021938204">전화</a><a href="https://talk.naver.com/w5v40h" target="_blank" rel="noopener">톡톡</a></nav>
 
 <script>
 const B = id => "https://blog.naver.com/ykd7411/" + id;
@@ -781,7 +781,7 @@ const qType=document.getElementById("qType"),qArea=document.getElementById("qAre
 function msg(){
   return `[네모자리 견적 문의]\n작업: ${qType.value}\n지역: ${qArea.value.trim()||"(지역을 적어주세요)"}\n내용: ${qText.value.trim()||"(작업 내용을 적어주세요)"}\n※ 현장 사진 2~3장 첨부합니다`;
 }
-function upd(){const m=msg();qPrev.textContent=m;qSms.href="sms:01021938204?body="+encodeURIComponent(m);qToast.textContent="";}
+function upd(){const m=msg();qPrev.textContent=m;const h="sms:01021938204?&body="+encodeURIComponent(m);qSms.href=h;const ms=document.getElementById("mSms");if(ms)ms.href=h;qToast.textContent="";}
 [qType,qArea,qText].forEach(el=>el.addEventListener("input",upd));
 upd();
 document.getElementById("qCopy").addEventListener("click",()=>{
