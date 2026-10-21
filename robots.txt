@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nemojari.com/sitemap.xml
