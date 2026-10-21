@@ -312,6 +312,12 @@ footer .links{flex-direction:column;gap:8px}
 .mcta a.p{background:var(--accent);color:var(--on-accent)}
 body{padding-bottom:76px}}
 
+.svc-card.sink-card{grid-column:span 6;background:var(--accent-soft);display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:center}
+.svc-card.sink-card .svc-ill.photo{aspect-ratio:4/3;border-radius:24px}
+.svc-card.sink-card li{background:var(--bg)}
+@media (max-width:860px){.svc-card.sink-card{grid-template-columns:1fr}}
+@media (max-width:560px){.svc-card.sink-card{grid-column:auto}}
+
 /* subpages */
 .sub-hero h1 mark{background:none;color:var(--accent)}
 .crumb{font-size:14px;color:var(--muted);padding-top:28px}
