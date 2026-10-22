@@ -25,7 +25,8 @@
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"></noscript>
 <style>
 /* Layout: 배민식 민트 + 도현체 큰 말장난 헤드라인, 넉넉한 여백과 둥근 카드. 로켓집수리식 작업일지와 문자 견적은 그대로 */
 :root{
@@ -383,7 +384,7 @@ body{padding-bottom:76px}}
       <div class="screen">
         <div class="scr-top"><span class="av"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="8" width="16" height="16" rx="4" fill="none" stroke="var(--on-accent)" stroke-width="4"/></svg></span><span><b>네모자리</b><small>작업 끝나면 바로 답장해요</small></span></div>
         <div class="scr-body">
-          <div class="photo-row"><img src="/img/hero1.jpg" alt=""><img src="/img/hero2.jpg" alt=""><img src="/img/hero3.jpg" alt=""></div>
+          <div class="photo-row"><img fetchpriority="high" decoding="async" width="225" height="300" src="/img/hero1.jpg" alt="칸막이를 철거하고 비운 냉장고장 자리"><img decoding="async" width="225" height="300" src="/img/hero2.jpg" alt="레이저 수평계로 냉장고장 수평을 맞추는 시공 과정"><img decoding="async" width="225" height="300" src="/img/hero3.jpg" alt="상부장까지 맞춰 완성한 냉장고장"></div>
           <p class="msg me">동탄이에요. 1도어 3대가 들어가게 해주세요</p>
           <p class="msg them">사진 확인했어요. 가운데만 철거하면 돼요.</p>
           <div class="est">
@@ -421,13 +422,13 @@ body{padding-bottom:76px}}
       <p>당진 아파트에서 실제로 한 냉장고장 리폼이에요. 가운데 손잡이를 좌우로 밀어보세요.</p>
     </div>
     <div class="ba" id="ba" style="--x:50%">
-      <img src="/img/ba_before.jpg" alt="공사 전, 두꺼운 중앙벽 때문에 냉장고 칸이 둘로 나뉜 냉장고장">
-      <div class="after"><img src="/img/ba_after.jpg" alt="공사 후, 중앙벽을 없애고 냉장고 두 대가 나란히 들어가게 넓힌 냉장고장"></div>
+      <img decoding="async" width="800" height="1067" src="/img/ba_before.jpg" alt="공사 전, 두꺼운 중앙벽 때문에 냉장고 칸이 둘로 나뉜 냉장고장">
+      <div class="after"><img decoding="async" width="800" height="1067" src="/img/ba_after.jpg" alt="공사 후, 중앙벽을 없애고 냉장고 두 대가 나란히 들어가게 넓힌 냉장고장"></div>
       <span class="bar"></span><span class="knob">⇆</span>
       <span class="lab l">BEFORE</span><span class="lab r">AFTER</span>
       <input type="range" id="baRange" min="0" max="100" value="50" aria-label="전후 비교 위치">
     </div>
-    <div class="ba-cap"><span>당진 · 냉장고장 중앙벽 제거 · 1명이 3시간</span><a href="https://blog.naver.com/ykd7411/224375219889" target="_blank" rel="noopener">이 현장 작업 과정 보기 ↗</a></div>
+    <div class="ba-cap"><span>당진 · 냉장고장 중앙벽 제거 · 1명이 3시간</span><a href="/cases/224375219889/">이 현장 작업 과정 보기 →</a></div>
   </div>
 </section>
 
@@ -486,10 +487,10 @@ body{padding-bottom:76px}}
           <p class="rec">작업 기록 · 칸막이 제거 1명 3시간 · 키친핏 리폼 2명 6시간 · 맞춤 제작은 3~5일 뒤 하루 설치</p>
         <a class="more" href="/fridge-cabinet/">사례·자주 묻는 질문 보기 →</a>
         </div>
-        <figure class="fridge-ph"><img src="/img/svc_fridge.jpg" alt="동탄 현장, 냉장고장 옆 남는 공간에 조명 들어간 홈바장을 맞춤 제작한 모습" loading="lazy"><figcaption>동탄 · 홈바장 맞춤 제작</figcaption></figure>
+        <figure class="fridge-ph"><img decoding="async" width="675" height="900" src="/img/svc_fridge.jpg" alt="동탄 현장, 냉장고장 옆 남는 공간에 조명 들어간 홈바장을 맞춤 제작한 모습" loading="lazy"><figcaption>동탄 · 홈바장 맞춤 제작</figcaption></figure>
       </article>
       <article class="svc-card sink-card">
-        <img class="svc-ill photo" src="/img/svc_sink.jpg" alt="내포 현장, 오븐 옮기고 식기세척기 자리를 만든 하부장" loading="lazy">
+        <img decoding="async" width="675" height="900" class="svc-ill photo" src="/img/svc_sink.jpg" alt="내포 현장, 오븐 옮기고 식기세척기 자리를 만든 하부장" loading="lazy">
         <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
         <span class="tag">하부장 리폼</span>
         <h3 style="font-size:36px">싱크대 하부장 리폼</h3>
@@ -500,7 +501,7 @@ body{padding-bottom:76px}}
         </div>
       </article>
       <article class="svc-card">
-        <img class="svc-ill photo" src="/img/svc_closet.jpg" alt="평택 현장, 신발장 가운데 칸을 오픈장으로 바꾼 모습" loading="lazy">
+        <img decoding="async" width="675" height="900" class="svc-ill photo" src="/img/svc_closet.jpg" alt="평택 현장, 신발장 가운데 칸을 오픈장으로 바꾼 모습" loading="lazy">
         <span class="tag">현관·방</span>
         <h3>수납장·신발장·붙박이장</h3>
         <p>신발장 가운데를 오픈장으로, 오피스텔 붙박이장을 TV장으로. 있는 장의 쓰임새를 바꿔 드려요.</p>
@@ -509,7 +510,7 @@ body{padding-bottom:76px}}
         <a class="more" href="/storage-cabinet/">사례·자주 묻는 질문 보기 →</a> <a class="more" href="/built-in-closet/">붙박이장 리폼·제작 →</a>
       </article>
       <article class="svc-card">
-        <img class="svc-ill photo" src="/img/svc_pet.jpg" alt="서산 현장, 방문에 단 소형견용 펫도어" loading="lazy">
+        <img decoding="async" width="675" height="900" class="svc-ill photo" src="/img/svc_pet.jpg" alt="서산 현장, 방문에 단 소형견용 펫도어" loading="lazy">
         <span class="tag">문</span>
         <h3>펫도어·문 하단</h3>
         <p>기존 문을 살려 펫도어를 달고, 매트에 걸리는 문은 두께만큼 잘라요.</p>
@@ -518,7 +519,7 @@ body{padding-bottom:76px}}
         <a class="more" href="/pet-door/">사례·자주 묻는 질문 보기 →</a>
       </article>
       <article class="svc-card">
-        <img class="svc-ill photo" src="/img/svc_out.jpg" alt="전기차 충전구역 바닥 도색을 마친 주차장" loading="lazy">
+        <img decoding="async" width="675" height="900" class="svc-ill photo" src="/img/svc_out.jpg" alt="전기차 충전구역 바닥 도색을 마친 주차장" loading="lazy">
         <span class="tag">바깥</span>
         <h3>시설물 보수</h3>
         <p>바람에 뽑힌 울타리 기둥 고정, 전기차 충전구역 바닥 도색도 해요.</p>
@@ -539,7 +540,7 @@ body{padding-bottom:76px}}
     <ul class="log" id="logList"></ul>
     <div class="log-foot">
       <span id="logCount"></span><button type="button" class="btn btn-soft btn-sm" id="logMore">더 보기</button>
-      <a class="btn btn-soft btn-sm" href="https://blog.naver.com/ykd7411" target="_blank" rel="noopener">블로그에서 791편 전체 보기</a>
+      <a class="btn btn-soft btn-sm" href="/cases/">시공 사례 상세 보기</a><a class="btn btn-soft btn-sm" href="https://blog.naver.com/ykd7411" target="_blank" rel="noopener">블로그에서 791편 전체 보기</a>
     </div>
   </div>
 </section>
@@ -711,7 +712,7 @@ body{padding-bottom:76px}}
       <p>주방 · 거실 · 욕실 · 베란다 · 실외 수리 보수</p>
       <p>전화·문자 <a href="tel:01021938204">010-2193-8204</a></p>
     </div>
-    <div class="links"><a href="/fridge-cabinet/">냉장고장 맞춤 시공</a><a href="/sink-cabinet/">하부장 리폼</a><a href="/dishwasher-cabinet/">식기세척기장 개조</a><a href="/storage-cabinet/">신발장·수납장</a><a href="/built-in-closet/">붙박이장 리폼·제작</a><a href="/pet-door/">펫도어·문 하단</a><a href="/area/">출동 지역</a><a href="/guide/">집수리 가이드</a></div>
+    <div class="links"><a href="/fridge-cabinet/">냉장고장 맞춤 시공</a><a href="/sink-cabinet/">하부장 리폼</a><a href="/dishwasher-cabinet/">식기세척기장 개조</a><a href="/storage-cabinet/">신발장·수납장</a><a href="/built-in-closet/">붙박이장 리폼·제작</a><a href="/pet-door/">펫도어·문 하단</a><a href="/cases/">시공 사례</a><a href="/area/">출동 지역</a><a href="/guide/">집수리 가이드</a></div>
     <div class="links">
       <a href="https://blog.naver.com/ykd7411" target="_blank" rel="noopener">네이버 블로그</a>
       <a href="https://talk.naver.com/w5v40h" target="_blank" rel="noopener">네이버 톡톡</a>
@@ -770,7 +771,7 @@ function renderLog(){
     const pills = [`<span class="pill cat">${c}</span>`];
     if(loc) pills.push(`<span class="pill">${esc(loc)}</span>`);
     if(crew) pills.push(`<span class="pill">${crew} · ${hrs}</span>`);
-    return `<li><a href="${B(id)}" target="_blank" rel="noopener"><span class="pair"><span><img src="/img/${id}_b.jpg" alt="${esc(t)} 공사 전" loading="lazy" decoding="async" width="675" height="900"><i>전</i></span><span><img src="/img/${id}_a.jpg" alt="${esc(t)} 공사 후" loading="lazy" decoding="async" width="675" height="900"><i class="on">후</i></span></span><span class="body"><span class="d">${d}</span><span class="t">${esc(t)}</span><span class="meta">${pills.join("")}</span></span></a></li>`;
+    return `<li><a href="/cases/${id}/"><span class="pair"><span><img src="/img/${id}_b.jpg" alt="${esc(t)} 공사 전" loading="lazy" decoding="async" width="675" height="900"><i>전</i></span><span><img src="/img/${id}_a.jpg" alt="${esc(t)} 공사 후" loading="lazy" decoding="async" width="675" height="900"><i class="on">후</i></span></span><span class="body"><span class="d">${d}</span><span class="t">${esc(t)}</span><span class="meta">${pills.join("")}</span></span></a></li>`;
   }).join("");
   count.textContent = `${all.length}건 중 ${rows.length}건 보는 중`;
   more.hidden = rows.length>=all.length;

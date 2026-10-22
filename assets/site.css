@@ -350,6 +350,10 @@ body{padding-bottom:76px}}
 .prose ul{padding-left:20px;margin:8px 0}
 .prose b{color:var(--accent-ink)}
 .guide-meta{font-size:14px;color:var(--muted);margin-top:16px}
+.gallery{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.gallery img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;display:block;background:var(--surface)}
+.prose ol{padding-left:22px;margin:8px 0}
+@media (max-width:640px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.cards2{grid-template-columns:1fr}}
 
 .mcta{display:none}
