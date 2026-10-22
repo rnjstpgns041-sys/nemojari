@@ -132,7 +132,7 @@ section{padding-block:80px}
 .log-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:22px;color:var(--muted);font-size:14.5px}
 
 /* process */
-.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:s}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:s}
 .step{background:var(--bg);border-radius:var(--r-md);padding:22px 20px;counter-increment:s}
 .step::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-family:var(--font-hand);font-size:16px;margin-bottom:14px}
 .step h3{font-size:22px;margin-bottom:6px}
