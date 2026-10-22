@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>방문·문의 통계 | 네모자리</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='8' fill='%232ac1bc'/%3E%3Crect x='10' y='10' width='12' height='12' rx='3' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'">
+<style>
+:root{--paper:#F2F7F6;--surface:#fff;--ink:#14211F;--ink-soft:#4A5B58;--ink-faint:#7C8D8A;--line:#D8E4E2;--brand:#14958F;--accent:#F2994A;--grid:#E4EEEC}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 60px}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+h1{font-size:1.35rem;margin:0}
+h1 small{display:block;font-size:.8rem;color:var(--ink-faint);font-weight:500}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;font:inherit;font-size:.88rem;font-weight:700;color:var(--ink-soft);padding:7px 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--brand);color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.tile span{display:block;font-size:.78rem;color:var(--ink-faint);font-weight:700}
+.tile b{display:block;font-size:1.7rem;line-height:1.2;margin-top:4px;font-variant-numeric:tabular-nums}
+.tile em{font-style:normal;font-size:.78rem;color:var(--ink-soft)}
+.tile.hl{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+@media(max-width:760px){.tiles{grid-template-columns:repeat(2,1fr)}.tile.wide{grid-column:span 2}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h2{font-size:1rem;margin:0 0 4px}
+.card p.sub{margin:0 0 12px;font-size:.82rem;color:var(--ink-faint)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.8rem;padding:6px 9px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .1s}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--grid)}
+th{font-size:.76rem;color:var(--ink-faint);font-weight:700}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.p{word-break:break-all}
+.bar{display:block;height:6px;border-radius:3px;background:var(--brand);margin-top:4px}
+.note{font-size:.82rem;color:var(--ink-soft);background:#DFF3F1;border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.empty{color:var(--ink-faint);font-size:.88rem;padding:8px 0}
+.lock{max-width:360px;margin:12vh auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 22px;text-align:center}
+.lock input{width:100%;font:inherit;font-size:1.3rem;letter-spacing:.3em;text-align:center;padding:12px;border:1px solid var(--line);border-radius:10px;margin:14px 0 10px}
+.btn{display:inline-block;border:0;background:var(--brand);color:#fff;font:inherit;font-weight:800;padding:12px 18px;border-radius:10px;cursor:pointer;width:100%}
+.btn2{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);font:inherit;font-size:.82rem;font-weight:700;padding:7px 12px;border-radius:999px;cursor:pointer}
+.err{color:#B42318;font-size:.85rem;min-height:1.2em}
+details summary{cursor:pointer;font-weight:700;font-size:.9rem}
+.foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;font-size:.8rem;color:var(--ink-faint)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="lock" id="lock">
+  <h1>방문·문의 통계</h1>
+  <p style="color:var(--ink-soft);font-size:.9rem;margin:8px 0 0" id="lockMsg">사장님용 페이지예요. 비밀번호 6자리를 넣어주세요.</p>
+  <form id="pinForm"><input id="pin" inputmode="numeric" autocomplete="off" maxlength="6" aria-label="비밀번호"><input id="pin2" inputmode="numeric" autocomplete="off" maxlength="6" aria-label="비밀번호 한 번 더" placeholder="한 번 더" hidden style="margin-top:0"><p class="err" id="pinErr" role="alert"></p><button class="btn" type="submit" id="pinBtn">통계 보기</button></form>
+</div>
+
+<div class="wrap" id="app" hidden>
+  <div style="display:flex;gap:6px;margin-bottom:14px"><a href="/admin/stats/" style="font-size:.88rem;font-weight:700;padding:7px 14px;border-radius:999px;background:var(--brand);color:#fff;text-decoration:none">방문·문의 통계</a><a href="/" style="font-size:.88rem;font-weight:700;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);text-decoration:none">홈페이지</a></div>
+  <header>
+    <h1>방문·문의 통계<small id="range"></small></h1>
+    <div class="seg" role="group" aria-label="기간">
+      <button data-d="1">오늘</button><button data-d="7">7일</button><button data-d="30">30일</button><button data-d="90">90일</button>
+    </div>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="note">문자·전화·톡톡 숫자는 홈페이지에서 <b>버튼을 누른 횟수</b>예요. 문자 견적은 사진을 붙여 보내는 문자창을 연 횟수라, 열고 실제로 안 보낸 경우도 들어가요. 번호를 직접 보고 건 전화는 빠져요.</div>
+
+  <div class="grid2">
+    <div class="card"><h2>하루 방문자</h2><p class="sub">그날 홈페이지에 들어온 사람 수</p><div class="chart" id="cVisit"></div></div>
+    <div class="card"><h2>하루 연락</h2><p class="sub">문자 견적 + 전화 + 톡톡 버튼</p><div class="chart" id="cContact"></div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h2>어디서 들어왔나</h2><p class="sub">처음 들어온 경로별 방문자 수</p><div id="tSrc"></div></div>
+    <div class="card"><h2>연락이 나온 페이지</h2><p class="sub">문자·전화·톡톡 버튼을 누른 페이지</p><div id="tContact"></div></div>
+  </div>
+
+  <div class="card"><h2>검색 키워드</h2><p class="sub">어떤 검색어로 홈페이지에 들어왔는지 (방문자 수 순서)</p><div id="tKw"></div><p class="sub" id="kwNote" style="margin:10px 0 0"></p></div>
+
+  <div class="card"><h2>많이 본 페이지</h2><p class="sub">열람 수가 많은 순서</p><div id="tPages"></div></div>
+
+  <div class="card"><details><summary>날짜별 숫자 표로 보기</summary><div id="tDaily" style="margin-top:10px"></div></details></div>
+
+  <div class="foot">
+    <span id="devices"></span>
+    <span><button class="btn2" id="ownerBtn"></button> <button class="btn2" id="logout">잠그기</button></span>
+  </div>
+</div>
+
+<script>
+(function(){
+    var $=function(id){return document.getElementById(id)};
+  function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function n(x){return Number(x||0).toLocaleString('ko-KR')}
+  var pin=ls('nj-stats-pin')||'', days=+(ls('nj-stats-days')||7), setup=false;
+
+  function load(){
+    $('range').textContent='불러오는 중…';
+    fetch('/api/stats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:pin,days:days})})
+      .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+      .then(function(res){
+        var j=res.j;
+        if(j&&(j.error==='pin'||j.error==='format')){ ls('nj-stats-pin',null); pin=''; showLock('비밀번호가 맞지 않아요.'); return; }
+        if(j&&j.error==='locked'){ ls('nj-stats-pin',null); pin=''; showLock('여러 번 틀려서 잠겼어요. '+j.wait+'분 뒤에 다시 해주세요.'); return; }
+        if(j&&j.error==='notset'){ ls('nj-stats-pin',null); pin=''; check(); return; }
+        if(!res.ok){ showLock('불러오지 못했어요. 잠시 뒤 다시 시도해 주세요.'); return; }
+        $('lock').hidden=true; $('app').hidden=false; render(j);
+      })
+      .catch(function(){ showLock('인터넷 연결을 확인해 주세요.'); });
+  }
+  function showLock(msg){ $('app').hidden=true; $('lock').hidden=false; $('pinErr').textContent=msg||''; $('pin').focus(); }
+
+  function render(d){
+    var t=d.totals||{}, td=d.today_totals||{};
+    $('range').textContent=(d.days===1?'오늘':'최근 '+d.days+'일')+' · '+d.today+' 기준';
+    document.querySelectorAll('.seg button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.d===d.days))});
+    var rate=t.visitors?Math.round((t.contact_visitors||0)/t.visitors*1000)/10:0;
+    $('tiles').innerHTML=[
+      ['방문자',t.visitors,'오늘 '+n(td.visitors)+'명','hl'],
+      ['문자 견적 버튼',t.sms,'오늘 '+n(td.sms)+'번','hl'],
+      ['전화 버튼',t.phone,'오늘 '+n(td.phone)+'번',''],
+      ['톡톡 버튼',t.talk,'오늘 '+n(td.talk)+'번',''],
+      ['연락한 방문자 비율',null,'방문자 '+n(t.visitors)+'명 중 '+n(t.contact_visitors)+'명','wide']
+    ].map(function(x){return '<div class="tile '+x[3]+'"><span>'+x[0]+'</span><b>'+(x[1]===null?rate+'%':n(x[1]))+'</b><em>'+x[2]+'</em></div>'}).join('');
+
+    var daily=d.daily||[];
+    bars($('cVisit'),daily.map(function(r){return{k:r.day,v:r.visitors,tip:r.day.slice(5).replace('-','/')+' · 방문자 '+n(r.visitors)+'명 · 열람 '+n(r.views)+'회'}}),'var(--brand)');
+    bars($('cContact'),daily.map(function(r){var c=r.phone+r.sms+r.talk;return{k:r.day,v:c,tip:r.day.slice(5).replace('-','/')+' · 문자 '+r.sms+' · 전화 '+r.phone+' · 톡톡 '+r.talk}}),'var(--accent)');
+
+    $('tSrc').innerHTML=table(d.sources,['경로','방문자','연락'],function(r,max){return '<td>'+esc(r.name)+'<span class="bar" style="width:'+Math.max(2,r.visitors/max*100)+'%"></span></td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.contacts)+'</td>'},'visitors');
+    {$('tKw').innerHTML=table(d.keywords,['검색어','방문자','연락'],function(r,max){return '<td>'+esc(r.kw)+' <small style="color:var(--ink-faint)">'+esc(r.src||'')+'</small><span class="bar" style="width:'+Math.max(2,r.visitors/max*100)+'%"></span></td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.contacts)+'</td>'},'visitors');
+      $('kwNote').textContent='검색·광고로 들어온 방문자 '+n(d.kw_search)+'명 중 '+n(d.kw_known)+'명의 검색어를 알 수 있었어요. 구글은 검색어를 알려주지 않아서, 구글 검색어는 구글 서치 콘솔에서만 볼 수 있어요.'}
+    $('tContact').innerHTML=table(d.contact_pages,['페이지','연락'],function(r){return '<td class="p">'+link(r.path)+'</td><td class="n">'+n(r.contacts)+'</td>'});
+    $('tPages').innerHTML=table(d.pages,['페이지','열람','연락'],function(r,max){return '<td class="p">'+link(r.path)+'<span class="bar" style="width:'+Math.max(2,r.views/max*100)+'%"></span></td><td class="n">'+n(r.views)+'</td><td class="n">'+n(r.contacts)+'</td>'},'views');
+    $('tDaily').innerHTML=table(daily.slice().reverse(),['날짜','방문자','열람','문자','전화','톡톡'],function(r){return '<td>'+r.day+'</td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.views)+'</td><td class="n">'+n(r.sms)+'</td><td class="n">'+n(r.phone)+'</td><td class="n">'+n(r.talk)+'</td>'});
+    var dv=d.devices||{}; $('devices').textContent='휴대폰 '+n(dv.mobile)+'명 · PC '+n(dv.pc)+'명';
+  }
+  var NAMES={'/':'메인 페이지','/kitchen/':'주방·싱크대','/bathroom/':'욕실·타일','/restoration/':'대리석·상판 복원','/interior/':'인테리어','/services/':'시공분야','/cases/':'시공사례 목록','/area/':'시공지역','/reviews/':'후기','/faq/':'자주 묻는 질문','/cost/':'비용 안내','/contact/':'상담 안내','/lp/door/':'광고: 문 수리','/lp/appliance/':'광고: 가전 설치','/lp/countertop-crack/':'광고: 상판 크랙','/lp/bathroom-repair/':'광고: 욕실 수리'};NAMES={'/':'메인 페이지'};
+  fetch('/admin/stats/names.json').then(function(r){return r.ok?r.json():{}}).then(function(j){for(var k in j)if(k!=='/')NAMES[k]=j[k]}).catch(function(){});
+  function link(p){var label=NAMES[p]||(p.indexOf('/case/')===0?'사례: '+p.slice(6).replace(/-/g,' '):p.indexOf('/area/')===0?'지역: '+p.slice(6).replace(/\/$/,''):p);return '<a href="'+esc(p)+'" target="_blank" rel="noopener" style="color:var(--ink)">'+esc(label)+'</a>'}
+  function table(rows,heads,row,key){
+    if(!rows||!rows.length) return '<p class="empty">아직 기록이 없어요.</p>';
+    var max=key?Math.max.apply(null,rows.map(function(r){return r[key]||0}))||1:1;
+    return '<table><thead><tr>'+heads.map(function(h,i){return '<th'+(i?' class="n"':'')+'>'+h+'</th>'}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+row(r,max)+'</tr>'}).join('')+'</tbody></table>';
+  }
+  // 막대 차트: 하루 한 칸, 마우스를 올리거나 누르면 그날 숫자 표시
+  function bars(el,data,color){
+    var W=440,H=170,pl=28,pb=22,pt=8,iw=W-pl-8,ih=H-pt-pb,max=Math.max(1,Math.max.apply(null,data.map(function(x){return x.v})));
+    var step=Math.pow(10,Math.floor(Math.log10(max))),top=Math.ceil(max/step)*step; if(top/step>5&&step>=1) top=Math.ceil(max/(step*2))*step*2; top=Math.max(top,1);
+    var bw=iw/data.length,gap=Math.min(2,bw*0.2),s='<svg viewBox="0 0 '+W+' '+H+'" role="img">';
+    [0,.5,1].forEach(function(f){var y=pt+ih-ih*f,v=Math.round(top*f);s+='<line x1="'+pl+'" x2="'+(W-8)+'" y1="'+y+'" y2="'+y+'" stroke="var(--grid)"/><text x="'+(pl-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="var(--ink-faint)">'+v+'</text>'});
+    var every=Math.ceil(data.length/7);
+    data.forEach(function(x,i){
+      var h=x.v/top*ih,X=pl+i*bw+gap/2,w=Math.max(1,bw-gap),Y=pt+ih-h,r=Math.min(4,w/2,h);
+      if(h>0) s+='<path d="M'+X+','+(pt+ih)+'V'+(Y+r)+'Q'+X+','+Y+' '+(X+r)+','+Y+'H'+(X+w-r)+'Q'+(X+w)+','+Y+' '+(X+w)+','+(Y+r)+'V'+(pt+ih)+'Z" fill="'+color+'"/>';
+      s+='<rect class="hit" data-i="'+i+'" x="'+(pl+i*bw)+'" y="'+pt+'" width="'+bw+'" height="'+ih+'" fill="transparent"/>';
+      if(i%every===0||i===data.length-1&&data.length<=7) s+='<text x="'+(pl+i*bw+bw/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="10" fill="var(--ink-faint)">'+x.k.slice(5).replace('-','/')+'</text>';
+    });
+    s+='<line x1="'+pl+'" x2="'+(W-8)+'" y1="'+(pt+ih)+'" y2="'+(pt+ih)+'" stroke="var(--line)"/></svg><div class="tip"></div>';
+    el.innerHTML=s; el.setAttribute('aria-label',data.map(function(x){return x.tip}).join(', '));
+    var tip=el.querySelector('.tip'),svg=el.querySelector('svg');
+    function show(e){var t=e.target.closest&&e.target.closest('.hit');if(!t){tip.style.opacity=0;return}var x=data[+t.dataset.i],b=t.getBoundingClientRect(),eb=el.getBoundingClientRect();tip.textContent=x.tip;var cx=b.left-eb.left+b.width/2;tip.style.left=Math.min(Math.max(cx,80),eb.width-80)+'px';tip.style.top=(svg.getBoundingClientRect().top-eb.top+20)+'px';tip.style.opacity=1}
+    svg.addEventListener('mousemove',show);svg.addEventListener('click',show);svg.addEventListener('mouseleave',function(){tip.style.opacity=0});
+  }
+
+  function check(){fetch('/api/stats').then(function(r){return r.json()}).then(function(j){setup=!j.set;$('pin2').hidden=!setup;$('pinBtn').textContent=setup?'비밀번호 정하기':'통계 보기';$('lockMsg').textContent=setup?'처음 쓰시는 거예요. 앞으로 쓸 숫자 비밀번호 6자리를 정해주세요.':'사장님용 페이지예요. 비밀번호 6자리를 넣어주세요.';showLock('')}).catch(function(){showLock('인터넷 연결을 확인해 주세요.')})}
+  $('pinForm').addEventListener('submit',function(e){e.preventDefault();var v=$('pin').value.trim();if(!/^\d{6}$/.test(v)){$('pinErr').textContent='숫자 6자리로 넣어주세요.';return}
+    if(setup){if($('pin2').value.trim()!==v){$('pinErr').textContent='두 번 넣은 숫자가 달라요.';return}
+      fetch('/api/stats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:v,setup:true})}).then(function(r){if(!r.ok)throw 0;setup=false;$('pin2').hidden=true;$('pinBtn').textContent='통계 보기';pin=v;ls('nj-stats-pin',pin);load()}).catch(function(){check()});return}
+    pin=v;ls('nj-stats-pin',pin);load()});
+  document.querySelector('.seg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;days=+b.dataset.d;ls('nj-stats-days',String(days));load()});
+  $('logout').addEventListener('click',function(){ls('nj-stats-pin',null);pin='';$('pin').value='';showLock('')});
+  function ownerLabel(){$('ownerBtn').textContent=ls('nj-owner')?'이 기기 방문은 통계에서 빠져 있어요 (다시 넣기)':'내 방문은 통계에서 빼기'}
+  $('ownerBtn').addEventListener('click',function(){ls('nj-owner',ls('nj-owner')?null:'1');ownerLabel()});
+  ownerLabel();
+  if(pin) load(); else check();
+})();
+</script>
+</body>
+</html>

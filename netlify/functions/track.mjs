@@ -1,22 +1,29 @@
-// 방문·문의 버튼 클릭을 날짜별 합계로만 저장한다 (개인정보·쿠키 없음)
+// 방문·연락 버튼을 날짜별로 모은다. 방문자는 기기에 저장한 무작위 번호로만 구분한다 (이름·연락처 없음)
 import { getStore } from "@netlify/blobs";
 
 const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|yeti|daum|facebookexternalhit|kakaotalk-scrap|python|curl|wget/i;
-const CLICKS = ["sms", "tel", "talk", "copy"];
+const CONTACT = { tel: 1, sms: 1, talk: 1 };
 
-function source(r) {
-  if (!r) return "직접 방문";
+function host(r) {
+  try { return new URL(r).hostname; } catch { return ""; }
+}
+function source(r, src) {
+  if (src) return /naver/i.test(src) ? "네이버 광고" : /google/i.test(src) ? "구글 광고" : "광고 · " + src.slice(0, 30);
+  const h = host(r);
+  if (!h || h.endsWith("nemojari.com")) return "직접 방문";
+  if (h.includes("naver")) return h.includes("blog") ? "네이버 블로그" : h.includes("map") || h.includes("place") ? "네이버 지도" : "네이버 검색";
+  if (h.includes("google")) return "구글 검색";
+  if (h.includes("daum")) return "다음 검색";
+  if (h.includes("kakao")) return "카카오";
+  if (/instagram|facebook|band|youtube|threads/.test(h)) return "SNS";
+  return h.replace(/^www\./, "").slice(0, 40);
+}
+function keyword(r, k) {
+  if (k) return k.slice(0, 60);
   try {
-    const h = new URL(r).hostname;
-    if (h.endsWith("nemojari.com")) return "사이트 안 이동";
-    if (h.includes("naver")) return "네이버";
-    if (h.includes("google")) return "구글";
-    if (h.includes("daum") || h.includes("kakao")) return "다음·카카오";
-    if (/instagram|facebook|band|youtube/.test(h)) return "SNS";
-    return h.slice(0, 60);
-  } catch {
-    return "기타";
-  }
+    const q = new URL(r).searchParams;
+    return (q.get("query") || q.get("q") || q.get("wd") || "").slice(0, 60);
+  } catch { return ""; }
 }
 
 export default async (req) => {
@@ -24,22 +31,28 @@ export default async (req) => {
   if (BOT.test(ua)) return new Response(null, { status: 204 });
   const q = new URL(req.url).searchParams;
   const t = q.get("t") || "view";
+  if (t !== "view" && t !== "copy" && !CONTACT[t]) return new Response(null, { status: 204 });
+  const v = (q.get("v") || "x").replace(/[^a-z0-9]/gi, "").slice(0, 16) || "x";
   let p = (q.get("p") || "/").slice(0, 120);
   if (!/^\/[\w\-\/]*$/.test(p)) p = "/기타";
   const day = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10); // 한국 날짜
-  const store = getStore({ name: "stats", consistency: "strong" });
+  const store = getStore({ name: "stats2", consistency: "strong" });
   const d = (await store.get(day, { type: "json" })) || {};
-  for (const k of ["v", "c", "r", "m", "cp"]) d[k] = d[k] || {};
+  for (const k of ["vis", "pv", "pc", "c"]) d[k] = d[k] || {};
   const inc = (o, k) => (o[k] = (o[k] || 0) + 1);
   if (t === "view") {
-    inc(d.v, p);
-    inc(d.r, source(q.get("r") || ""));
-    inc(d.m, /Mobi|Android|iPhone|iPad/i.test(ua) ? "휴대폰" : "PC");
-  } else if (CLICKS.includes(t)) {
-    inc(d.c, t);
-    inc(d.cp, p);
+    inc(d.pv, p);
+    if (!d.vis[v]) {
+      const r = q.get("r") || "";
+      d.vis[v] = { s: source(r, q.get("src") || ""), k: keyword(r, q.get("k") || ""), d: /Mobi|Android|iPhone|iPad/i.test(ua) ? "m" : "p", c: 0 };
+    }
+  } else if (t === "copy") {
+    inc(d.c, "copy");
   } else {
-    return new Response(null, { status: 204 });
+    inc(d.c, t);
+    inc(d.pc, p);
+    if (!d.vis[v]) d.vis[v] = { s: "직접 방문", k: "", d: /Mobi|Android|iPhone|iPad/i.test(ua) ? "m" : "p", c: 0 };
+    d.vis[v].c++;
   }
   await store.setJSON(day, d);
   return new Response(null, { status: 204, headers: { "cache-control": "no-store" } });
