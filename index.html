@@ -778,7 +778,7 @@ function renderLog(){
     const pills = [`<span class="pill cat">${c}</span>`];
     if(loc) pills.push(`<span class="pill">${esc(loc)}</span>`);
     if(crew) pills.push(`<span class="pill">${crew} · ${hrs}</span>`);
-    return `<li><a href="/cases/${id}/"><span class="pair"><span><img src="/img/${id}_b.jpg" alt="${esc(t)} 공사 전" loading="lazy" decoding="async" width="675" height="900"><i>전</i></span><span><img src="/img/${id}_a.jpg" alt="${esc(t)} 공사 후" loading="lazy" decoding="async" width="675" height="900"><i class="on">후</i></span></span><span class="body"><span class="d">${d}</span><span class="t">${esc(t)}</span><span class="meta">${pills.join("")}</span></span></a></li>`;
+    return `<li><a href="/cases/${id}/"><span class="pair"><span><img src="/img/${id}_b.jpg?v=2" alt="${esc(t)} 공사 전" loading="lazy" decoding="async" width="675" height="900"><i>전</i></span><span><img src="/img/${id}_a.jpg?v=2" alt="${esc(t)} 공사 후" loading="lazy" decoding="async" width="675" height="900"><i class="on">후</i></span></span><span class="body"><span class="d">${d}</span><span class="t">${esc(t)}</span><span class="meta">${pills.join("")}</span></span></a></li>`;
   }).join("");
   count.textContent = `${all.length}건 중 ${rows.length}건 보는 중`;
   more.hidden = rows.length>=all.length;
