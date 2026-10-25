@@ -194,6 +194,29 @@ section{padding-block:80px}
 .three div{display:flex;gap:14px;align-items:flex-start;background:var(--bg);border-radius:var(--r-md);padding:18px}
 .three b{display:block;font-size:16.5px}
 .three span{color:var(--muted);font-size:14.5px}
+.three .qc{display:block;background:var(--bg);border-radius:var(--r-md);border:2px solid transparent;transition:border-color .15s}
+.three .qc.open{border-color:var(--accent)}
+.three .qc.done .ico{background:var(--accent)}
+.three .qc.done .ico svg{stroke:#fff}
+.qc-head{all:unset;box-sizing:border-box;display:flex;gap:14px;align-items:flex-start;width:100%;padding:18px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.qc-head:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:var(--r-md)}
+.qc-head p{flex:1;min-width:0}
+.three .qc-val{display:block;font-style:normal;color:var(--accent-ink);font-weight:600;font-size:14.5px;margin-top:4px;white-space:pre-wrap;word-break:break-all}
+.three .qc-val:empty{display:none}
+.three .qc-go{flex:none;align-self:center;font-size:13px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:6px 12px}
+.three .qc-body{display:none;padding:0 18px 18px;background:none;border-radius:0}
+.three .qc.open .qc-body{display:block}
+#qShare[hidden]{display:none}
+.qc-body input,.qc-body textarea{width:100%;font:inherit;font-size:16px;color:var(--fg);background:var(--surface);border:2px solid transparent;border-radius:14px;padding:14px 16px}
+.qc-body textarea{min-height:110px;resize:vertical}
+.qc-body input:focus,.qc-body textarea:focus{outline:none;border-color:var(--accent)}
+.qc-thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}
+.qc-thumbs figure{position:relative;margin:0;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--surface)}
+.qc-thumbs img,.qc-thumbs video{width:100%;height:100%;object-fit:cover;display:block}
+.qc-thumbs button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:14px;line-height:24px;padding:0;cursor:pointer}
+.qc-add{display:grid;place-items:center;aspect-ratio:1;border-radius:12px;border:2px dashed var(--accent);color:var(--accent-ink);font-weight:700;font-size:13px;cursor:pointer;text-align:center}
+.qc-tip{font-size:13px;color:var(--muted);margin-top:10px}
+.qc-done{margin-top:10px;width:100%}
 .ico{flex:none;width:40px;height:40px;border-radius:12px;background:var(--accent-soft);display:grid;place-items:center}
 .ico svg{width:22px;height:22px;stroke:var(--accent-ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .form{background:var(--bg);border-radius:var(--r-lg);padding:28px;display:flex;flex-direction:column;gap:16px}
@@ -771,9 +794,12 @@ body{padding-bottom:76px}}
       <h2 id="q-h" style="font-size:clamp(34px,5.4vw,58px);line-height:1.18">사진, 동네, 할 일<br>이 세 개면 끝</h2>
       <p class="note" style="font-size:16px;margin-top:14px">현장 작업 중에는 소음 때문에 전화를 못 받을 때가 많아요. 문자나 톡톡으로 남겨주시면 작업 끝나고 순서대로 바로 연락드려요.</p>
       <div class="three">
-        <div><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg></span><p><b>현장 사진 2~3장</b><span>가까이서 1장, 멀리서 1~2장. 동영상이 있으면 더 정확해요.</span></p></div>
-        <div><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><p><b>사는 곳</b><span>시·군·구까지와 방문 가능한 시간대를 알려주세요.</span></p></div>
-        <div><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg></span><p><b>작업 내용</b><span>원하는 디자인이나 냉장고 모델명이 있으면 같이 적어주세요.</span></p></div>
+        <div class="qc" id="qcPhoto"><button type="button" class="qc-head" aria-expanded="false"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg></span><p><b>현장 사진 2~3장</b><span>가까이서 1장, 멀리서 1~2장. 동영상이 있으면 더 정확해요.</span><em class="qc-val" id="qPhotoVal"></em></p><span class="qc-go">사진 선택</span></button>
+          <div class="qc-body"><input type="file" id="qFiles" accept="image/*,video/*" multiple hidden><div class="qc-thumbs" id="qThumbs"><label class="qc-add" for="qFiles">+ 사진<br>추가</label></div><p class="qc-tip">고른 사진은 아래 '사진이랑 문자 보내기'로 같이 보낼 수 있어요. 안 되면 문자창에서 직접 첨부해 주세요.</p></div></div>
+        <div class="qc" id="qcArea"><button type="button" class="qc-head" aria-expanded="false"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><p><b>사는 곳</b><span>시·군·구까지와 방문 가능한 시간대를 알려주세요.</span><em class="qc-val" id="qAreaVal"></em></p><span class="qc-go">입력</span></button>
+          <div class="qc-body"><input id="qArea" aria-label="사는 곳" placeholder="예) 충남 천안시 불당동, 평일 저녁 가능" autocomplete="address-level2"><button type="button" class="btn btn-soft qc-done">다 적었어요</button></div></div>
+        <div class="qc" id="qcText"><button type="button" class="qc-head" aria-expanded="false"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg></span><p><b>작업 내용</b><span>원하는 디자인이나 냉장고 모델명이 있으면 같이 적어주세요.</span><em class="qc-val" id="qTextVal"></em></p><span class="qc-go">입력</span></button>
+          <div class="qc-body"><textarea id="qText" aria-label="작업 내용" placeholder="예) 1도어 냉장고 2대 들어가게 가운데 칸막이 제거하고 싶어요"></textarea><button type="button" class="btn btn-soft qc-done">다 적었어요</button></div></div>
       </div>
     </div>
     <form class="form" id="quoteForm" novalidate>
@@ -789,15 +815,7 @@ body{padding-bottom:76px}}
         </select>
       </div>
       <div>
-        <label for="qArea">지역</label>
-        <input id="qArea" placeholder="예) 충남 천안시 불당동" value="경기 화성시 동탄">
-      </div>
-      <div>
-        <label for="qText">작업 내용</label>
-        <textarea id="qText" placeholder="예) 1도어 냉장고 2대 들어가게 가운데 칸막이 제거하고 싶어요">새로 산 1도어 냉장고 2대가 안 들어가요. 가운데 칸막이 제거 가능할까요?</textarea>
-      </div>
-      <div>
-        <p class="preview-label">이렇게 보내져요 (사진은 문자에 직접 첨부해 주세요)</p>
+        <p class="preview-label">이렇게 보내져요 <span style="font-weight:400">(위 카드를 눌러 사진·사는 곳·작업 내용을 넣어주세요)</span></p>
         <div class="preview" id="qPreview" aria-live="polite"></div>
       </div>
       <div>
@@ -807,6 +825,7 @@ body{padding-bottom:76px}}
       <div class="row">
         <button type="button" class="btn btn-primary" id="qCopy">문자 내용 복사하기</button>
         <a class="btn btn-soft" id="qSms" href="sms:01021938204">문자 앱 열기</a>
+        <button type="button" class="btn btn-primary" id="qShare" hidden style="flex-basis:100%">사진이랑 문자 보내기</button>
       </div>
       <p class="toast" id="qToast"></p>
       <p class="note">문자 앱이 안 열리면 위 번호로 복사한 내용을 붙여넣어 보내주세요. <a href="https://talk.naver.com/w5v40h" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600;text-decoration:none">네이버 톡톡</a>으로도 받아요.</p>
@@ -893,9 +912,44 @@ renderChips();renderLog();
 
 const qType=document.getElementById("qType"),qArea=document.getElementById("qArea"),qText=document.getElementById("qText"),qPrev=document.getElementById("qPreview"),qSms=document.getElementById("qSms"),qToast=document.getElementById("qToast");
 function msg(){
-  return `[네모자리 견적 문의]\n작업: ${qType.value}\n지역: ${qArea.value.trim()||"(지역을 적어주세요)"}\n내용: ${qText.value.trim()||"(작업 내용을 적어주세요)"}\n※ 현장 사진 2~3장 첨부합니다`;
+  return `[네모자리 견적 문의]\n작업: ${qType.value}\n지역: ${qArea.value.trim()||"(지역을 적어주세요)"}\n내용: ${qText.value.trim()||"(작업 내용을 적어주세요)"}\n※ 현장 사진 ${qPics.length?qPics.length+"장":"2~3장"} 첨부합니다`;
 }
-function upd(){const m=msg();qPrev.textContent=m;const h="sms:01021938204?&body="+encodeURIComponent(m);qSms.href=h;const ms=document.getElementById("mSms");if(ms)ms.href=h;qToast.textContent="";}
+let qPics=[];
+const qFiles=document.getElementById("qFiles"),qThumbs=document.getElementById("qThumbs"),qShare=document.getElementById("qShare");
+function qOpen(card,open){card.classList.toggle("open",open);card.querySelector(".qc-head").setAttribute("aria-expanded",open);}
+document.querySelectorAll(".three .qc").forEach(card=>{
+  card.querySelector(".qc-head").addEventListener("click",()=>{
+    const open=!card.classList.contains("open");qOpen(card,open);
+    if(!open)return;
+    if(card.id=="qcPhoto"){if(!qPics.length)qFiles.click();}
+    else{const f=card.querySelector("input,textarea");setTimeout(()=>f.focus(),30);}
+  });
+  const d=card.querySelector(".qc-done");
+  if(d)d.addEventListener("click",()=>{qOpen(card,false);const nx=card.nextElementSibling;if(nx&&!nx.classList.contains("done")){qOpen(nx,true);const f=nx.querySelector("input,textarea");if(f)f.focus();}else document.getElementById("quoteForm").scrollIntoView({behavior:"smooth",block:"start"});});
+});
+qArea.addEventListener("keydown",e=>{if(e.key=="Enter"){e.preventDefault();qArea.closest(".qc").querySelector(".qc-done").click();}});
+function canShareFiles(){try{return qPics.length&&navigator.canShare&&navigator.canShare({files:qPics});}catch(e){return false;}}
+function renderPics(){
+  qThumbs.querySelectorAll("figure").forEach(f=>{const m=f.querySelector("img,video");if(m)URL.revokeObjectURL(m.src);f.remove();});
+  qPics.forEach((f,i)=>{
+    const fig=document.createElement("figure"),u=URL.createObjectURL(f);
+    const m=document.createElement(f.type.startsWith("video")?"video":"img");m.src=u;if(m.tagName=="VIDEO"){m.muted=true;m.playsInline=true;}else m.alt="고른 사진 "+(i+1);
+    const x=document.createElement("button");x.type="button";x.textContent="×";x.setAttribute("aria-label","사진 빼기");
+    x.addEventListener("click",()=>{qPics.splice(i,1);renderPics();upd();});
+    fig.append(m,x);qThumbs.insertBefore(fig,qThumbs.lastElementChild);
+  });
+  document.getElementById("qPhotoVal").textContent=qPics.length?`사진 ${qPics.length}장 골랐어요`:"";
+  document.getElementById("qcPhoto").classList.toggle("done",qPics.length>0);
+  qShare.hidden=!canShareFiles();
+}
+qFiles.addEventListener("change",()=>{qPics=qPics.concat([...qFiles.files]).slice(0,10);qFiles.value="";renderPics();upd();});
+qShare.addEventListener("click",async()=>{
+  const m=msg()+"\n\n받는 번호: 010-2193-8204";
+  try{await navigator.clipboard.writeText("01021938204");}catch(e){}
+  try{await navigator.share({files:qPics,text:m});qToast.textContent="받는 사람에 010-2193-8204를 넣어주세요. (번호는 복사해 두었어요)";}
+  catch(e){if(e&&e.name=="AbortError")return;location.href=qSms.href;qToast.textContent="문자창이 열리면 사진을 직접 첨부해 주세요.";}
+});
+function upd(){const m=msg();qPrev.textContent=m;[["qAreaVal",qArea,"qcArea"],["qTextVal",qText,"qcText"]].forEach(([v,el,c])=>{const t=el.value.trim();document.getElementById(v).textContent=t;document.getElementById(c).classList.toggle("done",!!t);});const h="sms:01021938204?&body="+encodeURIComponent(m);qSms.href=h;const ms=document.getElementById("mSms");if(ms)ms.href=h;qToast.textContent="";}
 [qType,qArea,qText].forEach(el=>el.addEventListener("input",upd));
 upd();
 document.getElementById("qCopy").addEventListener("click",()=>{
@@ -916,6 +970,6 @@ try{
 }catch(e){}
 </script>
 
-<script>(function(){if(!/nemojari\.com$/.test(location.hostname))return;var L;try{L=window.localStorage}catch(e){}function g(k){try{return L.getItem(k)}catch(e){return null}}if(g("nj-owner"))return;var v=g("nj-vid");if(!v){v=Math.random().toString(36).slice(2,12);try{L.setItem("nj-vid",v)}catch(e){}}function s(t,x){try{var q="/api/t?t="+t+"&v="+v+"&p="+encodeURIComponent(location.pathname)+(x||"");if(navigator.sendBeacon)navigator.sendBeacon(q);else fetch(q,{keepalive:true})}catch(e){}}var u=new URLSearchParams(location.search);s("view","&r="+encodeURIComponent(document.referrer)+"&k="+encodeURIComponent(u.get("n_keyword")||u.get("utm_term")||u.get("keyword")||"")+"&src="+encodeURIComponent(u.get("utm_source")||(u.get("n_media")?"naver":"")));document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a,button");if(!a)return;var h=a.getAttribute("href")||"";if(h.indexOf("sms:")==0)s("sms");else if(h.indexOf("tel:")==0)s("tel");else if(h.indexOf("talk.naver.com")>-1)s("talk");else if(a.id=="qCopy")s("copy")},true)})();</script>
+<script>(function(){if(!/nemojari\.com$/.test(location.hostname))return;var L;try{L=window.localStorage}catch(e){}function g(k){try{return L.getItem(k)}catch(e){return null}}if(g("nj-owner"))return;var v=g("nj-vid");if(!v){v=Math.random().toString(36).slice(2,12);try{L.setItem("nj-vid",v)}catch(e){}}function s(t,x){try{var q="/api/t?t="+t+"&v="+v+"&p="+encodeURIComponent(location.pathname)+(x||"");if(navigator.sendBeacon)navigator.sendBeacon(q);else fetch(q,{keepalive:true})}catch(e){}}var u=new URLSearchParams(location.search);s("view","&r="+encodeURIComponent(document.referrer)+"&k="+encodeURIComponent(u.get("n_keyword")||u.get("utm_term")||u.get("keyword")||"")+"&src="+encodeURIComponent(u.get("utm_source")||(u.get("n_media")?"naver":"")));document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a,button");if(!a)return;var h=a.getAttribute("href")||"";if(h.indexOf("sms:")==0)s("sms");else if(h.indexOf("tel:")==0)s("tel");else if(h.indexOf("talk.naver.com")>-1)s("talk");else if(a.id=="qCopy")s("copy");else if(a.id=="qShare")s("sms")},true)})();</script>
 </body>
 </html>
