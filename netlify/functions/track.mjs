@@ -18,6 +18,41 @@ function source(r, src) {
   if (/instagram|facebook|band|youtube|threads/.test(h)) return "SNS";
   return h.replace(/^www\./, "").slice(0, 40);
 }
+// 접속 지역(통신사 IP 기준이라 대략적), 브라우저·앱, 기기 종류
+const PROV = [[/seoul/i, "서울"], [/incheon/i, "인천"], [/gyeonggi/i, "경기"], [/chungcheongnam|chungnam/i, "충남"], [/chungcheongbuk|chungbuk/i, "충북"], [/sejong/i, "세종"], [/daejeon/i, "대전"], [/gangwon/i, "강원"], [/jeollabuk|jeonbuk/i, "전북"], [/jeollanam|jeonnam/i, "전남"], [/gwangju/i, "광주"], [/gyeongsangbuk|gyeongbuk/i, "경북"], [/gyeongsangnam|gyeongnam/i, "경남"], [/daegu/i, "대구"], [/busan/i, "부산"], [/ulsan/i, "울산"], [/jeju/i, "제주"]];
+const CITY = { cheonan: "천안", asan: "아산", dangjin: "당진", seosan: "서산", hongseong: "홍성", yesan: "예산", boryeong: "보령", gongju: "공주", nonsan: "논산", taean: "태안", seocheon: "서천", hwaseong: "화성", suwon: "수원", yongin: "용인", pyeongtaek: "평택", osan: "오산", anseong: "안성", seongnam: "성남", goyang: "고양", bucheon: "부천", ansan: "안산", anyang: "안양", siheung: "시흥", gimpo: "김포", hanam: "하남", namyangju: "남양주", uijeongbu: "의정부", paju: "파주", gwangmyeong: "광명", gunpo: "군포", icheon: "이천", cheongju: "청주", chungju: "충주", jecheon: "제천", sejong: "세종", daejeon: "대전", seoul: "서울", incheon: "인천" };
+function region(geo) {
+  if (!geo || !geo.country) return "";
+  if (geo.country.code && geo.country.code !== "KR") return "해외";
+  const sub = (geo.subdivision && geo.subdivision.name) || "";
+  const prov = (PROV.find(([re]) => re.test(sub)) || [])[1] || "";
+  const ck = (geo.city || "").toLowerCase().replace(/[^a-z]/g, "").replace(/si$/, "");
+  const city = CITY[ck] || "";
+  if (!prov && !city) return "지역 모름";
+  return city && city !== prov ? (prov ? prov + " " + city : city) : prov;
+}
+function browser(ua) {
+  if (/NAVER\(inapp|NAVER/.test(ua)) return "네이버 앱";
+  if (/KAKAOTALK/i.test(ua)) return "카카오톡";
+  if (/Instagram|FBAN|FBAV/.test(ua)) return "인스타·페북";
+  if (/DaumApps/i.test(ua)) return "다음 앱";
+  if (/SamsungBrowser/.test(ua)) return "삼성 인터넷";
+  if (/Whale/.test(ua)) return "웨일";
+  if (/Edg\//.test(ua)) return "엣지";
+  if (/CriOS|Chrome/.test(ua)) return "크롬";
+  if (/Safari/.test(ua)) return "사파리";
+  return "기타";
+}
+function os(ua) {
+  if (/iPhone|iPad|iPod/.test(ua)) return "아이폰";
+  if (/Android/.test(ua)) return "안드로이드";
+  if (/Windows/.test(ua)) return "윈도우";
+  if (/Macintosh/.test(ua)) return "맥";
+  return "기타";
+}
+function newVisitor(ua, ctx, extra) {
+  return Object.assign({ d: /Mobi|Android|iPhone|iPad/i.test(ua) ? "m" : "p", c: 0, n: 0, h: new Date(Date.now() + 9 * 3600e3).getUTCHours(), g: region(ctx && ctx.geo), b: browser(ua), o: os(ua) }, extra);
+}
 function keyword(r, k) {
   if (k) return k.slice(0, 60);
   try {
@@ -26,7 +61,7 @@ function keyword(r, k) {
   } catch { return ""; }
 }
 
-export default async (req) => {
+export default async (req, context) => {
   const ua = req.headers.get("user-agent") || "";
   if (BOT.test(ua)) return new Response(null, { status: 204 });
   const q = new URL(req.url).searchParams;
@@ -44,15 +79,18 @@ export default async (req) => {
     inc(d.pv, p);
     if (!d.vis[v]) {
       const r = q.get("r") || "";
-      d.vis[v] = { s: source(r, q.get("src") || ""), k: keyword(r, q.get("k") || ""), d: /Mobi|Android|iPhone|iPad/i.test(ua) ? "m" : "p", c: 0 };
+      d.vis[v] = newVisitor(ua, context, { s: source(r, q.get("src") || ""), k: keyword(r, q.get("k") || ""), l: p });
     }
+    d.vis[v].n = (d.vis[v].n || 0) + 1;
   } else if (t === "copy") {
     inc(d.c, "copy");
   } else {
     inc(d.c, t);
     inc(d.pc, p);
-    if (!d.vis[v]) d.vis[v] = { s: "직접 방문", k: "", d: /Mobi|Android|iPhone|iPad/i.test(ua) ? "m" : "p", c: 0 };
+    if (!d.vis[v]) d.vis[v] = newVisitor(ua, context, { s: "직접 방문", k: "", l: p });
     d.vis[v].c++;
+    d.vis[v].t = d.vis[v].t || {};
+    inc(d.vis[v].t, t);
   }
   await store.setJSON(day, d);
   return new Response(null, { status: 204, headers: { "cache-control": "no-store" } });

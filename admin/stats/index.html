@@ -13,46 +13,91 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'">
 <style>
-:root{--paper:#F2F7F6;--surface:#fff;--ink:#14211F;--ink-soft:#4A5B58;--ink-faint:#7C8D8A;--line:#D8E4E2;--brand:#14958F;--accent:#F2994A;--grid:#E4EEEC}
+:root{--paper:#F2F7F6;--surface:#fff;--ink:#14211F;--ink-soft:#4A5B58;--ink-faint:#7C8D8A;--line:#D8E4E2;--brand:#14958F;--brand-deep:#0E6F6A;--brand-soft:#DFF3F1;--accent:#E8833A;--c3:#5B6CD9;--c4:#C9A227;--grid:#E4EEEC;--up:#0E7A55;--down:#B42318}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;line-height:1.55}
-.wrap{max-width:960px;margin:0 auto;padding:24px 16px 60px}
-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-h1{font-size:1.35rem;margin:0}
-h1 small{display:block;font-size:.8rem;color:var(--ink-faint);font-weight:500}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 16px 60px}
+.top{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.top a{font-size:.88rem;font-weight:700;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);text-decoration:none}
+.top a.on{background:var(--brand);border-color:var(--brand);color:#fff}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:16px}
+h1{font-size:1.5rem;margin:0;letter-spacing:-.01em}
+h1 small{display:block;font-size:.82rem;color:var(--ink-faint);font-weight:500;letter-spacing:0}
 .seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
 .seg button{border:0;background:none;font:inherit;font-size:.88rem;font-weight:700;color:var(--ink-soft);padding:7px 14px;border-radius:999px;cursor:pointer}
 .seg button[aria-pressed=true]{background:var(--brand);color:#fff}
-.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
-.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
-.tile span{display:block;font-size:.78rem;color:var(--ink-faint);font-weight:700}
-.tile b{display:block;font-size:1.7rem;line-height:1.2;margin-top:4px;font-variant-numeric:tabular-nums}
-.tile em{font-style:normal;font-size:.78rem;color:var(--ink-soft)}
+.sec{font-size:.78rem;font-weight:800;color:var(--brand-deep);letter-spacing:.06em;margin:26px 2px 10px}
+.insight{background:linear-gradient(135deg,#0E6F6A,#14958F);color:#fff;border-radius:18px;padding:20px 22px;margin-bottom:14px}
+.insight h2{margin:0 0 10px;font-size:1.02rem}
+.insight ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.insight li{display:flex;gap:10px;font-size:.93rem;line-height:1.5}
+.insight li::before{content:"";flex:none;width:7px;height:7px;border-radius:2px;background:#FFD66B;margin-top:.55em}
+.insight b{color:#FFE7A3}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+@media(min-width:900px){.tiles{grid-template-columns:repeat(6,1fr)}}
+@media(max-width:560px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 14px 10px;display:flex;flex-direction:column;min-width:0}
+.tile span{font-size:.76rem;color:var(--ink-faint);font-weight:700}
+.tile b{font-size:1.65rem;line-height:1.2;margin-top:3px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.tile b small{font-size:.9rem;font-weight:700;margin-left:1px}
+.tile em{font-style:normal;font-size:.76rem;color:var(--ink-soft);margin-top:2px}
+.tile .d{font-weight:800}
+.tile .d.up{color:var(--up)}.tile .d.down{color:var(--down)}.tile .d.flat{color:var(--ink-faint)}
+.tile svg{display:block;width:100%;height:26px;margin-top:6px}
 .tile.hl{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
-@media(max-width:760px){.tiles{grid-template-columns:repeat(2,1fr)}.tile.wide{grid-column:span 2}}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
-.card h2{font-size:1rem;margin:0 0 4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;min-width:0}
+.card h2{font-size:1rem;margin:0 0 2px}
 .card p.sub{margin:0 0 12px;font-size:.82rem;color:var(--ink-faint)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.grid2>.card{margin-bottom:0}
+.grid2{margin-bottom:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}.heat{gap:1px}.heat .c{border-radius:2px}}
 .chart{position:relative}
 .chart svg{display:block;width:100%;height:auto;overflow:visible}
-.chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.8rem;padding:6px 9px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .1s}
+#tip{position:fixed;z-index:9;pointer-events:none;background:var(--ink);color:#fff;font-size:.8rem;line-height:1.45;padding:7px 10px;border-radius:8px;max-width:260px;opacity:0;transition:opacity .1s}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.8rem;color:var(--ink-soft);margin:0 0 8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
 table{width:100%;border-collapse:collapse;font-size:.88rem}
 th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--grid)}
 th{font-size:.76rem;color:var(--ink-faint);font-weight:700}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 td.p{word-break:break-all}
-.bar{display:block;height:6px;border-radius:3px;background:var(--brand);margin-top:4px}
-.note{font-size:.82rem;color:var(--ink-soft);background:#DFF3F1;border-radius:12px;padding:12px 14px;margin-bottom:14px}
-.empty{color:var(--ink-faint);font-size:.88rem;padding:8px 0}
+td small{color:var(--ink-faint)}
+.bar{display:block;height:6px;border-radius:3px;background:var(--brand);margin-top:5px}
+.bar.o{background:var(--accent)}
+.rate{display:inline-block;min-width:3.2em;font-size:.76rem;font-weight:800;color:var(--brand-deep);background:var(--brand-soft);border-radius:6px;padding:1px 6px;text-align:center}
+.rate.z{color:var(--ink-faint);background:var(--grid)}
+.split{display:flex;height:30px;border-radius:8px;overflow:hidden;gap:2px;margin:6px 0 10px}
+.split div{min-width:2px}
+.mix{display:grid;gap:10px}
+.mix .row{display:grid;grid-template-columns:6.8em minmax(0,1fr) auto;gap:10px;align-items:center;font-size:.86rem}
+.mix .track{height:12px;background:var(--grid);border-radius:6px;overflow:hidden}
+.mix .track div{height:100%;border-radius:6px}
+.mix .row b{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:5.5em}
+.funnel{display:grid;gap:8px}
+.funnel .st{position:relative;background:var(--grid);border-radius:10px;height:46px;overflow:hidden}
+.funnel .st div{position:absolute;inset:0 auto 0 0;background:var(--brand);border-radius:10px}
+.funnel .st span{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:.86rem;font-weight:700;color:var(--ink);text-shadow:0 0 6px #fff,0 0 2px #fff}
+.funnel .st b{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.95rem;font-variant-numeric:tabular-nums}
+.funnel .ar{font-size:.76rem;color:var(--ink-faint);padding-left:12px}
+.heat{display:grid;grid-template-columns:1.6em repeat(24,minmax(0,1fr));gap:2px;font-size:.66rem;color:var(--ink-faint)}
+.heat .c{aspect-ratio:1;border-radius:3px;background:var(--grid)}
+.heat .h{text-align:center}
+.heat .w{display:flex;align-items:center}
+.scale{display:flex;align-items:center;gap:6px;font-size:.74rem;color:var(--ink-faint);margin-top:8px}
+.scale i{width:14px;height:10px;border-radius:2px;display:inline-block}
+.note{font-size:.82rem;color:var(--ink-soft);background:var(--brand-soft);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.empty{color:var(--ink-faint);font-size:.86rem;padding:8px 0}
+.new{font-size:.68rem;font-weight:800;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:2px}
 .lock{max-width:360px;margin:12vh auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 22px;text-align:center}
 .lock input{width:100%;font:inherit;font-size:1.3rem;letter-spacing:.3em;text-align:center;padding:12px;border:1px solid var(--line);border-radius:10px;margin:14px 0 10px}
 .btn{display:inline-block;border:0;background:var(--brand);color:#fff;font:inherit;font-weight:800;padding:12px 18px;border-radius:10px;cursor:pointer;width:100%}
 .btn2{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);font:inherit;font-size:.82rem;font-weight:700;padding:7px 12px;border-radius:999px;cursor:pointer}
-.err{color:#B42318;font-size:.85rem;min-height:1.2em}
+.err{color:var(--down);font-size:.85rem;min-height:1.2em}
 details summary{cursor:pointer;font-weight:700;font-size:.9rem}
-.foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;font-size:.8rem;color:var(--ink-faint)}
+.foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;font-size:.8rem;color:var(--ink-faint);margin-top:6px}
+.loading .tiles,.loading .card,.loading .insight{opacity:.5;transition:opacity .2s}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -64,7 +109,7 @@ details summary{cursor:pointer;font-weight:700;font-size:.9rem}
 </div>
 
 <div class="wrap" id="app" hidden>
-  <div style="display:flex;gap:6px;margin-bottom:14px"><a href="/admin/stats/" style="font-size:.88rem;font-weight:700;padding:7px 14px;border-radius:999px;background:var(--brand);color:#fff;text-decoration:none">방문·문의 통계</a><a href="/" style="font-size:.88rem;font-weight:700;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);text-decoration:none">홈페이지</a></div>
+  <nav class="top"><a href="/admin/stats/" class="on">방문·문의 통계</a><a href="/">홈페이지</a></nav>
   <header>
     <h1>방문·문의 통계<small id="range"></small></h1>
     <div class="seg" role="group" aria-label="기간">
@@ -72,108 +117,260 @@ details summary{cursor:pointer;font-weight:700;font-size:.9rem}
     </div>
   </header>
 
+  <div class="insight" id="insight" hidden><h2>이번 기간 한눈에 보기</h2><ul id="insightList"></ul></div>
+
   <div class="tiles" id="tiles"></div>
 
-  <div class="note">문자·전화·톡톡 숫자는 홈페이지에서 <b>버튼을 누른 횟수</b>예요. 문자 견적은 사진을 붙여 보내는 문자창을 연 횟수라, 열고 실제로 안 보낸 경우도 들어가요. 번호를 직접 보고 건 전화는 빠져요.</div>
-
-  <div class="card" style="border-color:var(--brand)"><h2>타고 들어온 검색 키워드</h2><p class="sub">네이버·다음 검색이나 네이버 광고에서 어떤 검색어로 들어왔는지 (방문자 수 순서)</p><div id="tKw"></div><p class="sub" id="kwNote" style="margin:10px 0 0"></p></div>
-
+  <div class="sec">방문과 연락 추이</div>
+  <div class="card"><h2>하루 방문자와 페이지 열람</h2><p class="sub">막대는 방문자, 선은 그날 열어 본 페이지 수예요. 같은 눈금이라 그대로 비교할 수 있어요.</p><div class="legend"><span><i style="background:var(--brand)"></i>방문자</span><span><i style="background:var(--c3);height:3px;vertical-align:3px"></i>페이지 열람</span></div><div class="chart" id="cVisit"></div></div>
   <div class="grid2">
-    <div class="card"><h2>하루 방문자</h2><p class="sub">그날 홈페이지에 들어온 사람 수</p><div class="chart" id="cVisit"></div></div>
-    <div class="card"><h2>하루 연락</h2><p class="sub">문자 견적 + 전화 + 톡톡 버튼</p><div class="chart" id="cContact"></div></div>
+    <div class="card"><h2>하루 연락</h2><p class="sub">버튼 종류별로 쌓았어요</p><div class="legend"><span><i style="background:var(--brand)"></i>문자 견적</span><span><i style="background:var(--accent)"></i>전화</span><span><i style="background:var(--c3)"></i>톡톡</span></div><div class="chart" id="cContact"></div></div>
+    <div class="card"><h2>연락은 어떤 방법으로</h2><p class="sub">문자·전화·톡톡 버튼을 누른 비율</p><div id="mixContact"></div><h2 style="margin-top:18px">방문에서 연락까지<span class="new">NEW</span></h2><p class="sub">들어온 사람 중 몇 명이 더 둘러보고, 몇 명이 연락했나</p><div id="funnel"></div></div>
   </div>
 
+  <div class="sec">어떻게 찾아왔나</div>
+  <div class="card" style="border-color:var(--brand)"><h2>타고 들어온 검색 키워드</h2><p class="sub">네이버·다음 검색이나 네이버 광고에서 어떤 검색어로 들어왔는지</p><div id="tKw"></div><p class="sub" id="kwNote" style="margin:10px 0 0"></p></div>
   <div class="grid2">
-    <div class="card"><h2>어디서 들어왔나</h2><p class="sub">처음 들어온 경로별 방문자 수</p><div id="tSrc"></div></div>
+    <div class="card"><h2>들어온 경로</h2><p class="sub">처음 들어온 경로별 방문자와 연락률</p><div id="tSrc"></div></div>
+    <div class="card"><h2>처음 연 페이지<span class="new">NEW</span></h2><p class="sub">사람들이 홈페이지에 들어와 처음 본 화면</p><div id="tLand"></div></div>
+  </div>
+
+  <div class="sec">무엇을 찾았나</div>
+  <div class="grid2">
+    <div class="card"><h2>관심 시공 분야</h2><p class="sub">시공 페이지·사례·가이드 열람을 분야별로 묶었어요</p><div id="tSvc"></div></div>
+    <div class="card"><h2>많이 본 지역 페이지</h2><p class="sub">지역 이름이 들어간 페이지 열람 수</p><div id="tArea"></div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>많이 본 페이지</h2><p class="sub">열람 수 순서 · 상위 15개</p><div id="tPages"></div></div>
     <div class="card"><h2>연락이 나온 페이지</h2><p class="sub">문자·전화·톡톡 버튼을 누른 페이지</p><div id="tContact"></div></div>
   </div>
 
-  <div class="card"><h2>많이 본 페이지</h2><p class="sub">열람 수가 많은 순서</p><div id="tPages"></div></div>
+  <div class="sec">언제, 어디서, 무엇으로</div>
+  <div class="card"><h2>요일·시간대별 방문<span class="new">NEW</span></h2><p class="sub">진할수록 그 시간에 많이 들어왔어요. 전화 받기 좋은 시간을 정할 때 참고하세요.</p><div id="heat"></div></div>
+  <div class="grid2">
+    <div class="card"><h2>요일별 하루 평균</h2><p class="sub">요일마다 평균 방문자와 연락</p><div class="legend"><span><i style="background:var(--brand)"></i>방문자</span><span><i style="background:var(--accent)"></i>연락</span></div><div class="chart" id="cWeek"></div></div>
+    <div class="card"><h2>접속 지역<span class="new">NEW</span></h2><p class="sub">인터넷 주소로 본 대략적인 지역이에요. 휴대폰은 통신사 위치로 잡혀 실제와 다를 수 있어요.</p><div id="tGeo"></div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>휴대폰과 PC</h2><p class="sub">방문자가 쓴 기기</p><div id="dev"></div><h2 style="margin-top:16px">휴대폰 종류<span class="new">NEW</span></h2><div id="osMix" style="margin-top:8px"></div></div>
+    <div class="card"><h2>어떤 앱으로 열었나<span class="new">NEW</span></h2><p class="sub">네이버 앱·카카오톡 안에서 열었는지, 브라우저로 열었는지</p><div id="brMix"></div><h2 style="margin-top:16px">얼마나 둘러봤나<span class="new">NEW</span></h2><p class="sub">한 사람이 하루에 본 페이지 수</p><div id="depth"></div></div>
+  </div>
 
-  <div class="card"><details><summary>날짜별 숫자 표로 보기</summary><div id="tDaily" style="margin-top:10px"></div></details></div>
+  <div class="note">문자·전화·톡톡 숫자는 홈페이지에서 <b>버튼을 누른 횟수</b>예요. 문자 견적은 사진을 붙여 보내는 문자창을 연 횟수라, 열고 실제로 안 보낸 경우도 들어가요. 번호를 직접 보고 건 전화는 빠져요. <b>NEW</b> 표시 항목은 2026년 10월 25일부터 모으기 시작해서 그 전 방문은 들어 있지 않아요.</div>
+
+  <div class="card"><details><summary>날짜별 숫자 표로 보기</summary><div style="margin:10px 0"><button class="btn2" id="csv">엑셀(CSV)로 받기</button></div><div id="tDaily"></div></details></div>
 
   <div class="foot">
     <span id="devices"></span>
     <span><button class="btn2" id="ownerBtn"></button> <button class="btn2" id="logout">잠그기</button></span>
   </div>
 </div>
+<div id="tip" role="status"></div>
 
 <script>
 (function(){
-    var $=function(id){return document.getElementById(id)};
+  var $=function(id){return document.getElementById(id)};
   function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function n(x){return Number(x||0).toLocaleString('ko-KR')}
-  var pin=ls('nj-stats-pin')||'', days=+(ls('nj-stats-days')||7), setup=false;
+  function pct(a,b){return b?Math.round(a/b*1000)/10:0}
+  function md(day){return day.slice(5).replace('-','/')}
+  var WD=['일','월','화','수','목','금','토'];
+  var pin=ls('nj-stats-pin')||'', days=+(ls('nj-stats-days')||7), setup=false, last=null;
+
+  var NAMES={'/':'메인 페이지'};
+  var namesReady=fetch('/admin/stats/names.json').then(function(r){return r.ok?r.json():{}}).then(function(j){for(var k in j)if(k!=='/')NAMES[k]=j[k]}).catch(function(){});
 
   function load(){
-    $('range').textContent='불러오는 중…';
-    fetch('/api/stats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:pin,days:days})})
-      .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
-      .then(function(res){
-        var j=res.j;
+    $('range').textContent='불러오는 중…'; $('app').classList.add('loading');
+    Promise.all([fetch('/api/stats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:pin,days:days})})
+      .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})}),namesReady])
+      .then(function(all){
+        var res=all[0],j=res.j; $('app').classList.remove('loading');
         if(j&&(j.error==='pin'||j.error==='format')){ ls('nj-stats-pin',null); pin=''; showLock('비밀번호가 맞지 않아요.'); return; }
         if(j&&j.error==='locked'){ ls('nj-stats-pin',null); pin=''; showLock('여러 번 틀려서 잠겼어요. '+j.wait+'분 뒤에 다시 해주세요.'); return; }
         if(j&&j.error==='notset'){ ls('nj-stats-pin',null); pin=''; check(); return; }
         if(!res.ok){ showLock('불러오지 못했어요. 잠시 뒤 다시 시도해 주세요.'); return; }
-        $('lock').hidden=true; $('app').hidden=false; render(j);
+        $('lock').hidden=true; $('app').hidden=false; last=j; render(j);
       })
-      .catch(function(){ showLock('인터넷 연결을 확인해 주세요.'); });
+      .catch(function(){ $('app').classList.remove('loading'); showLock('인터넷 연결을 확인해 주세요.'); });
   }
   function showLock(msg){ $('app').hidden=true; $('lock').hidden=false; $('pinErr').textContent=msg||''; $('pin').focus(); }
 
-  function render(d){
-    var t=d.totals||{}, td=d.today_totals||{};
-    $('range').textContent=(d.days===1?'오늘':'최근 '+d.days+'일')+' · '+d.today+' 기준';
-    document.querySelectorAll('.seg button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.d===d.days))});
-    var rate=t.visitors?Math.round((t.contact_visitors||0)/t.visitors*1000)/10:0;
-    $('tiles').innerHTML=[
-      ['방문자',t.visitors,'오늘 '+n(td.visitors)+'명','hl'],
-      ['문자 견적 버튼',t.sms,'오늘 '+n(td.sms)+'번','hl'],
-      ['전화 버튼',t.phone,'오늘 '+n(td.phone)+'번',''],
-      ['톡톡 버튼',t.talk,'오늘 '+n(td.talk)+'번',''],
-      ['연락한 방문자 비율',null,'방문자 '+n(t.visitors)+'명 중 '+n(t.contact_visitors)+'명','wide']
-    ].map(function(x){return '<div class="tile '+x[3]+'"><span>'+x[0]+'</span><b>'+(x[1]===null?rate+'%':n(x[1]))+'</b><em>'+x[2]+'</em></div>'}).join('');
-
-    var daily=d.daily||[];
-    bars($('cVisit'),daily.map(function(r){return{k:r.day,v:r.visitors,tip:r.day.slice(5).replace('-','/')+' · 방문자 '+n(r.visitors)+'명 · 열람 '+n(r.views)+'회'}}),'var(--brand)');
-    bars($('cContact'),daily.map(function(r){var c=r.phone+r.sms+r.talk;return{k:r.day,v:c,tip:r.day.slice(5).replace('-','/')+' · 문자 '+r.sms+' · 전화 '+r.phone+' · 톡톡 '+r.talk}}),'var(--accent)');
-
-    $('tSrc').innerHTML=table(d.sources,['경로','방문자','연락'],function(r,max){return '<td>'+esc(r.name)+'<span class="bar" style="width:'+Math.max(2,r.visitors/max*100)+'%"></span></td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.contacts)+'</td>'},'visitors');
-    {$('tKw').innerHTML=table(d.keywords,['검색어','방문자','연락'],function(r,max){return '<td>'+esc(r.kw)+' <small style="color:var(--ink-faint)">'+esc(r.src||'')+'</small><span class="bar" style="width:'+Math.max(2,r.visitors/max*100)+'%"></span></td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.contacts)+'</td>'},'visitors');
-      if(!d.keywords||!d.keywords.length)$('tKw').innerHTML='<p class="empty">아직 검색어로 들어온 방문이 없어요. 네이버 검색에 홈페이지가 나오기 시작하면 여기에 검색어가 쌓여요.</p>';$('kwNote').textContent='검색·광고로 들어온 방문자 '+n(d.kw_search)+'명 중 '+n(d.kw_known)+'명의 검색어를 알 수 있었어요. 구글은 검색어를 알려주지 않아서, 구글 검색어는 구글 서치 콘솔에서만 볼 수 있어요.'}
-    $('tContact').innerHTML=table(d.contact_pages,['페이지','연락'],function(r){return '<td class="p">'+link(r.path)+'</td><td class="n">'+n(r.contacts)+'</td>'});
-    $('tPages').innerHTML=table(d.pages,['페이지','열람','연락'],function(r,max){return '<td class="p">'+link(r.path)+'<span class="bar" style="width:'+Math.max(2,r.views/max*100)+'%"></span></td><td class="n">'+n(r.views)+'</td><td class="n">'+n(r.contacts)+'</td>'},'views');
-    $('tDaily').innerHTML=table(daily.slice().reverse(),['날짜','방문자','열람','문자','전화','톡톡'],function(r){return '<td>'+r.day+'</td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.views)+'</td><td class="n">'+n(r.sms)+'</td><td class="n">'+n(r.phone)+'</td><td class="n">'+n(r.talk)+'</td>'});
-    var dv=d.devices||{}; $('devices').textContent='휴대폰 '+n(dv.mobile)+'명 · PC '+n(dv.pc)+'명';
+  // 시공 분야·지역 묶기 (페이지 주소와 제목으로)
+  var SVC=[['/fridge-cabinet/','냉장고장',/냉장고/],['/sink-cabinet/','하부장·싱크대',/하부장|싱크대|로봇청소기/],['/dishwasher-cabinet/','식기세척기 자리',/식기세척기|식세기/],['/built-in-closet/','붙박이장·TV장',/붙박이|옷장|TV장/],['/storage-cabinet/','신발장·수납장',/신발장|중문|수납|오픈장/],['/pet-door/','펫도어·문 자르기',/펫도어|문 아래|방문/]];
+  var AREA={'dongtan-hwaseong':'동탄·화성','dangjin':'당진','naepo-hongseong':'내포·홍성','seosan':'서산','cheonan-asan':'천안·아산','cheongju':'청주','pyeongtaek':'평택','boryeong':'보령','sejong-daejeon':'세종·대전','suwon-yongin':'수원·용인'};
+  function svcOf(p){
+    for(var i=0;i<SVC.length;i++) if(p.indexOf(SVC[i][0])===0) return SVC[i][1];
+    if(p==='/lp/fridge/') return '냉장고장';
+    if(/^\/(cases|guide)\/.+/.test(p)){var t=NAMES[p]||'';for(i=0;i<SVC.length;i++) if(SVC[i][2].test(t)) return SVC[i][1];}
+    return '';
   }
-  var NAMES={'/':'메인 페이지','/kitchen/':'주방·싱크대','/bathroom/':'욕실·타일','/restoration/':'대리석·상판 복원','/interior/':'인테리어','/services/':'시공분야','/cases/':'시공사례 목록','/area/':'시공지역','/reviews/':'후기','/faq/':'자주 묻는 질문','/cost/':'비용 안내','/contact/':'상담 안내','/lp/door/':'광고: 문 수리','/lp/appliance/':'광고: 가전 설치','/lp/countertop-crack/':'광고: 상판 크랙','/lp/bathroom-repair/':'광고: 욕실 수리'};NAMES={'/':'메인 페이지'};
-  fetch('/admin/stats/names.json').then(function(r){return r.ok?r.json():{}}).then(function(j){for(var k in j)if(k!=='/')NAMES[k]=j[k]}).catch(function(){});
-  function link(p){var label=NAMES[p]||(p.indexOf('/case/')===0?'사례: '+p.slice(6).replace(/-/g,' '):p.indexOf('/area/')===0?'지역: '+p.slice(6).replace(/\/$/,''):p);return '<a href="'+esc(p)+'" target="_blank" rel="noopener" style="color:var(--ink)">'+esc(label)+'</a>'}
+  function areaOf(p){var m=p.split('/').filter(Boolean);for(var i=0;i<m.length;i++) if(AREA[m[i]]) return AREA[m[i]];return ''}
+
+  function delta(cur,prev,unit){
+    if(!prev&&!cur) return '<span class="d flat">변화 없음</span>';
+    if(!prev) return '<span class="d flat">비교 기록 없음</span>';
+    var d=Math.round((cur-prev)/prev*100);
+    if(unit==='p'){d=Math.round((cur-prev)*10)/10;return '<span class="d '+(d>0?'up':d<0?'down':'flat')+'">'+(d>0?'▲ ':d<0?'▼ ':'')+Math.abs(d)+'%p</span>'}
+    return '<span class="d '+(d>0?'up':d<0?'down':'flat')+'">'+(d>0?'▲ ':d<0?'▼ ':'')+Math.abs(d)+'%</span>';
+  }
+  function spark(vals,color){
+    if(vals.length<2) return '';
+    var W=120,H=26,max=Math.max.apply(null,vals)||1,pts=vals.map(function(v,i){return (i/(vals.length-1)*W).toFixed(1)+','+(H-2-v/max*(H-4)).toFixed(1)});
+    return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+pts.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+  }
+
+  function render(d){
+    var t=d.totals||{}, p=d.prev||{}, td=d.today_totals||{}, daily=d.daily||[];
+    var per=d.days===1?'어제':'지난 '+d.days+'일';
+    $('range').textContent=(d.days===1?'오늘':'최근 '+d.days+'일')+' · '+d.today+' 기준 · '+per+(d.days===1?'와':'과')+' 비교';
+    document.querySelectorAll('.seg button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.d===d.days))});
+    var con=t.phone+t.sms+t.talk, pcon=(p.phone||0)+(p.sms||0)+(p.talk||0);
+    var rate=pct(t.contact_visitors,t.visitors), prate=pct(p.contact_visitors,p.visitors);
+    var ppv=t.visitors?Math.round(t.views/t.visitors*10)/10:0, pppv=p.visitors?Math.round(p.views/p.visitors*10)/10:0;
+    var col=function(k){return daily.map(function(r){return k(r)})};
+    $('tiles').innerHTML=[
+      ['방문자',n(t.visitors)+'<small>명</small>',delta(t.visitors,p.visitors)+' · 오늘 '+n(td.visitors)+'명',spark(col(function(r){return r.visitors}),'var(--brand)'),'hl'],
+      ['연락 버튼',n(con)+'<small>번</small>',delta(con,pcon)+' · 오늘 '+n(td.phone+td.sms+td.talk)+'번',spark(col(function(r){return r.phone+r.sms+r.talk}),'var(--accent)'),'hl'],
+      ['연락한 방문자 비율',rate+'<small>%</small>',delta(rate,prate,'p')+' · '+n(t.contact_visitors)+'명 연락',spark(col(function(r){return r.visitors?r.contact_visitors/r.visitors:0}),'var(--brand)'),''],
+      ['페이지 열람',n(t.views)+'<small>회</small>',delta(t.views,p.views),spark(col(function(r){return r.views}),'var(--c3)'),''],
+      ['1명당 본 페이지',ppv+'<small>쪽</small>',delta(ppv,pppv),'',''],
+      [d.days===1?'처음 온 사람':'다시 온 사람',d.days===1?n(t.unique)+'<small>명</small>':n(t.returning)+'<small>명</small>',d.days===1?'오늘 들어온 사람':'다른 날 또 들어온 사람 · 전체 '+n(t.unique)+'명 중 '+pct(t.returning,t.unique)+'%','','']
+    ].map(function(x){return '<div class="tile '+x[4]+'"><span>'+x[0]+'</span><b>'+x[1]+'</b><em>'+x[2]+'</em>'+x[3]+'</div>'}).join('');
+
+    combo($('cVisit'),daily);
+    stack($('cContact'),daily.map(function(r){return{k:r.day,segs:[[r.sms,'var(--brand)'],[r.phone,'var(--accent)'],[r.talk,'var(--c3)']],tip:md(r.day)+' ('+WD[new Date(r.day+'T00:00:00Z').getUTCDay()]+')<br>문자 견적 '+r.sms+' · 전화 '+r.phone+' · 톡톡 '+r.talk}}));
+    mix($('mixContact'),[['문자 견적',t.sms,'var(--brand)'],['전화',t.phone,'var(--accent)'],['톡톡',t.talk,'var(--c3)'],['견적 문구 복사',t.copy,'var(--c4)']],'번',con+t.copy);
+
+    var f=d.funnel||{};
+    $('funnel').innerHTML=f.tracked?[['들어온 사람',f.tracked],['2페이지 이상 본 사람',f.multi],['연락 버튼 누른 사람',f.contact]].map(function(s,i,a){return (i?'<div class="ar">↓ '+pct(s[1],a[i-1][1])+'%</div>':'')+'<div class="st"><div style="width:'+Math.max(1,pct(s[1],f.tracked))+'%;opacity:'+(1-i*.25)+'"></div><span>'+s[0]+'</span><b>'+n(s[1])+'명</b></div>'}).join(''):newEmpty();
+    $('funnel').className='funnel';
+
+    $('tKw').innerHTML=table(d.keywords,['검색어','방문자','연락'],function(r,max){return '<td>'+esc(r.kw)+' <small>'+esc(r.src||'')+'</small><span class="bar" style="width:'+Math.max(2,r.visitors/max*100)+'%"></span></td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.contacts)+'</td>'},'visitors');
+    if(!d.keywords||!d.keywords.length)$('tKw').innerHTML='<p class="empty">아직 검색어로 들어온 방문이 없어요. 네이버 검색에 홈페이지가 나오기 시작하면 여기에 검색어가 쌓여요.</p>';
+    $('kwNote').textContent='검색·광고로 들어온 방문자 '+n(d.kw_search)+'명 중 '+n(d.kw_known)+'명의 검색어를 알 수 있었어요. 구글은 검색어를 알려주지 않아서, 구글 검색어는 구글 서치 콘솔에서만 볼 수 있어요.';
+
+    $('tSrc').innerHTML=table(d.sources,['경로','방문자','연락률'],function(r,max){return '<td>'+esc(r.name)+'<span class="bar" style="width:'+Math.max(2,r.visitors/max*100)+'%"></span></td><td class="n">'+n(r.visitors)+'<br><small>'+pct(r.visitors,t.visitors)+'%</small></td><td class="n">'+rateTag(r.contacts,r.visitors)+'</td>'},'visitors');
+    $('tLand').innerHTML=d.landings&&d.landings.length?table(d.landings.slice(0,10),['페이지','방문자','연락률'],function(r,max){return '<td class="p">'+link(r.path)+'<span class="bar" style="width:'+Math.max(2,r.visitors/max*100)+'%"></span></td><td class="n">'+n(r.visitors)+'</td><td class="n">'+rateTag(r.contacts,r.visitors)+'</td>'},'visitors'):newEmpty();
+
+    var pages=d.pages||[], svc={}, area={};
+    pages.forEach(function(r){var s=svcOf(r.path),a=areaOf(r.path);
+      if(s){svc[s]=svc[s]||{name:s,views:0,contacts:0};svc[s].views+=r.views;svc[s].contacts+=r.contacts}
+      if(a){area[a]=area[a]||{name:a,views:0,contacts:0};area[a].views+=r.views;area[a].contacts+=r.contacts}});
+    var svcL=Object.values(svc).sort(function(a,b){return b.views-a.views}), areaL=Object.values(area).sort(function(a,b){return b.views-a.views});
+    var svcSum=svcL.reduce(function(a,b){return a+b.views},0);
+    $('tSvc').innerHTML=table(svcL,['분야','열람','연락'],function(r,max){return '<td>'+esc(r.name)+'<span class="bar" style="width:'+Math.max(2,r.views/max*100)+'%"></span></td><td class="n">'+n(r.views)+'<br><small>'+pct(r.views,svcSum)+'%</small></td><td class="n">'+n(r.contacts)+'</td>'},'views');
+    $('tArea').innerHTML=table(areaL,['지역','열람','연락'],function(r,max){return '<td>'+esc(r.name)+'<span class="bar o" style="width:'+Math.max(2,r.views/max*100)+'%"></span></td><td class="n">'+n(r.views)+'</td><td class="n">'+n(r.contacts)+'</td>'},'views');
+    $('tPages').innerHTML=table(pages.slice(0,15),['페이지','열람','연락'],function(r,max){return '<td class="p">'+link(r.path)+'<span class="bar" style="width:'+Math.max(2,r.views/max*100)+'%"></span></td><td class="n">'+n(r.views)+'</td><td class="n">'+n(r.contacts)+'</td>'},'views');
+    $('tContact').innerHTML=table(d.contact_pages,['페이지','연락'],function(r,max){return '<td class="p">'+link(r.path)+'<span class="bar o" style="width:'+Math.max(2,r.contacts/max*100)+'%"></span></td><td class="n">'+n(r.contacts)+'</td>'},'contacts');
+
+    heat($('heat'),d.hours||[]);
+    var wk=(d.week||[]), order=[1,2,3,4,5,6,0];
+    pair($('cWeek'),order.filter(function(i){return wk[i]&&wk[i].days}).map(function(i){var w=wk[i];return{k:WD[i],a:w.visitors/w.days,b:w.contacts/w.days,tip:WD[i]+'요일 하루 평균<br>방문자 '+(Math.round(w.visitors/w.days*10)/10)+'명 · 연락 '+(Math.round(w.contacts/w.days*10)/10)+'번 ('+w.days+'일 기준)'}}));
+    $('tGeo').innerHTML=d.regions&&d.regions.length?table(d.regions.slice(0,10),['지역','방문자','연락'],function(r,max){return '<td>'+esc(r.name)+'<span class="bar" style="width:'+Math.max(2,r.visitors/max*100)+'%"></span></td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.contacts)+'</td>'},'visitors'):newEmpty();
+
+    var dv=d.devices||{}, dt=(dv.mobile||0)+(dv.pc||0);
+    $('dev').innerHTML=dt?'<div class="split"><div style="flex:'+dv.mobile+';background:var(--brand)" data-tip="휴대폰 '+n(dv.mobile)+'명"></div><div style="flex:'+dv.pc+';background:var(--accent)" data-tip="PC '+n(dv.pc)+'명"></div></div><div class="legend"><span><i style="background:var(--brand)"></i>휴대폰 <b>'+pct(dv.mobile,dt)+'%</b> ('+n(dv.mobile)+'명)</span><span><i style="background:var(--accent)"></i>PC <b>'+pct(dv.pc,dt)+'%</b> ('+n(dv.pc)+'명)</span></div>':'<p class="empty">아직 기록이 없어요.</p>';
+    var CC=['var(--brand)','var(--accent)','var(--c3)','var(--c4)','var(--ink-faint)'];
+    var list=function(a){var s=a.reduce(function(x,y){return x+y.visitors},0);return {rows:a.slice(0,5).map(function(r,i){return [r.name,r.visitors,CC[i]]}),sum:s}};
+    var o=list(d.os||[]), b=list(d.browsers||[]);
+    $('osMix').innerHTML=o.sum?'':newEmpty(); if(o.sum) mix($('osMix'),o.rows,'명',o.sum);
+    $('brMix').innerHTML=b.sum?'':newEmpty(); if(b.sum) mix($('brMix'),b.rows,'명',b.sum);
+    var dp=d.depth||{}, ds=(dp.d1||0)+(dp.d2||0)+(dp.d3||0)+(dp.d5||0);
+    $('depth').innerHTML=ds?'':newEmpty(); if(ds) mix($('depth'),[['1쪽만',dp.d1,'var(--ink-faint)'],['2쪽',dp.d2,'var(--c3)'],['3~4쪽',dp.d3,'var(--accent)'],['5쪽 이상',dp.d5,'var(--brand)']],'명',ds);
+
+    $('tDaily').innerHTML=table(daily.slice().reverse(),['날짜','방문자','열람','문자','전화','톡톡','연락률'],function(r){return '<td>'+r.day+' <small>'+WD[new Date(r.day+'T00:00:00Z').getUTCDay()]+'</small></td><td class="n">'+n(r.visitors)+'</td><td class="n">'+n(r.views)+'</td><td class="n">'+n(r.sms)+'</td><td class="n">'+n(r.phone)+'</td><td class="n">'+n(r.talk)+'</td><td class="n">'+pct(r.contact_visitors,r.visitors)+'%</td>'});
+    $('devices').textContent='순 방문자 '+n(t.unique)+'명 · 휴대폰 '+n(dv.mobile)+'명 · PC '+n(dv.pc)+'명';
+
+    insights(d,{con:con,pcon:pcon,rate:rate,svcL:svcL,areaL:areaL,dt:dt,dv:dv});
+  }
+
+  // 실제 숫자에서 뽑은 요약 문장. 숫자가 너무 적으면 그 문장은 뺀다
+  function insights(d,x){
+    var t=d.totals,p=d.prev||{},L=[],per=d.days===1?'어제':'지난 '+d.days+'일';
+    if(t.visitors){
+      var ch=p.visitors?Math.round((t.visitors-p.visitors)/p.visitors*100):null;
+      L.push('방문자 <b>'+n(t.visitors)+'명</b>'+(ch===null?'':', '+per+'보다 <b>'+Math.abs(ch)+'% '+(ch>=0?'늘었어요':'줄었어요')+'</b>')+(ch===null?'이 들어왔어요.':''));
+    }
+    if(x.con) L.push('연락 버튼은 <b>'+n(x.con)+'번</b> 눌렸고, 들어온 사람 100명 중 <b>'+x.rate+'명</b>꼴로 연락했어요.');
+    var s=(d.sources||[]).filter(function(r){return r.name!=='직접 방문'});
+    if(s.length&&t.visitors) L.push('직접 주소를 친 경우를 빼면 <b>'+esc(s[0].name)+'</b>로 가장 많이 들어왔어요 (전체의 '+pct(s[0].visitors,t.visitors)+'%).');
+    var best=(d.sources||[]).filter(function(r){return r.visitors>=5&&r.contacts}).sort(function(a,b){return b.contacts/b.visitors-a.contacts/a.visitors})[0];
+    if(best) L.push('연락으로 가장 잘 이어지는 경로는 <b>'+esc(best.name)+'</b>예요 (연락률 '+pct(best.contacts,best.visitors)+'%).');
+    if(x.svcL.length&&x.svcL[0].views>=3) L.push('가장 관심이 많은 분야는 <b>'+esc(x.svcL[0].name)+'</b>'+(x.svcL[1]?', 그다음은 '+esc(x.svcL[1].name):'')+'이에요.');
+    if(x.areaL.length&&x.areaL[0].views>=3) L.push('지역 페이지 중에는 <b>'+esc(x.areaL[0].name)+'</b>를 가장 많이 봤어요.');
+    var h=d.hours||[],tot=0,bh=0,bv=0,hs=Array(24).fill(0);
+    h.forEach(function(r){r.forEach(function(v,i){hs[i]+=v;tot+=v})});
+    for(var i=0;i<24;i++){var w=hs[i]+(hs[(i+1)%24]||0);if(w>bv){bv=w;bh=i}}
+    if(tot>=15) L.push('<b>'+bh+'시~'+(bh+2)+'시</b> 사이에 가장 많이 들어와요. 이 시간엔 전화를 바로 받을 수 있게 해 두면 좋아요.');
+    if(x.dt>=5) L.push('방문자의 <b>'+pct(x.dv.mobile,x.dt)+'%</b>가 휴대폰으로 봤어요.');
+    $('insight').hidden=!L.length;
+    $('insightList').innerHTML=L.map(function(s){return '<li><span>'+s+'</span></li>'}).join('');
+  }
+
+  function newEmpty(){return '<p class="empty">오늘부터 모으기 시작한 항목이에요. 방문이 쌓이면 여기에 나와요.</p>'}
+  function rateTag(c,v){var r=pct(c,v);return '<span class="rate'+(r?'':' z')+'">'+r+'%</span>'}
+  function link(p){var label=NAMES[p]||p;if(label.length>34)label=label.slice(0,33)+'…';return '<a href="'+esc(p)+'" target="_blank" rel="noopener" style="text-decoration:none" title="'+esc(p)+'">'+esc(label)+'</a>'}
   function table(rows,heads,row,key){
     if(!rows||!rows.length) return '<p class="empty">아직 기록이 없어요.</p>';
     var max=key?Math.max.apply(null,rows.map(function(r){return r[key]||0}))||1:1;
     return '<table><thead><tr>'+heads.map(function(h,i){return '<th'+(i?' class="n"':'')+'>'+h+'</th>'}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+row(r,max)+'</tr>'}).join('')+'</tbody></table>';
   }
-  // 막대 차트: 하루 한 칸, 마우스를 올리거나 누르면 그날 숫자 표시
-  function bars(el,data,color){
-    var W=440,H=170,pl=28,pb=22,pt=8,iw=W-pl-8,ih=H-pt-pb,max=Math.max(1,Math.max.apply(null,data.map(function(x){return x.v})));
-    var step=Math.pow(10,Math.floor(Math.log10(max))),top=Math.ceil(max/step)*step; if(top/step>5&&step>=1) top=Math.ceil(max/(step*2))*step*2; top=Math.max(top,1);
-    var bw=iw/data.length,gap=Math.min(2,bw*0.2),s='<svg viewBox="0 0 '+W+' '+H+'" role="img">';
-    [0,.5,1].forEach(function(f){var y=pt+ih-ih*f,v=Math.round(top*f);s+='<line x1="'+pl+'" x2="'+(W-8)+'" y1="'+y+'" y2="'+y+'" stroke="var(--grid)"/><text x="'+(pl-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="var(--ink-faint)">'+v+'</text>'});
-    var every=Math.ceil(data.length/7);
-    data.forEach(function(x,i){
-      var h=x.v/top*ih,X=pl+i*bw+gap/2,w=Math.max(1,bw-gap),Y=pt+ih-h,r=Math.min(4,w/2,h);
-      if(h>0) s+='<path d="M'+X+','+(pt+ih)+'V'+(Y+r)+'Q'+X+','+Y+' '+(X+r)+','+Y+'H'+(X+w-r)+'Q'+(X+w)+','+Y+' '+(X+w)+','+(Y+r)+'V'+(pt+ih)+'Z" fill="'+color+'"/>';
-      s+='<rect class="hit" data-i="'+i+'" x="'+(pl+i*bw)+'" y="'+pt+'" width="'+bw+'" height="'+ih+'" fill="transparent"/>';
-      if(i%every===0||i===data.length-1&&data.length<=7) s+='<text x="'+(pl+i*bw+bw/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="10" fill="var(--ink-faint)">'+x.k.slice(5).replace('-','/')+'</text>';
-    });
-    s+='<line x1="'+pl+'" x2="'+(W-8)+'" y1="'+(pt+ih)+'" y2="'+(pt+ih)+'" stroke="var(--line)"/></svg><div class="tip"></div>';
-    el.innerHTML=s; el.setAttribute('aria-label',data.map(function(x){return x.tip}).join(', '));
-    var tip=el.querySelector('.tip'),svg=el.querySelector('svg');
-    function show(e){var t=e.target.closest&&e.target.closest('.hit');if(!t){tip.style.opacity=0;return}var x=data[+t.dataset.i],b=t.getBoundingClientRect(),eb=el.getBoundingClientRect();tip.textContent=x.tip;var cx=b.left-eb.left+b.width/2;tip.style.left=Math.min(Math.max(cx,80),eb.width-80)+'px';tip.style.top=(svg.getBoundingClientRect().top-eb.top+20)+'px';tip.style.opacity=1}
-    svg.addEventListener('mousemove',show);svg.addEventListener('click',show);svg.addEventListener('mouseleave',function(){tip.style.opacity=0});
+  function mix(el,rows,unit,sum){
+    sum=sum||rows.reduce(function(a,b){return a+(b[1]||0)},0);
+    el.innerHTML='<div class="mix">'+rows.map(function(r){return '<div class="row"><span>'+esc(r[0])+'</span><div class="track"><div style="width:'+(sum?Math.max(r[1]?2:0,r[1]/sum*100):0)+'%;background:'+r[2]+'"></div></div><b>'+n(r[1])+unit+' <small style="color:var(--ink-faint);font-weight:600">'+pct(r[1],sum)+'%</small></b></div>'}).join('')+'</div>';
   }
+  function niceTop(max){max=Math.max(1,max);var step=Math.pow(10,Math.floor(Math.log10(max))),top=Math.ceil(max/step)*step;if(top/step>5&&step>=1)top=Math.ceil(max/(step*2))*step*2;return Math.max(top,1)}
+  function axis(W,pl,pt,ih,top){var s='';[0,.5,1].forEach(function(f){var y=pt+ih-ih*f;s+='<line x1="'+pl+'" x2="'+(W-8)+'" y1="'+y+'" y2="'+y+'" stroke="var(--grid)"/><text x="'+(pl-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="var(--ink-faint)">'+(Math.round(top*f*10)/10)+'</text>'});return s}
+  function roundTop(X,Y,w,h,base){var r=Math.min(4,w/2,h);return 'M'+X+','+base+'V'+(Y+r)+'Q'+X+','+Y+' '+(X+r)+','+Y+'H'+(X+w-r)+'Q'+(X+w)+','+Y+' '+(X+w)+','+(Y+r)+'V'+base+'Z'}
+  function xlab(data,i,every){return i%every===0||(i===data.length-1&&data.length<=7)}
+  // 방문자 막대 + 열람 선 (같은 눈금)
+  function combo(el,daily){
+    var W=Math.max(300,el.clientWidth||880),H=W<500?190:230,pl=34,pb=22,pt=10,iw=W-pl-8,ih=H-pt-pb,base=pt+ih;
+    var top=niceTop(Math.max.apply(null,daily.map(function(r){return Math.max(r.views,r.visitors)}).concat([1])));
+    var bw=iw/daily.length,gap=Math.min(2,bw*.2),s='<svg viewBox="0 0 '+W+' '+H+'" role="img">'+axis(W,pl,pt,ih,top),every=Math.ceil(daily.length/(W<500?6:10)),pts=[];
+    daily.forEach(function(r,i){var h=r.visitors/top*ih,X=pl+i*bw+gap/2,w=Math.max(1,bw-gap);if(h>0)s+='<path d="'+roundTop(X,base-h,w,h,base)+'" fill="var(--brand)"/>';pts.push([pl+i*bw+bw/2,base-r.views/top*ih]);if(xlab(daily,i,every))s+='<text x="'+(pl+i*bw+bw/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="10" fill="var(--ink-faint)">'+md(r.day)+'</text>'});
+    if(pts.length>1)s+='<polyline points="'+pts.map(function(q){return q[0].toFixed(1)+','+q[1].toFixed(1)}).join(' ')+'" fill="none" stroke="var(--c3)" stroke-width="2" stroke-linejoin="round"/>';
+    if(daily.length<=31)pts.forEach(function(q){s+='<circle cx="'+q[0]+'" cy="'+q[1]+'" r="3.5" fill="var(--c3)" stroke="#fff" stroke-width="2"/>'});
+    daily.forEach(function(r,i){s+='<rect x="'+(pl+i*bw)+'" y="'+pt+'" width="'+bw+'" height="'+ih+'" fill="transparent" data-tip="'+md(r.day)+' ('+WD[new Date(r.day+'T00:00:00Z').getUTCDay()]+')<br>방문자 '+n(r.visitors)+'명 · 열람 '+n(r.views)+'회"/>'});
+    el.innerHTML=s+'<line x1="'+pl+'" x2="'+(W-8)+'" y1="'+base+'" y2="'+base+'" stroke="var(--line)"/></svg>';
+  }
+  function stack(el,data){
+    var W=Math.max(280,el.clientWidth||440),H=180,pl=28,pb=22,pt=8,iw=W-pl-8,ih=H-pt-pb,base=pt+ih;
+    var top=niceTop(Math.max.apply(null,data.map(function(x){return x.segs.reduce(function(a,b){return a+b[0]},0)}).concat([1])));
+    var bw=iw/data.length,gap=Math.min(2,bw*.2),s='<svg viewBox="0 0 '+W+' '+H+'" role="img">'+axis(W,pl,pt,ih,top),every=Math.ceil(data.length/7);
+    data.forEach(function(x,i){var X=pl+i*bw+gap/2,w=Math.max(1,bw-gap),y=base,segs=x.segs.filter(function(g){return g[0]>0});
+      segs.forEach(function(g,j){var h=g[0]/top*ih,Y=y-h;s+=j===segs.length-1?'<path d="'+roundTop(X,Y,w,h,y)+'" fill="'+g[1]+'"/>':'<rect x="'+X+'" y="'+Y+'" width="'+w+'" height="'+Math.max(0,h-(segs.length>1?1:0))+'" fill="'+g[1]+'"/>';y=Y});
+      s+='<rect x="'+(pl+i*bw)+'" y="'+pt+'" width="'+bw+'" height="'+ih+'" fill="transparent" data-tip="'+x.tip+'"/>';
+      if(xlab(data,i,every))s+='<text x="'+(pl+i*bw+bw/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="10" fill="var(--ink-faint)">'+md(x.k)+'</text>'});
+    el.innerHTML=s+'<line x1="'+pl+'" x2="'+(W-8)+'" y1="'+base+'" y2="'+base+'" stroke="var(--line)"/></svg>';
+  }
+  function pair(el,data){
+    if(!data.length){el.innerHTML='<p class="empty">아직 기록이 없어요.</p>';return}
+    var W=Math.max(280,el.clientWidth||440),H=180,pl=28,pb=22,pt=8,iw=W-pl-8,ih=H-pt-pb,base=pt+ih;
+    var top=niceTop(Math.max.apply(null,data.map(function(x){return Math.max(x.a,x.b)}).concat([1])));
+    var bw=iw/data.length,w=Math.min(18,(bw-10)/2),s='<svg viewBox="0 0 '+W+' '+H+'" role="img">'+axis(W,pl,pt,ih,top);
+    data.forEach(function(x,i){var cx=pl+i*bw+bw/2,ha=x.a/top*ih,hb=x.b/top*ih;
+      if(ha>0)s+='<path d="'+roundTop(cx-w-1,base-ha,w,ha,base)+'" fill="var(--brand)"/>';
+      if(hb>0)s+='<path d="'+roundTop(cx+1,base-hb,w,hb,base)+'" fill="var(--accent)"/>';
+      s+='<rect x="'+(pl+i*bw)+'" y="'+pt+'" width="'+bw+'" height="'+ih+'" fill="transparent" data-tip="'+x.tip+'"/><text x="'+cx+'" y="'+(H-6)+'" text-anchor="middle" font-size="11" fill="var(--ink-soft)">'+x.k+'</text>'});
+    el.innerHTML=s+'<line x1="'+pl+'" x2="'+(W-8)+'" y1="'+base+'" y2="'+base+'" stroke="var(--line)"/></svg>';
+  }
+  function heat(el,h){
+    var max=0,tot=0;h.forEach(function(r){r.forEach(function(v){if(v>max)max=v;tot+=v})});
+    if(!tot){el.innerHTML=newEmpty();return}
+    var s='<div class="heat"><span></span>';
+    for(var i=0;i<24;i++)s+='<span class="h">'+(i%3===0?i:'')+'</span>';
+    [1,2,3,4,5,6,0].forEach(function(d){s+='<span class="w">'+WD[d]+'</span>';for(var i=0;i<24;i++){var v=(h[d]||[])[i]||0;s+='<span class="c" style="'+(v?'background:rgba(20,149,143,'+(.15+.85*v/max).toFixed(2)+')':'')+'" data-tip="'+WD[d]+'요일 '+i+'시~'+(i+1)+'시<br>방문자 '+v+'명"></span>'}});
+    el.innerHTML=s+'</div><div class="scale">적음<i style="background:rgba(20,149,143,.15)"></i><i style="background:rgba(20,149,143,.45)"></i><i style="background:rgba(20,149,143,.75)"></i><i style="background:rgba(20,149,143,1)"></i>많음 · 가장 많은 칸 '+max+'명</div>';
+  }
+  // 마우스를 올리거나 누르면 숫자 표시
+  var tip=$('tip');
+  function showTip(e){var t=e.target.closest&&e.target.closest('[data-tip]');if(!t||$('app').hidden){tip.style.opacity=0;return}tip.innerHTML=t.getAttribute('data-tip');var x=e.clientX,y=e.clientY,w=tip.offsetWidth;tip.style.left=Math.min(Math.max(8,x-w/2),innerWidth-w-8)+'px';tip.style.top=Math.max(8,y-tip.offsetHeight-14)+'px';tip.style.opacity=1}
+  document.addEventListener('mousemove',showTip);document.addEventListener('click',showTip);document.addEventListener('scroll',function(){tip.style.opacity=0},{passive:true});
+
+  $('csv').addEventListener('click',function(){if(!last)return;var rows=[['날짜','방문자','열람','문자','전화','톡톡','견적문구복사','연락한방문자']].concat(last.daily.map(function(r){return[r.day,r.visitors,r.views,r.sms,r.phone,r.talk,r.copy,r.contact_visitors]}));var b=new Blob(['﻿'+rows.map(function(r){return r.join(',')}).join('\n')],{type:'text/csv'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='nemojari-stats-'+last.today+'-'+last.days+'d.csv';a.click()});
 
   function check(){fetch('/api/stats').then(function(r){return r.json()}).then(function(j){setup=!j.set;$('pin2').hidden=!setup;$('pinBtn').textContent=setup?'비밀번호 정하기':'통계 보기';$('lockMsg').textContent=setup?'처음 쓰시는 거예요. 앞으로 쓸 숫자 비밀번호 6자리를 정해주세요.':'사장님용 페이지예요. 비밀번호 6자리를 넣어주세요.';showLock('')}).catch(function(){showLock('인터넷 연결을 확인해 주세요.')})}
   $('pinForm').addEventListener('submit',function(e){e.preventDefault();var v=$('pin').value.trim();if(!/^\d{6}$/.test(v)){$('pinErr').textContent='숫자 6자리로 넣어주세요.';return}

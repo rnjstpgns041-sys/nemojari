@@ -37,49 +37,82 @@ export default async (req) => {
   const days = [1, 7, 30, 90].includes(+body.days) ? +body.days : 7;
   const store = getStore({ name: "stats2", consistency: "strong" });
   const now = Date.now();
-  const list = [];
-  for (let i = days - 1; i >= 0; i--) {
-    const day = kst(now - i * 86400e3);
-    list.push({ day, d: (await store.get(day, { type: "json" })) || {} });
-  }
+  // 이번 기간 + 바로 앞 같은 길이 기간(비교용)을 한 번에 읽는다
+  const all = await Promise.all(Array.from({ length: days * 2 }, (_, i) => {
+    const day = kst(now - (days * 2 - 1 - i) * 86400e3);
+    return store.get(day, { type: "json" }).then((d) => ({ day, d: d || {} }), () => ({ day, d: {} }));
+  }));
+  const prev = all.slice(0, days), list = all.slice(days);
+  const cur = summarize(list);
+  const p = summarize(prev).totals;
+  return json(Object.assign({ days, today: list[list.length - 1].day, prev: p }, cur));
+};
 
-  const T = { visitors: 0, views: 0, phone: 0, sms: 0, talk: 0, copy: 0, contact_visitors: 0 };
+const by = (k) => (a, b) => b[k] - a[k];
+const bump = (o, key, base, f) => { const x = (o[key] = o[key] || Object.assign({}, base)); f(x); };
+
+function summarize(list) {
+  const T = { visitors: 0, unique: 0, returning: 0, views: 0, phone: 0, sms: 0, talk: 0, copy: 0, contact_visitors: 0 };
   const src = {}, kw = {}, pages = {}, cpages = {}, dev = { mobile: 0, pc: 0 };
+  const geo = {}, br = {}, osm = {}, land = {}, seen = {};
+  const hours = Array.from({ length: 7 }, () => Array(24).fill(0));
+  const depth = { d1: 0, d2: 0, d3: 0, d5: 0 };
+  const funnel = { tracked: 0, multi: 0, contact: 0 };
+  const week = Array.from({ length: 7 }, () => ({ days: 0, visitors: 0, contacts: 0 }));
   let kwSearch = 0, kwKnown = 0;
   const daily = list.map(({ day, d }) => {
-    const vis = Object.values(d.vis || {}), c = d.c || {};
+    const vis = Object.entries(d.vis || {}), c = d.c || {};
+    const wd = new Date(day + "T00:00:00Z").getUTCDay();
     const views = Object.values(d.pv || {}).reduce((a, b) => a + b, 0);
-    for (const x of vis) {
-      const s = (src[x.s] = src[x.s] || { name: x.s, visitors: 0, contacts: 0 });
-      s.visitors++; if (x.c) s.contacts++;
-      if (x.c) T.contact_visitors++;
+    let cv = 0;
+    for (const [id, x] of vis) {
+      seen[id] = (seen[id] || 0) + 1;
+      bump(src, x.s, { name: x.s, visitors: 0, contacts: 0 }, (s) => { s.visitors++; if (x.c) s.contacts++; });
+      if (x.c) { T.contact_visitors++; cv++; }
       x.d === "m" ? dev.mobile++ : dev.pc++;
       if (/검색|광고/.test(x.s)) { kwSearch++; if (x.k) kwKnown++; }
-      if (x.k) {
-        const k = (kw[x.k + "|" + x.s] = kw[x.k + "|" + x.s] || { kw: x.k, src: x.s, visitors: 0, contacts: 0 });
-        k.visitors++; if (x.c) k.contacts++;
+      if (x.k) bump(kw, x.k + "|" + x.s, { kw: x.k, src: x.s, visitors: 0, contacts: 0 }, (k) => { k.visitors++; if (x.c) k.contacts++; });
+      // 아래는 2026-10-25부터 새로 모으는 항목 (그 전 방문에는 없음)
+      if (x.g) bump(geo, x.g, { name: x.g, visitors: 0, contacts: 0 }, (g) => { g.visitors++; if (x.c) g.contacts++; });
+      if (x.b) bump(br, x.b, { name: x.b, visitors: 0 }, (b) => b.visitors++);
+      if (x.o) bump(osm, x.o, { name: x.o, visitors: 0 }, (o) => o.visitors++);
+      if (x.l) bump(land, x.l, { path: x.l, visitors: 0, contacts: 0 }, (l) => { l.visitors++; if (x.c) l.contacts++; });
+      if (typeof x.h === "number") hours[wd][x.h]++;
+      if (x.n) {
+        funnel.tracked++;
+        if (x.n > 1) funnel.multi++;
+        if (x.c) funnel.contact++;
+        depth[x.n >= 5 ? "d5" : x.n >= 3 ? "d3" : x.n === 2 ? "d2" : "d1"]++;
       }
     }
-    for (const [p, n] of Object.entries(d.pv || {})) (pages[p] = pages[p] || { path: p, views: 0, contacts: 0 }).views += n;
+    for (const [p, n] of Object.entries(d.pv || {})) bump(pages, p, { path: p, views: 0, contacts: 0 }, (x) => (x.views += n));
     for (const [p, n] of Object.entries(d.pc || {})) {
-      (pages[p] = pages[p] || { path: p, views: 0, contacts: 0 }).contacts += n;
-      (cpages[p] = cpages[p] || { path: p, contacts: 0 }).contacts += n;
+      bump(pages, p, { path: p, views: 0, contacts: 0 }, (x) => (x.contacts += n));
+      bump(cpages, p, { path: p, contacts: 0 }, (x) => (x.contacts += n));
     }
-    const row = { day, visitors: vis.length, views, phone: c.tel || 0, sms: c.sms || 0, talk: c.talk || 0, copy: c.copy || 0 };
+    const row = { day, visitors: vis.length, views, phone: c.tel || 0, sms: c.sms || 0, talk: c.talk || 0, copy: c.copy || 0, contact_visitors: cv };
+    week[wd].days++; week[wd].visitors += row.visitors; week[wd].contacts += row.phone + row.sms + row.talk;
     T.visitors += row.visitors; T.views += views; T.phone += row.phone; T.sms += row.sms; T.talk += row.talk; T.copy += row.copy;
     return row;
   });
-  const by = (k) => (a, b) => b[k] - a[k];
+  const ids = Object.values(seen);
+  T.unique = ids.length;
+  T.returning = ids.filter((n) => n > 1).length;
   const td = daily[daily.length - 1];
-  return json({
-    days, today: td.day, totals: T,
+  return {
+    totals: T,
     today_totals: { visitors: td.visitors, phone: td.phone, sms: td.sms, talk: td.talk },
     daily, devices: dev, kw_search: kwSearch, kw_known: kwKnown,
     sources: Object.values(src).sort(by("visitors")).slice(0, 15),
     keywords: Object.values(kw).sort(by("visitors")).slice(0, 30),
-    pages: Object.values(pages).sort(by("views")).slice(0, 30),
+    pages: Object.values(pages).sort(by("views")),
     contact_pages: Object.values(cpages).sort(by("contacts")).slice(0, 15),
-  });
-};
+    regions: Object.values(geo).sort(by("visitors")).slice(0, 15),
+    browsers: Object.values(br).sort(by("visitors")),
+    os: Object.values(osm).sort(by("visitors")),
+    landings: Object.values(land).sort(by("visitors")).slice(0, 15),
+    hours, depth, funnel, week,
+  };
+}
 
 export const config = { path: "/api/stats" };
