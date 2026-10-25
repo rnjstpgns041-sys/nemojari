@@ -255,6 +255,60 @@ footer .links{display:flex;gap:18px;flex-wrap:wrap}
   .reveal.pending{transform:translateY(36px)}
 }
 
+
+/* enrich v6: 현장 사진 띠, 다른 점, 고객 반응 */
+.reel{padding-block:8px 72px;overflow:hidden}
+.reel-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.reel-head h2{font-size:clamp(26px,3.6vw,36px);line-height:1.2}
+.reel-head a{color:var(--accent-ink);font-weight:600;text-decoration:none;font-size:15px}
+.reel-row{display:flex;gap:14px;width:max-content;padding-block:6px}
+.reel-row+.reel-row{margin-top:8px}
+.reel-item{position:relative;flex:none;width:200px;aspect-ratio:3/4;border-radius:22px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);text-decoration:none}
+.reel-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.reel-item:hover img{transform:scale(1.05)}
+.reel-item span{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(16,20,24,.72);color:#fff;font-size:13px;line-height:1.4;padding:7px 10px;border-radius:12px;backdrop-filter:blur(6px)}
+.reel-item span b{display:block;font-weight:600;color:#7fe8e3;font-size:12px}
+@media (prefers-reduced-motion:no-preference){
+  .reel-row{animation:reel 70s linear infinite}
+  .reel-row.rev{animation-direction:reverse;animation-duration:80s}
+  .reel:hover .reel-row{animation-play-state:paused}
+}
+@keyframes reel{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.reel-track{overflow-x:auto}}
+@media (max-width:600px){.reel-item{width:150px;border-radius:18px}.reel{padding-block:0 56px}}
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.why-card{background:var(--surface);border-radius:var(--r-lg);padding:28px;display:flex;flex-direction:column;gap:12px;transition:transform .25s ease, box-shadow .25s ease}
+.why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.why-card .ic{width:48px;height:48px;border-radius:14px;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center}
+.why-card .ic svg{width:26px;height:26px}
+.why-card .no{font-family:var(--font-display);font-size:15px;color:var(--muted)}
+.why-card h3{font-size:26px;line-height:1.25}
+.why-card p{color:var(--muted);font-size:15.5px}
+.why-card a{margin-top:auto;padding-top:6px;color:var(--accent-ink);font-weight:600;text-decoration:none;font-size:14px}
+.why-card.pick{background:var(--accent);color:var(--on-accent)}
+.why-card.pick p,.why-card.pick .no{color:var(--on-accent);opacity:.85}
+.why-card.pick .ic{background:rgba(255,255,255,.5);color:var(--on-accent)}
+.why-card.pick a{color:var(--on-accent)}
+@media (max-width:900px){.why{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.why{grid-template-columns:1fr}.why-card{padding:24px}}
+.voices-head{margin:44px 0 16px;display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.voices-head h3{font-size:26px}
+.voices-head p{color:var(--muted);font-size:14px}
+.voices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.voice{background:var(--bg);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;box-shadow:var(--shadow);transition:transform .25s ease}
+.voice:hover{transform:translateY(-4px)}
+.voice img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
+.voice div{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.voice q{font-size:15.5px;line-height:1.6;quotes:none}
+.voice small{color:var(--muted);font-size:13px;margin-top:auto}
+.voice small b{color:var(--accent-ink);font-weight:600}
+@media (max-width:900px){.voices{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.voices{grid-template-columns:1fr}.voice{flex-direction:row}.voice img{width:110px;aspect-ratio:auto;height:auto;min-height:100%;flex:none}.voice div{padding:14px 16px}}
+.trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;padding:0;list-style:none}
+.trust li{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border-radius:999px;padding:7px 13px 7px 9px;font-size:14px;font-weight:500}
+.trust li svg{width:18px;height:18px;color:var(--accent-ink);flex:none}
+.trust li.hi{background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+
 /* polish v5 */
 .svc-card,.chat,.review,.step{transition:transform .25s ease, box-shadow .25s ease}
 .svc-card:hover,.chat:hover,.review:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
@@ -365,6 +419,7 @@ body{padding-bottom:76px}}
     </a>
     <div class="nav-links">
       <a href="#services">하는 일</a>
+      <a href="#why">일하는 방식</a>
       <a href="/cases/">작업 기록</a>
       <a href="#price">비용</a>
       <a href="#process">진행 방법</a>
@@ -385,7 +440,12 @@ body{padding-bottom:76px}}
       <a class="btn btn-primary" href="#quote">사진 보내고 견적 받기</a>
       <a class="btn btn-soft" href="/fridge-cabinet/">냉장고장 시공 사례</a>
     </div>
-    <p class="rise d3" style="margin-top:18px;font-size:15px;color:var(--muted)"><b style="color:var(--accent-ink)">시공 후 1년 무상 A/S</b> · 충청·경기 당일 예약 · 전국 출동</p>
+    <ul class="trust rise d3" aria-label="네모자리 약속">
+      <li class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>시공 후 1년 무상 A/S</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5h16v14z"/><path d="M8 9h8M8 13h5"/></svg>현장 기록 791건</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>충청·경기 당일 예약</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>전국 출동</li>
+    </ul>
     <p class="rise d3" style="margin-top:16px;font-size:15px"><a href="/sink-cabinet/" style="color:var(--accent-ink);font-weight:600;text-decoration:none">하부장 리폼 사례도 보기 →</a></p>
     </div>
     <div class="phone rise d2" role="img" aria-label="문자로 사진을 보내고 작업 안내를 받는 화면 예시">
@@ -407,6 +467,17 @@ body{padding-bottom:76px}}
    </div>
   </div>
 </header>
+
+<section class="reel" id="reel" aria-labelledby="reel-h">
+  <div class="wrap reel-head">
+    <h2 id="reel-h">요즘 다녀온 현장들</h2>
+    <a href="/cases/">시공 사례 27건 모두 보기 →</a>
+  </div>
+  <div class="reel-track">
+    <div class="reel-row"><a class="reel-item" href="/cases/224434966685/"><img src="/img/224434966685_a.jpg?v=2" alt="반려동물 출입문 설치, 기존 문 타공 펫도어 리폼 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>문·펫도어</b>반려동물 출입문 설치, 기존 문 타공 펫도어 리폼</span></a><a class="reel-item" href="/cases/224431253766/"><img src="/img/224431253766_a.jpg?v=2" alt="냉장고장 구조 변경, 가운데 칸막이 철거 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>냉장고장</b>냉장고장 구조 변경, 가운데 칸막이 철거</span></a><a class="reel-item" href="/cases/224425838936/"><img src="/img/224425838936_a.jpg?v=2" alt="흡입력 떨어진 주방 후드 교체 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>주방</b>흡입력 떨어진 주방 후드 교체</span></a><a class="reel-item" href="/cases/224421929056/"><img src="/img/224421929056_a.jpg?v=2" alt="수납장 철거 후 냉장고 두 대 설치 공간 만들기 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>냉장고장</b>수납장 철거 후 냉장고 두 대 설치 공간 만들기</span></a><a class="reel-item" href="/cases/224414970479/"><img src="/img/224414970479_a.jpg?v=2" alt="오래된 싱크볼·수전 교체 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>용인</b>오래된 싱크볼·수전 교체</span></a><a class="reel-item" href="/cases/224410014122/"><img src="/img/224410014122_a.jpg?v=2" alt="냉장고 폭이 안 맞을 때 옆 수납장 철거 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>냉장고장</b>냉장고 폭이 안 맞을 때 옆 수납장 철거</span></a><a class="reel-item" href="/cases/224409018438/"><img src="/img/224409018438_a.jpg?v=2" alt="식기세척기 빈자리 하부장 제작으로 원상복구 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>주방</b>식기세척기 빈자리 하부장 제작으로 원상복구</span></a><a class="reel-item" href="/cases/224398949820/"><img src="/img/224398949820_a.jpg?v=2" alt="중간벽 자르기, 칸막이 제거하고 2대 설치 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>청주</b>중간벽 자르기, 칸막이 제거하고 2대 설치</span></a><a class="reel-item" href="/cases/224391806058/"><img src="/img/224391806058_a.jpg?v=2" alt="신발장 가운데 칸을 오픈장으로 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>평택</b>신발장 가운데 칸을 오픈장으로</span></a><a class="reel-item" href="/cases/224390097198/"><img src="/img/224390097198_a.jpg?v=2" alt="층간소음 매트에 걸리는 팬트리 문 하단 2cm 절단 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>당진</b>층간소음 매트에 걸리는 팬트리 문 하단 2cm 절단</span></a><a class="reel-item" href="/cases/224388915091/"><img src="/img/224388915091_a.jpg?v=2" alt="싱크대 하부장 리폼으로 로봇청소기장 만들기 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>내포</b>싱크대 하부장 리폼으로 로봇청소기장 만들기</span></a><a class="reel-item" href="/cases/224387704850/"><img src="/img/224387704850_a.jpg?v=2" alt="신발장 한 칸 빼고 3연동 중문 설치 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>화성</b>신발장 한 칸 빼고 3연동 중문 설치</span></a><a class="reel-item" href="/cases/224385958044/"><img src="/img/224385958044_a.jpg?v=2" alt="오피스텔 붙박이장을 TV장으로 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>화성</b>오피스텔 붙박이장을 TV장으로</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224434966685/"><img src="/img/224434966685_a.jpg?v=2" alt="반려동물 출입문 설치, 기존 문 타공 펫도어 리폼 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>문·펫도어</b>반려동물 출입문 설치, 기존 문 타공 펫도어 리폼</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224431253766/"><img src="/img/224431253766_a.jpg?v=2" alt="냉장고장 구조 변경, 가운데 칸막이 철거 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>냉장고장</b>냉장고장 구조 변경, 가운데 칸막이 철거</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224425838936/"><img src="/img/224425838936_a.jpg?v=2" alt="흡입력 떨어진 주방 후드 교체 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>주방</b>흡입력 떨어진 주방 후드 교체</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224421929056/"><img src="/img/224421929056_a.jpg?v=2" alt="수납장 철거 후 냉장고 두 대 설치 공간 만들기 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>냉장고장</b>수납장 철거 후 냉장고 두 대 설치 공간 만들기</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224414970479/"><img src="/img/224414970479_a.jpg?v=2" alt="오래된 싱크볼·수전 교체 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>용인</b>오래된 싱크볼·수전 교체</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224410014122/"><img src="/img/224410014122_a.jpg?v=2" alt="냉장고 폭이 안 맞을 때 옆 수납장 철거 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>냉장고장</b>냉장고 폭이 안 맞을 때 옆 수납장 철거</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224409018438/"><img src="/img/224409018438_a.jpg?v=2" alt="식기세척기 빈자리 하부장 제작으로 원상복구 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>주방</b>식기세척기 빈자리 하부장 제작으로 원상복구</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224398949820/"><img src="/img/224398949820_a.jpg?v=2" alt="중간벽 자르기, 칸막이 제거하고 2대 설치 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>청주</b>중간벽 자르기, 칸막이 제거하고 2대 설치</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224391806058/"><img src="/img/224391806058_a.jpg?v=2" alt="신발장 가운데 칸을 오픈장으로 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>평택</b>신발장 가운데 칸을 오픈장으로</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224390097198/"><img src="/img/224390097198_a.jpg?v=2" alt="층간소음 매트에 걸리는 팬트리 문 하단 2cm 절단 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>당진</b>층간소음 매트에 걸리는 팬트리 문 하단 2cm 절단</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224388915091/"><img src="/img/224388915091_a.jpg?v=2" alt="싱크대 하부장 리폼으로 로봇청소기장 만들기 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>내포</b>싱크대 하부장 리폼으로 로봇청소기장 만들기</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224387704850/"><img src="/img/224387704850_a.jpg?v=2" alt="신발장 한 칸 빼고 3연동 중문 설치 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>화성</b>신발장 한 칸 빼고 3연동 중문 설치</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224385958044/"><img src="/img/224385958044_a.jpg?v=2" alt="오피스텔 붙박이장을 TV장으로 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>화성</b>오피스텔 붙박이장을 TV장으로</span></a></div>
+    <div class="reel-row rev"><a class="reel-item" href="/cases/224384780745/"><img src="/img/224384780745_a.jpg?v=2" alt="삼성 1도어 3대 키친핏 냉장고장 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>동탄</b>삼성 1도어 3대 키친핏 냉장고장</span></a><a class="reel-item" href="/cases/224383366513/"><img src="/img/224383366513_a.jpg?v=2" alt="남는 공간에 홈바·와인냉장고장 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>천안 불당</b>남는 공간에 홈바·와인냉장고장</span></a><a class="reel-item" href="/cases/224382210661/"><img src="/img/224382210661_a.jpg?v=2" alt="하부장 개조, 오븐 옮기고 식세기 자리 만들기 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>내포</b>하부장 개조, 오븐 옮기고 식세기 자리 만들기</span></a><a class="reel-item" href="/cases/224379817707/"><img src="/img/224379817707_a.jpg?v=2" alt="김치냉장고 자리 키친핏 수납장 제작 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>당진</b>김치냉장고 자리 키친핏 수납장 제작</span></a><a class="reel-item" href="/cases/224378644878/"><img src="/img/224378644878_a.jpg?v=2" alt="붙박이 냉장고장과 홈바 맞춤 제작 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>보령</b>붙박이 냉장고장과 홈바 맞춤 제작</span></a><a class="reel-item" href="/cases/224376689174/"><img src="/img/224376689174_a.jpg?v=2" alt="조명 들어간 홈바장 맞춤 제작 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>동탄</b>조명 들어간 홈바장 맞춤 제작</span></a><a class="reel-item" href="/cases/224375219889/"><img src="/img/224375219889_a.jpg?v=2" alt="냉장고장 중앙벽 제거 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>당진</b>냉장고장 중앙벽 제거</span></a><a class="reel-item" href="/cases/224374304359/"><img src="/img/224374304359_a.jpg?v=2" alt="화이트 붙박이장 옷장 제작 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>동탄</b>화이트 붙박이장 옷장 제작</span></a><a class="reel-item" href="/cases/224363907375/"><img src="/img/224363907375_a.jpg?v=2" alt="물먹어 부푼 싱크대 하부장 부분 수리 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>주방</b>물먹어 부푼 싱크대 하부장 부분 수리</span></a><a class="reel-item" href="/cases/224360769598/"><img src="/img/224360769598_a.jpg?v=2" alt="소형견용 방문 펫도어 설치 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>서산</b>소형견용 방문 펫도어 설치</span></a><a class="reel-item" href="/cases/224354103092/"><img src="/img/224354103092_a.jpg?v=2" alt="현관 신발장 중간 선반 제거, 오픈장 리폼 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>서산</b>현관 신발장 중간 선반 제거, 오픈장 리폼</span></a><a class="reel-item" href="/cases/224240636177/"><img src="/img/224240636177_a.jpg?v=2" alt="뚱냉장고 안 튀어나오는 냉장고장 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>구로 신도림</b>뚱냉장고 안 튀어나오는 냉장고장</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224384780745/"><img src="/img/224384780745_a.jpg?v=2" alt="삼성 1도어 3대 키친핏 냉장고장 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>동탄</b>삼성 1도어 3대 키친핏 냉장고장</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224383366513/"><img src="/img/224383366513_a.jpg?v=2" alt="남는 공간에 홈바·와인냉장고장 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>천안 불당</b>남는 공간에 홈바·와인냉장고장</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224382210661/"><img src="/img/224382210661_a.jpg?v=2" alt="하부장 개조, 오븐 옮기고 식세기 자리 만들기 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>내포</b>하부장 개조, 오븐 옮기고 식세기 자리 만들기</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224379817707/"><img src="/img/224379817707_a.jpg?v=2" alt="김치냉장고 자리 키친핏 수납장 제작 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>당진</b>김치냉장고 자리 키친핏 수납장 제작</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224378644878/"><img src="/img/224378644878_a.jpg?v=2" alt="붙박이 냉장고장과 홈바 맞춤 제작 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>보령</b>붙박이 냉장고장과 홈바 맞춤 제작</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224376689174/"><img src="/img/224376689174_a.jpg?v=2" alt="조명 들어간 홈바장 맞춤 제작 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>동탄</b>조명 들어간 홈바장 맞춤 제작</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224375219889/"><img src="/img/224375219889_a.jpg?v=2" alt="냉장고장 중앙벽 제거 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>당진</b>냉장고장 중앙벽 제거</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224374304359/"><img src="/img/224374304359_a.jpg?v=2" alt="화이트 붙박이장 옷장 제작 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>동탄</b>화이트 붙박이장 옷장 제작</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224363907375/"><img src="/img/224363907375_a.jpg?v=2" alt="물먹어 부푼 싱크대 하부장 부분 수리 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>주방</b>물먹어 부푼 싱크대 하부장 부분 수리</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224360769598/"><img src="/img/224360769598_a.jpg?v=2" alt="소형견용 방문 펫도어 설치 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>서산</b>소형견용 방문 펫도어 설치</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224354103092/"><img src="/img/224354103092_a.jpg?v=2" alt="현관 신발장 중간 선반 제거, 오픈장 리폼 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>서산</b>현관 신발장 중간 선반 제거, 오픈장 리폼</span></a><a class="reel-item" aria-hidden="true" tabindex="-1" href="/cases/224240636177/"><img src="/img/224240636177_a.jpg?v=2" alt="뚱냉장고 안 튀어나오는 냉장고장 시공 후" loading="lazy" decoding="async" width="675" height="900"><span><b>구로 신도림</b>뚱냉장고 안 튀어나오는 냉장고장</span></a></div>
+  </div>
+</section>
 
 <section class="statement" aria-labelledby="st-h">
   <div class="wrap">
@@ -437,6 +508,24 @@ body{padding-bottom:76px}}
       <input type="range" id="baRange" min="0" max="100" value="50" aria-label="전후 비교 위치">
     </div>
     <div class="ba-cap"><span>당진 · 냉장고장 중앙벽 제거 · 1명이 3시간</span><a href="/cases/224375219889/">이 현장 작업 과정 보기 →</a></div>
+  </div>
+</section>
+
+<section id="why" aria-labelledby="why-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-kicker">네모자리가 일하는 방식</p>
+      <h2 id="why-h">보이지 않는 곳까지,<br><span style="color:var(--accent)">여섯 가지</span>는 꼭 지켜요</h2>
+      <p>냉장고장은 매일 여닫는 가구라 몇 mm, 몇 년 뒤가 중요해요. 그래서 현장마다 이렇게 일해요.</p>
+    </div>
+    <div class="why">
+      <article class="why-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><circle cx="9" cy="10.5" r="1"/><circle cx="12.5" cy="10.5" r="1"/><circle cx="16" cy="10.5" r="1"/></svg></span><span class="no">01</span><h3>사진 보고 먼저 말씀드려요</h3><p>현장 사진 2~3장이면 몇 명이 몇 시간 걸릴 일인지, 리폼으로 될지 새로 짜야 할지 방문 전에 먼저 알려드려요.</p><a href="#price">비용이 정해지는 기준 →</a></article>
+      <article class="why-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16 16 3l5 5L8 21z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/></svg></span><span class="no">02</span><h3>자르기 전에 세 번 재요</h3><p>냉장고 모델 규격과 실제 벽 치수, 문 열림 방향까지 확인하고 잘라요. 한 번 자르면 되돌리기 어려운 일이니까요.</p><a href="/cases/224378644878/">보령 · 문 열림까지 맞춘 냉장고장 →</a></article>
+      <article class="why-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18M3 20h18M7 4v16M17 4v16M7 9h10"/></svg></span><span class="no">03</span><h3>상부장 처짐까지 챙겨요</h3><p>가운데 기둥이나 칸막이를 빼면 위가 처질 수 있어요. 천장 지지대로 상부장을 단단히 받쳐 두고 마무리해요.</p><a href="/cases/224398949820/">청주 · 중간벽 자르고 상부장 보강 →</a></article>
+      <article class="why-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span class="no">04</span><h3>보양부터 하고 시작해요</h3><p>벽과 바닥이 상하지 않게 덮어 두고, 필요한 부분만 철거해요. 끝나면 주변 정리까지 하고 나와요.</p><a href="#process">진행 방법 보기 →</a></article>
+      <article class="why-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.3-1-1.6-1-2.6 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="15" cy="7" r="1.2"/></svg></span><span class="no">05</span><h3>원래 장과 어울리게</h3><p>기존 장과 같은 색감·디자인으로 맞춰서 새로 붙인 티가 덜 나요. 필요한 부분만 바꾸니 버리는 것도 적어요.</p><a href="/cases/224383366513/">천안 불당 · 기존 장에 맞춘 홈바장 →</a></article>
+      <article class="why-card pick"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/><path d="M12 8v4l3 2"/></svg></span><span class="no">06</span><h3>시공 후 1년 무상 A/S</h3><p>끝나고 나서 단차나 흔들림이 보이면 사진과 함께 문자 주세요. 1년 동안은 무상으로 다시 봐 드려요.</p><a href="#quote">문자로 문의하기 →</a></article>
+    </div>
   </div>
 </section>
 
@@ -622,6 +711,15 @@ body{padding-bottom:76px}}
         <blockquote>외출하거나 일 가면 강아지가 혼자 있으니 불안해서 여기저기 검색했어요. 사장님이 시공을 많이 하셨고 후기가 좋아서 맡겼는데 만족스럽게 받았어요.</blockquote>
         <figcaption class="src"><span>서산 · 방문 강아지문 설치</span><a href="https://blog.naver.com/ykd7411/224360769598" target="_blank" rel="noopener">원문 보기</a></figcaption>
       </figure>
+    </div>
+    <div class="voices-head"><h3>현장 기록에 남은 반응</h3><p>블로그 시공 기록에 적어 둔 그날의 모습이에요.</p></div>
+    <div class="voices">
+      <a class="voice" href="/cases/224379817707/"><img src="/img/224379817707_a.jpg?v=2" alt="당진 · 김치냉장고 자리 수납장 시공 후" loading="lazy" decoding="async" width="675" height="900"><div><q>키큰 수납장이 빠지면서 냉장고 자리가 넉넉해졌고, 수납은 상부장으로 옮겨 오히려 더 깔끔하다고 좋아하셨어요.</q><small>당진 · 김치냉장고 자리 수납장 · <b>현장 기록 보기</b></small></div></a>
+      <a class="voice" href="/cases/224378644878/"><img src="/img/224378644878_a.jpg?v=2" alt="보령 · 붙박이 냉장고장과 홈바 시공 후" loading="lazy" decoding="async" width="675" height="900"><div><q>냉장고와 수납장 문을 여닫을 때 서로 걸리지 않게 설계돼서, 실제로 써 보시고 편하다며 만족해하셨어요.</q><small>보령 · 붙박이 냉장고장과 홈바 · <b>현장 기록 보기</b></small></div></a>
+      <a class="voice" href="/cases/224375219889/"><img src="/img/224375219889_a.jpg?v=2" alt="당진 · 냉장고장 중앙벽 제거 시공 후" loading="lazy" decoding="async" width="675" height="900"><div><q>중앙벽이 사라지고 화이트 톤으로 바뀌면서, 새 냉장고 두 대가 라인 맞춰 예쁘게 들어간다고 좋아하셨어요.</q><small>당진 · 냉장고장 중앙벽 제거 · <b>현장 기록 보기</b></small></div></a>
+      <a class="voice" href="/cases/224374304359/"><img src="/img/224374304359_a.jpg?v=2" alt="동탄 · 화이트 붙박이 옷장 시공 후" loading="lazy" decoding="async" width="675" height="900"><div><q>틈이나 뜨는 곳 없이 방에 꼭 맞는 붙박이 옷장이 완성됐고, 수납력도 좋고 방이 넓어 보인다며 만족하셨어요.</q><small>동탄 · 화이트 붙박이 옷장 · <b>현장 기록 보기</b></small></div></a>
+      <a class="voice" href="/cases/224384780745/"><img src="/img/224384780745_a.jpg?v=2" alt="동탄 · 1도어 3대 키친핏 시공 후" loading="lazy" decoding="async" width="675" height="900"><div><q>기존 디자인과 색상은 살리면서 1도어 냉장고 3대가 나란히 들어가는 키친핏 스타일 냉장고장이 됐어요.</q><small>동탄 · 1도어 3대 키친핏 · <b>현장 기록 보기</b></small></div></a>
+      <a class="voice" href="/cases/224363907375/"><img src="/img/224363907375_a.jpg?v=2" alt="아산 · 물먹은 하부장 수리 시공 후" loading="lazy" decoding="async" width="675" height="900"><div><q>제품을 바꾸지 않고 복원만으로 곰팡이나 냄새 없이 깔끔하게 되살렸고, 고객님도 아주 만족하셨어요.</q><small>아산 · 물먹은 하부장 수리 · <b>현장 기록 보기</b></small></div></a>
     </div>
   </div>
 </section>
