@@ -45,14 +45,30 @@ export default async (req) => {
   const prev = all.slice(0, days), list = all.slice(days);
   const cur = summarize(list);
   const p = summarize(prev).totals;
-  return json(Object.assign({ days, today: list[list.length - 1].day, prev: p }, cur));
+  return json(Object.assign({ days, today: list[list.length - 1].day, prev: p, leads: await leadList(now) }, cur));
 };
+
+// 번호 남기기로 들어온 전화 요청 (최근 3개월, 그보다 오래된 건 지운다)
+async function leadList(now) {
+  const leads = getStore({ name: "leads", consistency: "strong" });
+  const { blobs } = await leads.list();
+  const old = now - 92 * 86400e3, out = [];
+  for (const { key } of blobs) {
+    const m = /^(lead|count)-(\d{13}|\d{4}-\d\d-\d\d)/.exec(key);
+    if (!m) continue;
+    const t = m[1] === "lead" ? +m[2] : Date.parse(m[2]);
+    if (t < old) { await leads.delete(key); continue; }
+    if (m[1] === "lead") out.push(key);
+  }
+  out.sort().reverse();
+  return (await Promise.all(out.slice(0, 100).map((k) => leads.get(k, { type: "json" })))).filter(Boolean);
+}
 
 const by = (k) => (a, b) => b[k] - a[k];
 const bump = (o, key, base, f) => { const x = (o[key] = o[key] || Object.assign({}, base)); f(x); };
 
 function summarize(list) {
-  const T = { visitors: 0, unique: 0, returning: 0, views: 0, phone: 0, sms: 0, talk: 0, copy: 0, contact_visitors: 0 };
+  const T = { visitors: 0, unique: 0, returning: 0, views: 0, phone: 0, sms: 0, talk: 0, lead: 0, cbopen: 0, copy: 0, contact_visitors: 0 };
   const src = {}, kw = {}, pages = {}, cpages = {}, dev = { mobile: 0, pc: 0 };
   const geo = {}, br = {}, osm = {}, land = {}, seen = {};
   const hours = Array.from({ length: 7 }, () => Array(24).fill(0));
@@ -90,9 +106,9 @@ function summarize(list) {
       bump(pages, p, { path: p, views: 0, contacts: 0 }, (x) => (x.contacts += n));
       bump(cpages, p, { path: p, contacts: 0 }, (x) => (x.contacts += n));
     }
-    const row = { day, visitors: vis.length, views, phone: c.tel || 0, sms: c.sms || 0, talk: c.talk || 0, copy: c.copy || 0, contact_visitors: cv };
-    week[wd].days++; week[wd].visitors += row.visitors; week[wd].contacts += row.phone + row.sms + row.talk;
-    T.visitors += row.visitors; T.views += views; T.phone += row.phone; T.sms += row.sms; T.talk += row.talk; T.copy += row.copy;
+    const row = { day, visitors: vis.length, views, phone: c.tel || 0, sms: c.sms || 0, talk: c.talk || 0, lead: c.lead || 0, cbopen: c.cbopen || 0, copy: c.copy || 0, contact_visitors: cv };
+    week[wd].days++; week[wd].visitors += row.visitors; week[wd].contacts += row.phone + row.sms + row.talk + row.lead;
+    T.visitors += row.visitors; T.views += views; T.phone += row.phone; T.sms += row.sms; T.talk += row.talk; T.lead += row.lead; T.cbopen += row.cbopen; T.copy += row.copy;
     return row;
   });
   const ids = Object.values(seen);
@@ -101,7 +117,7 @@ function summarize(list) {
   const td = daily[daily.length - 1];
   return {
     totals: T,
-    today_totals: { visitors: td.visitors, phone: td.phone, sms: td.sms, talk: td.talk },
+    today_totals: { visitors: td.visitors, phone: td.phone, sms: td.sms, talk: td.talk, lead: td.lead },
     daily, devices: dev, kw_search: kwSearch, kw_known: kwKnown,
     sources: Object.values(src).sort(by("visitors")).slice(0, 15),
     keywords: Object.values(kw).sort(by("visitors")).slice(0, 30),

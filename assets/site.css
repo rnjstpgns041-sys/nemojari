@@ -420,6 +420,44 @@ svg.ph{width:1.2em;height:1.2em;flex:none}
 .fcall{display:none}
 @media (min-width:721px){.fcall{display:inline-flex;align-items:center;gap:10px;position:fixed;right:24px;bottom:24px;z-index:20;background:var(--accent);color:var(--on-accent);text-decoration:none;border-radius:999px;padding:14px 22px 14px 18px;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums;box-shadow:0 10px 30px rgba(0,0,0,.18)}.fcall .ph{width:20px;height:20px}.fcall small{display:block;font-weight:600;font-size:12px;opacity:.85}}
 @media (prefers-reduced-motion:reduce){.ph-ring::after{animation:none}}
+/* callback: 번호 남기기 */
+.hero-cta .btn-soft.cbb{background:var(--accent-ink);color:var(--bg)}
+@media (max-width:600px){.hero-cta .btn-soft{width:auto;flex:1 1 0;padding-inline:8px;font-size:16px;white-space:nowrap}}
+.mcta.m4{grid-template-columns:1.35fr 1.15fr .8fr .7fr}
+.mcta.m4 a,.mcta.m4 button{font-size:15px;padding-inline:4px}
+.mcta.m4 a.p{font-size:16px}
+.mcta.m4 .cbm{background:var(--accent-ink);color:var(--bg)}
+dialog.cb{border:0;padding:28px 22px 22px;border-radius:24px;width:min(440px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;background:var(--bg);color:var(--fg);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog.cb::backdrop{background:rgba(0,0,0,.45)}
+.cb h2{font-size:26px}
+.cb-sub{color:var(--muted);font-size:15px;margin-top:8px;line-height:1.6}
+.cb-sub b{color:var(--fg)}
+.cb-x{position:absolute;top:10px;right:12px;width:40px;height:40px;border:0;background:none;font-size:28px;line-height:1;color:var(--muted);cursor:pointer}
+.cb-l{display:block;font-weight:700;font-size:15px;margin:18px 0 8px}
+.cb-l small{font-weight:400;color:var(--muted)}
+.cb input[type=tel],.cb input[name=area]{width:100%;box-sizing:border-box;font:inherit;font-size:18px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg)}
+.cb input[type=tel]{font-size:20px;font-weight:700;letter-spacing:.02em}
+.cb input:focus{outline:2px solid var(--accent);border-color:transparent}
+.cb-chips{display:flex;flex-wrap:wrap;gap:6px}
+.cb-chip input{position:absolute;opacity:0;pointer-events:none}
+.cb-chip span{display:inline-block;padding:9px 13px;border-radius:999px;background:var(--surface);font-size:15px;cursor:pointer;border:1.5px solid transparent}
+.cb-chip input:checked+span{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.cb-chip input:focus-visible+span{outline:2px solid var(--accent)}
+.cb-hp{position:absolute;left:-9999px;width:1px;height:1px}
+.cb-ok{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--muted);margin-top:18px;line-height:1.5}
+.cb-ok input{margin-top:3px;flex:none}
+.cb-err{color:#c0392b;font-size:14px;min-height:1em;margin-top:8px}
+.cb-go{width:100%;margin-top:6px;font-size:18px;padding:16px}
+.cb-or{text-align:center;font-size:14px;color:var(--muted);margin-top:12px}
+.cb-or a{color:var(--accent-ink);font-weight:700}
+.cb-done .btn{margin-top:14px}
+.cb-nudge{position:fixed;left:12px;right:12px;bottom:calc(80px + env(safe-area-inset-bottom));z-index:21;display:flex;align-items:center;gap:8px;background:var(--fg);color:var(--bg);border-radius:16px;padding:10px 8px 10px 16px;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:cbup .3s ease-out}
+.cb-nudge span{flex:1}
+.cb-nudge [data-cb]{border:0;border-radius:10px;background:var(--accent);color:var(--on-accent);font:inherit;font-weight:700;padding:9px 14px}
+.cb-nudge .cb-nx{border:0;background:none;color:inherit;opacity:.7;font-size:22px;width:34px;height:34px}
+@keyframes cbup{from{transform:translateY(20px);opacity:0}}
+@media (min-width:721px){.fcb{position:fixed;right:24px;bottom:104px;z-index:20;border:0;border-radius:999px;padding:12px 20px;background:var(--accent-ink);color:var(--bg);font:inherit;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.18)}}
+@media (max-width:720px){.fcb{display:none}}
 
 /* subpages */
 .sub-hero h1 mark{background:none;color:var(--accent)}

@@ -455,6 +455,44 @@ svg.ph{width:1.2em;height:1.2em;flex:none}
 .fcall{display:none}
 @media (min-width:721px){.fcall{display:inline-flex;align-items:center;gap:10px;position:fixed;right:24px;bottom:24px;z-index:20;background:var(--accent);color:var(--on-accent);text-decoration:none;border-radius:999px;padding:14px 22px 14px 18px;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums;box-shadow:0 10px 30px rgba(0,0,0,.18)}.fcall .ph{width:20px;height:20px}.fcall small{display:block;font-weight:600;font-size:12px;opacity:.85}}
 @media (prefers-reduced-motion:reduce){.ph-ring::after{animation:none}}
+/* callback: 번호 남기기 */
+.hero-cta .btn-soft.cbb{background:var(--accent-ink);color:var(--bg)}
+@media (max-width:600px){.hero-cta .btn-soft{width:auto;flex:1 1 0;padding-inline:8px;font-size:16px;white-space:nowrap}}
+.mcta.m4{grid-template-columns:1.35fr 1.15fr .8fr .7fr}
+.mcta.m4 a,.mcta.m4 button{font-size:15px;padding-inline:4px}
+.mcta.m4 a.p{font-size:16px}
+.mcta.m4 .cbm{background:var(--accent-ink);color:var(--bg)}
+dialog.cb{border:0;padding:28px 22px 22px;border-radius:24px;width:min(440px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;background:var(--bg);color:var(--fg);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog.cb::backdrop{background:rgba(0,0,0,.45)}
+.cb h2{font-size:26px}
+.cb-sub{color:var(--muted);font-size:15px;margin-top:8px;line-height:1.6}
+.cb-sub b{color:var(--fg)}
+.cb-x{position:absolute;top:10px;right:12px;width:40px;height:40px;border:0;background:none;font-size:28px;line-height:1;color:var(--muted);cursor:pointer}
+.cb-l{display:block;font-weight:700;font-size:15px;margin:18px 0 8px}
+.cb-l small{font-weight:400;color:var(--muted)}
+.cb input[type=tel],.cb input[name=area]{width:100%;box-sizing:border-box;font:inherit;font-size:18px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg)}
+.cb input[type=tel]{font-size:20px;font-weight:700;letter-spacing:.02em}
+.cb input:focus{outline:2px solid var(--accent);border-color:transparent}
+.cb-chips{display:flex;flex-wrap:wrap;gap:6px}
+.cb-chip input{position:absolute;opacity:0;pointer-events:none}
+.cb-chip span{display:inline-block;padding:9px 13px;border-radius:999px;background:var(--surface);font-size:15px;cursor:pointer;border:1.5px solid transparent}
+.cb-chip input:checked+span{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.cb-chip input:focus-visible+span{outline:2px solid var(--accent)}
+.cb-hp{position:absolute;left:-9999px;width:1px;height:1px}
+.cb-ok{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--muted);margin-top:18px;line-height:1.5}
+.cb-ok input{margin-top:3px;flex:none}
+.cb-err{color:#c0392b;font-size:14px;min-height:1em;margin-top:8px}
+.cb-go{width:100%;margin-top:6px;font-size:18px;padding:16px}
+.cb-or{text-align:center;font-size:14px;color:var(--muted);margin-top:12px}
+.cb-or a{color:var(--accent-ink);font-weight:700}
+.cb-done .btn{margin-top:14px}
+.cb-nudge{position:fixed;left:12px;right:12px;bottom:calc(80px + env(safe-area-inset-bottom));z-index:21;display:flex;align-items:center;gap:8px;background:var(--fg);color:var(--bg);border-radius:16px;padding:10px 8px 10px 16px;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:cbup .3s ease-out}
+.cb-nudge span{flex:1}
+.cb-nudge [data-cb]{border:0;border-radius:10px;background:var(--accent);color:var(--on-accent);font:inherit;font-weight:700;padding:9px 14px}
+.cb-nudge .cb-nx{border:0;background:none;color:inherit;opacity:.7;font-size:22px;width:34px;height:34px}
+@keyframes cbup{from{transform:translateY(20px);opacity:0}}
+@media (min-width:721px){.fcb{position:fixed;right:24px;bottom:104px;z-index:20;border:0;border-radius:999px;padding:12px 20px;background:var(--accent-ink);color:var(--bg);font:inherit;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.18)}}
+@media (max-width:720px){.fcb{display:none}}
 </style>
 
 </head>
@@ -486,9 +524,9 @@ svg.ph{width:1.2em;height:1.2em;flex:none}
     <p class="lead rise d2">새로 짜는 냉장고장 맞춤 시공부터 칸막이만 빼는 리폼까지, 냉장고장은 저희가 가장 많이 하는 일이에요. 식기세척기·로봇청소기 자리를 만드는 하부장 리폼도 함께 해요. 충청·경기 당일 예약, 전화 한 통이면 가능한지 바로 알려드려요.</p>
     <div class="hero-cta rise d3">
       <a class="btn btn-primary btn-call" href="tel:01021938204"><span class="ph-ring"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>지금 전화하기 <b>010-2193-8204</b></a>
-      <a class="btn btn-soft" href="#quote">사진 보내고 문자 견적</a>
+      <a class="btn btn-soft cbb" href="#cb" data-cb>번호 남기면 전화드려요</a><a class="btn btn-soft" href="#quote">문자로 사진 견적</a>
     </div>
-    <p class="call-note rise d3"><b>누르면 바로 전화가 걸려요.</b> 작업 중이라 못 받으면 끝나는 대로 다시 연락드려요.</p>
+    <p class="call-note rise d3"><b>누르면 바로 전화가 걸려요.</b> 통화가 부담되시면 번호만 남겨주세요. 작업 끝나는 대로 전화드려요.</p>
     <ul class="trust rise d3" aria-label="네모자리 약속">
       <li class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>시공 후 1년 무상 A/S</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5h16v14z"/><path d="M8 9h8M8 13h5"/></svg>현장 기록 791건</li>
@@ -578,7 +616,7 @@ svg.ph{width:1.2em;height:1.2em;flex:none}
   </div>
 </section>
 
-<section class="callband" aria-label="전화 상담"><div class="wrap"><div class="in"><div><h2>우리 집도 되는지, 전화로 바로 물어보세요</h2><p>구조만 말씀해 주시면 가능 여부랑 방문 날짜까지 통화로 정해드려요.</p></div><a class="btn btn-primary btn-call" href="tel:01021938204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>전화하기 <b>010-2193-8204</b></a></div></div></section>
+<section class="callband" aria-label="전화 상담"><div class="wrap"><div class="in"><div><h2>우리 집도 되는지, 전화로 바로 물어보세요</h2><p>구조만 말씀해 주시면 가능 여부랑 방문 날짜까지 통화로 정해드려요.</p></div><a class="btn btn-primary btn-call" href="tel:01021938204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>전화하기 <b>010-2193-8204</b></a><a class="btn btn-soft" href="#cb" data-cb>번호 남기면 전화드려요</a></div></div></section>
 
 <section class="band" aria-labelledby="ask-h">
   <div class="wrap">
@@ -801,7 +839,7 @@ svg.ph{width:1.2em;height:1.2em;flex:none}
   </div>
 </section>
 
-<section class="callband" aria-label="전화 상담"><div class="wrap"><div class="in"><div><h2>더 궁금한 건 전화 한 통이면 끝나요</h2><p>못 받으면 작업 끝나는 대로 다시 연락드려요. 시공 후 1년 무상 A/S.</p></div><a class="btn btn-primary btn-call" href="tel:01021938204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>전화하기 <b>010-2193-8204</b></a></div></div></section>
+<section class="callband" aria-label="전화 상담"><div class="wrap"><div class="in"><div><h2>더 궁금한 건 전화 한 통이면 끝나요</h2><p>못 받으면 작업 끝나는 대로 다시 연락드려요. 시공 후 1년 무상 A/S.</p></div><a class="btn btn-primary btn-call" href="tel:01021938204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>전화하기 <b>010-2193-8204</b></a><a class="btn btn-soft" href="#cb" data-cb>번호 남기면 전화드려요</a></div></div></section>
 
 <section id="area" aria-labelledby="area-h">
   <div class="wrap">
@@ -880,7 +918,10 @@ svg.ph{width:1.2em;height:1.2em;flex:none}
   </div>
 </footer>
 <a class="fcall" href="tel:01021938204" aria-label="전화 상담 010-2193-8204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><small>전화 상담</small>010-2193-8204</span></a>
-<nav class="mcta" aria-label="빠른 문의"><a class="p" href="tel:01021938204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>전화 상담</a><a id="mSms" href="sms:01021938204">문자 견적</a><a href="https://talk.naver.com/w5v40h" target="_blank" rel="noopener">톡톡</a></nav>
+<nav class="mcta m4" aria-label="빠른 문의"><a class="p" href="tel:01021938204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>전화 상담</a><a class="cbm" href="#cb" data-cb>번호 남기기</a><a id="mSms" href="sms:01021938204">문자</a><a href="https://talk.naver.com/w5v40h" target="_blank" rel="noopener">톡톡</a></nav>
+<button class="fcb" type="button" data-cb>번호 남기면 전화드려요</button>
+<form name="callback" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="tel"><input name="work"><input name="area"><input name="when"><input name="page"><input name="bot-field"></form>
+<script src="/assets/cb.js?v=1" defer></script>
 
 <script>
 const B = id => "https://blog.naver.com/ykd7411/" + id;

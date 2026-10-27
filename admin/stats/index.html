@@ -119,6 +119,7 @@ details summary{cursor:pointer;font-weight:700;font-size:.9rem}
 
   <div class="insight" id="insight" hidden><h2>이번 기간 한눈에 보기</h2><ul id="insightList"></ul></div>
 
+  <div class="card" id="leadCard" style="border-color:var(--accent)"><h2>번호 남긴 손님<span class="new">NEW</span></h2><p class="sub">홈페이지에서 '번호 남기면 전화드려요'로 남긴 번호예요. 눌러서 바로 전화하세요. 3개월 지나면 자동으로 지워져요.</p><div id="tLeads"></div></div>
   <div class="tiles" id="tiles"></div>
 
   <div class="sec">방문과 연락 추이</div>
@@ -221,18 +222,23 @@ details summary{cursor:pointer;font-weight:700;font-size:.9rem}
     return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+pts.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>';
   }
 
+  function renderLeads(L){
+    if(!L.length){$('tLeads').innerHTML='<p class="sub" style="margin:0">아직 없어요. 들어오면 여기에 보여요. (번호 남기기 창을 연 사람 '+n((last&&last.totals&&last.totals.cbopen)||0)+'명)</p>';return}
+    $('tLeads').innerHTML=table(L,['남긴 때','번호','작업','동네','편한 때','보던 페이지'],function(x){var dt=new Date(x.at+9*3600e3).toISOString();var tel=x.tel.replace(/^(\d{3})(\d{3,4})(\d{4})$/,'$1-$2-$3');return '<td>'+dt.slice(5,10).replace('-','/')+' '+dt.slice(11,16)+'</td><td><a href="tel:'+esc(x.tel)+'" style="font-weight:700">'+esc(tel)+'</a></td><td>'+esc(x.work||'-')+'</td><td>'+esc(x.area||'-')+'</td><td>'+esc(x.when||'-')+'</td><td><small>'+esc(NAMES[x.page]||x.page||'')+'</small></td>'});
+  }
   function render(d){
     var t=d.totals||{}, p=d.prev||{}, td=d.today_totals||{}, daily=d.daily||[];
     var per=d.days===1?'어제':'지난 '+d.days+'일';
     $('range').textContent=(d.days===1?'오늘':'최근 '+d.days+'일')+' · '+d.today+' 기준 · '+per+(d.days===1?'와':'과')+' 비교';
     document.querySelectorAll('.seg button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.d===d.days))});
-    var con=t.phone+t.sms+t.talk, pcon=(p.phone||0)+(p.sms||0)+(p.talk||0);
+    var con=t.phone+t.sms+t.talk+(t.lead||0), pcon=(p.phone||0)+(p.sms||0)+(p.talk||0)+(p.lead||0);
+    renderLeads(d.leads||[]);
     var rate=pct(t.contact_visitors,t.visitors), prate=pct(p.contact_visitors,p.visitors);
     var ppv=t.visitors?Math.round(t.views/t.visitors*10)/10:0, pppv=p.visitors?Math.round(p.views/p.visitors*10)/10:0;
     var col=function(k){return daily.map(function(r){return k(r)})};
     $('tiles').innerHTML=[
       ['방문자',n(t.visitors)+'<small>명</small>',delta(t.visitors,p.visitors)+' · 오늘 '+n(td.visitors)+'명',spark(col(function(r){return r.visitors}),'var(--brand)'),'hl'],
-      ['연락 버튼',n(con)+'<small>번</small>',delta(con,pcon)+' · 오늘 '+n(td.phone+td.sms+td.talk)+'번',spark(col(function(r){return r.phone+r.sms+r.talk}),'var(--accent)'),'hl'],
+      ['연락 버튼',n(con)+'<small>번</small>',delta(con,pcon)+' · 오늘 '+n(td.phone+td.sms+td.talk+(td.lead||0))+'번',spark(col(function(r){return r.phone+r.sms+r.talk+(r.lead||0)}),'var(--accent)'),'hl'],
       ['연락한 방문자 비율',rate+'<small>%</small>',delta(rate,prate,'p')+' · '+n(t.contact_visitors)+'명 연락',spark(col(function(r){return r.visitors?r.contact_visitors/r.visitors:0}),'var(--brand)'),''],
       ['페이지 열람',n(t.views)+'<small>회</small>',delta(t.views,p.views),spark(col(function(r){return r.views}),'var(--c3)'),''],
       ['1명당 본 페이지',ppv+'<small>쪽</small>',delta(ppv,pppv),'',''],
@@ -241,7 +247,7 @@ details summary{cursor:pointer;font-weight:700;font-size:.9rem}
 
     combo($('cVisit'),daily);
     stack($('cContact'),daily.map(function(r){return{k:r.day,segs:[[r.sms,'var(--brand)'],[r.phone,'var(--accent)'],[r.talk,'var(--c3)']],tip:md(r.day)+' ('+WD[new Date(r.day+'T00:00:00Z').getUTCDay()]+')<br>문자 견적 '+r.sms+' · 전화 '+r.phone+' · 톡톡 '+r.talk}}));
-    mix($('mixContact'),[['문자 견적',t.sms,'var(--brand)'],['전화',t.phone,'var(--accent)'],['톡톡',t.talk,'var(--c3)'],['견적 문구 복사',t.copy,'var(--c4)']],'번',con+t.copy);
+    mix($('mixContact'),[['문자 견적',t.sms,'var(--brand)'],['전화',t.phone,'var(--accent)'],['톡톡',t.talk,'var(--c3)'],['번호 남기기',t.lead||0,'#A35BC9'],['견적 문구 복사',t.copy,'var(--c4)']],'번',con+t.copy);
 
     var f=d.funnel||{};
     $('funnel').innerHTML=f.tracked?[['들어온 사람',f.tracked],['2페이지 이상 본 사람',f.multi],['연락 버튼 누른 사람',f.contact]].map(function(s,i,a){return (i?'<div class="ar">↓ '+pct(s[1],a[i-1][1])+'%</div>':'')+'<div class="st"><div style="width:'+Math.max(1,pct(s[1],f.tracked))+'%;opacity:'+(1-i*.25)+'"></div><span>'+s[0]+'</span><b>'+n(s[1])+'명</b></div>'}).join(''):newEmpty();

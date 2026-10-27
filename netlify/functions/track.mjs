@@ -66,7 +66,7 @@ export default async (req, context) => {
   if (BOT.test(ua)) return new Response(null, { status: 204 });
   const q = new URL(req.url).searchParams;
   const t = q.get("t") || "view";
-  if (t !== "view" && t !== "copy" && !CONTACT[t]) return new Response(null, { status: 204 });
+  if (t !== "view" && t !== "copy" && t !== "cbopen" && !CONTACT[t]) return new Response(null, { status: 204 });
   const v = (q.get("v") || "x").replace(/[^a-z0-9]/gi, "").slice(0, 16) || "x";
   let p = (q.get("p") || "/").slice(0, 120);
   if (!/^\/[\w\-\/]*$/.test(p)) p = "/기타";
@@ -82,8 +82,8 @@ export default async (req, context) => {
       d.vis[v] = newVisitor(ua, context, { s: source(r, q.get("src") || ""), k: keyword(r, q.get("k") || ""), l: p });
     }
     d.vis[v].n = (d.vis[v].n || 0) + 1;
-  } else if (t === "copy") {
-    inc(d.c, "copy");
+  } else if (t === "copy" || t === "cbopen") {
+    inc(d.c, t);
   } else {
     inc(d.c, t);
     inc(d.pc, p);
