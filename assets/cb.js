@@ -40,9 +40,10 @@
     dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
     form.addEventListener("submit", submit);
   }
-  function open() {
+  function open(work) {
     if (!dlg) build();
     if (dlg.open) return;
+    if (work) { var r = form.querySelector('input[name="work"][value="' + work + '"]'); if (r) r.checked = true; }
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
     setTimeout(function () { var t = dlg.querySelector("#cbTel"); if (t && !form.hidden) t.focus(); }, 60);
     beacon("cbopen");
@@ -86,7 +87,7 @@
     var a = e.target.closest && e.target.closest('[data-cb],a[href="#cb"]');
     if (!a) return;
     e.preventDefault();
-    open();
+    open(a.getAttribute("data-cb"));
   });
   // 휴대폰에서 한참 둘러보고도 연락 안 한 사람에게 한 번만 살짝 권한다
   function nudge() {

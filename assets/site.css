@@ -243,7 +243,6 @@ footer .links{display:flex;gap:18px;flex-wrap:wrap}
   .reveal.pending{transform:translateY(36px)}
 }
 
-
 /* enrich v6: 현장 사진 띠, 다른 점, 고객 반응 */
 .reel{padding-block:8px 72px;overflow:hidden}
 .reel-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:22px;flex-wrap:wrap}
@@ -458,6 +457,42 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 @keyframes cbup{from{transform:translateY(20px);opacity:0}}
 @media (min-width:721px){.fcb{position:fixed;right:24px;bottom:104px;z-index:20;border:0;border-radius:999px;padding:12px 20px;background:var(--accent-ink);color:var(--bg);font:inherit;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.18)}}
 @media (max-width:720px){.fcb{display:none}}
+
+/* conversion-v2 (2026-10-29): 히어로 전후 비교, 작업 고르기, 상담 시트 */
+.hero .lead b{color:var(--fg);font-weight:600}
+.hero-ba{min-width:0}
+.hero-ba-k{font-size:14px;color:var(--muted);margin:0 0 10px;font-weight:600}
+.hero-ba .ba{aspect-ratio:4/5;max-height:560px}
+.hero-ba .ba img{width:100%;height:100%;object-fit:cover}
+.picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pick{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:var(--surface);border-radius:var(--r-lg,24px);overflow:hidden;position:relative;transition:transform .15s}
+.pick:hover{transform:translateY(-3px)}
+.pick:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.pick img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface-2)}
+.pk-t{display:flex;flex-direction:column;gap:4px;padding:16px 18px 18px}
+.pk-t b{font-size:18px;line-height:1.35;color:var(--fg)}
+.pk-t small{font-size:14px;color:var(--muted);line-height:1.5}
+.pk-t em{font-style:normal;font-size:13px;font-weight:600;color:var(--accent-ink);margin-top:4px}
+.pk-go{position:absolute;top:12px;right:12px;background:var(--accent);color:var(--on-accent);font-size:13px;font-weight:700;padding:6px 11px;border-radius:999px}
+.pick-etc{margin-top:20px;color:var(--muted);font-size:15px}
+.pick-etc a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.psheet{border:0;border-radius:24px;padding:28px 22px 22px;width:min(440px,calc(100vw - 24px));background:var(--bg);color:var(--fg);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.psheet::backdrop{background:rgba(10,14,18,.5)}
+.psheet[open]{display:flex;flex-direction:column;gap:10px}
+.psheet h2{word-break:keep-all;font-size:26px;line-height:1.3;margin:0 34px 4px 0}
+.ps-k{font-size:13px;font-weight:700;color:var(--accent-ink);margin:0}
+.ps-sub,.ps-note{font-size:14.5px;color:var(--muted);margin:0 0 6px;line-height:1.6}
+.ps-note{margin:4px 0 0;font-size:13.5px}
+.psheet .btn{justify-content:center;width:100%;box-sizing:border-box}
+.psheet .btn .ph{width:18px;height:18px;margin-right:6px}
+.ps-more{font-size:14.5px;font-weight:600;color:var(--accent-ink);text-decoration:none;text-align:center;margin-top:6px}
+@media (max-width:900px){.picks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){
+ .picks{gap:10px}.pk-t{padding:12px 13px 14px}.pk-t b{font-size:15.5px}.pk-t small{font-size:12.5px}.pk-t em{font-size:12px}
+ .pk-go{font-size:11.5px;padding:4px 9px;top:8px;right:8px}
+ .hero-ba .ba{aspect-ratio:1/1}.hero{padding-top:28px}
+ .psheet{margin:auto auto 0;border-radius:24px 24px 0 0;width:100%;max-width:100%;padding-bottom:calc(22px + env(safe-area-inset-bottom))}
+}
 
 /* subpages */
 .sub-hero h1 mark{background:none;color:var(--accent)}
