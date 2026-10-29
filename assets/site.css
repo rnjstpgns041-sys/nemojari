@@ -465,10 +465,10 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 .hero-ba .ba{aspect-ratio:4/5;max-height:560px}
 .hero-ba .ba img{width:100%;height:100%;object-fit:cover}
 .picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.pick{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:var(--surface);border-radius:var(--r-lg,24px);overflow:hidden;position:relative;transition:transform .15s}
-.pick:hover{transform:translateY(-3px)}
-.pick:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.pick img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface-2)}
+.jpick{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:var(--surface);border-radius:var(--r-lg,24px);overflow:hidden;position:relative;transition:transform .15s}
+.jpick:hover{transform:translateY(-3px)}
+.jpick:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.jpick img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface-2)}
 .pk-t{display:flex;flex-direction:column;gap:4px;padding:16px 18px 18px}
 .pk-t b{font-size:18px;line-height:1.35;color:var(--fg)}
 .pk-t small{font-size:14px;color:var(--muted);line-height:1.5}
@@ -494,6 +494,9 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
  .psheet{margin:auto auto 0;border-radius:24px 24px 0 0;width:100%;max-width:100%;padding-bottom:calc(22px + env(safe-area-inset-bottom))}
 }
 
+/* 네이버 앱: 오른쪽 아래 '맨 위로' 버튼 자리 비우기, 문자는 빼고 3칸 */
+.nv-app .mcta.m4{grid-template-columns:1.25fr 1.15fr .8fr;padding-right:72px}
+.nv-app .mcta.m4 a[href^="sms:"]{display:none}
 /* trust-v1 (2026-10-29): 처음 맡기시는 분께 */
 #trust{padding-bottom:72px}
 .tr-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}

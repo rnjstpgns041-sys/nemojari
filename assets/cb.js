@@ -1,5 +1,7 @@
 // 번호 남기기(전화 요청): 전화가 부담되는 방문자가 번호를 남기면 사장님이 다시 전화한다
 (function () {
+  // 네이버 앱 브라우저는 오른쪽 아래에 자체 '맨 위로' 버튼이 떠서 하단 바 끝 버튼을 가린다
+  if (/NAVER\(inapp/.test(navigator.userAgent)) document.documentElement.classList.add("nv-app");
   var TEL = "010-2193-8204";
   var WORKS = [["fridge", "냉장고장"], ["sink|dishwasher", "하부장·식세기"], ["storage|closet", "신발장·붙박이장"], ["pet-door", "펫도어·문"], ["", "기타"]];
   var WHEN = ["아무 때나", "오늘 저녁", "내일 이후"];

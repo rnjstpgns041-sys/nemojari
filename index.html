@@ -500,10 +500,10 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 .hero-ba .ba{aspect-ratio:4/5;max-height:560px}
 .hero-ba .ba img{width:100%;height:100%;object-fit:cover}
 .picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.pick{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:var(--surface);border-radius:var(--r-lg,24px);overflow:hidden;position:relative;transition:transform .15s}
-.pick:hover{transform:translateY(-3px)}
-.pick:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.pick img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface-2)}
+.jpick{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:var(--surface);border-radius:var(--r-lg,24px);overflow:hidden;position:relative;transition:transform .15s}
+.jpick:hover{transform:translateY(-3px)}
+.jpick:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.jpick img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface-2)}
 .pk-t{display:flex;flex-direction:column;gap:4px;padding:16px 18px 18px}
 .pk-t b{font-size:18px;line-height:1.35;color:var(--fg)}
 .pk-t small{font-size:14px;color:var(--muted);line-height:1.5}
@@ -529,6 +529,9 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
  .psheet{margin:auto auto 0;border-radius:24px 24px 0 0;width:100%;max-width:100%;padding-bottom:calc(22px + env(safe-area-inset-bottom))}
 }
 
+/* 네이버 앱: 오른쪽 아래 '맨 위로' 버튼 자리 비우기, 문자는 빼고 3칸 */
+.nv-app .mcta.m4{grid-template-columns:1.25fr 1.15fr .8fr;padding-right:72px}
+.nv-app .mcta.m4 a[href^="sms:"]{display:none}
 /* trust-v1 (2026-10-29): 처음 맡기시는 분께 */
 #trust{padding-bottom:72px}
 .tr-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
@@ -678,7 +681,7 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
       <h2 id="pick-h">고르시면 <span style="color:var(--accent)">바로 연결</span>해 드려요</h2>
       <p>누르면 그 작업으로 전화, 문자, 번호 남기기 중 편한 걸 고르실 수 있어요. 문자는 내용이 채워진 채로 열려서 사진만 붙이면 돼요.</p>
     </div>
-    <div class="picks"><button type="button" class="pick" data-job="냉장고장 맞춤 제작" data-href="/fridge-cabinet/" data-cbw="냉장고장"><img src="/img/224384780745_a.jpg?v=2" alt="냉장고장 맞춤 제작 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>냉장고장 맞춤 제작</b><small>1도어 2~3대, 키친핏, 김치냉장고 자리</small><em>실측 후 3~5일 제작 · 설치 하루</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="pick" data-job="냉장고장 칸막이·중앙벽 제거" data-href="/fridge-cabinet/" data-cbw="냉장고장"><img src="/img/224375219889_a.jpg?v=2" alt="냉장고장 칸막이·중앙벽 제거 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>냉장고장 칸막이·중앙벽 제거</b><small>있는 장 살려서 냉장고 2대 자리로</small><em>1명 · 3시간 · 방문 당일</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="pick" data-job="식기세척기·로봇청소기 자리" data-href="/dishwasher-cabinet/" data-cbw="하부장·식세기"><img src="/img/224382210661_a.jpg?v=2" alt="식기세척기·로봇청소기 자리 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>식기세척기·로봇청소기 자리</b><small>하부장 한 칸을 맞춤으로 개조</small><em>직배수·콘센트 연결까지</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="pick" data-job="하부장 수리·싱크볼 교체" data-href="/sink-cabinet/" data-cbw="하부장·식세기"><img src="/img/224363907375_a.jpg?v=2" alt="하부장 수리·싱크볼 교체 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>하부장 수리·싱크볼 교체</b><small>물먹어 부푼 밑판, 오래된 수전</small><em>제품 안 바꾸고 부분 수리</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="pick" data-job="신발장·붙박이장 리폼" data-href="/storage-cabinet/" data-cbw="신발장·붙박이장"><img src="/img/224391806058_a.jpg?v=2" alt="신발장·붙박이장 리폼 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>신발장·붙박이장 리폼</b><small>오픈장, 중문 자리, 붙박이 옷장</small><em>신발장 오픈장 1명 · 2시간</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="pick" data-job="펫도어·문 아래 자르기" data-href="/pet-door/" data-cbw="펫도어·문"><img src="/img/224360769598_a.jpg?v=2" alt="펫도어·문 아래 자르기 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>펫도어·문 아래 자르기</b><small>강아지·고양이문, 매트에 걸리는 문</small><em>1명 · 1시간 안팎</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button></div>
+    <div class="picks"><button type="button" class="jpick" data-job="냉장고장 맞춤 제작" data-href="/fridge-cabinet/" data-cbw="냉장고장"><img src="/img/224384780745_a.jpg?v=2" alt="냉장고장 맞춤 제작 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>냉장고장 맞춤 제작</b><small>1도어 2~3대, 키친핏, 김치냉장고 자리</small><em>실측 후 3~5일 제작 · 설치 하루</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="jpick" data-job="냉장고장 칸막이·중앙벽 제거" data-href="/fridge-cabinet/" data-cbw="냉장고장"><img src="/img/224375219889_a.jpg?v=2" alt="냉장고장 칸막이·중앙벽 제거 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>냉장고장 칸막이·중앙벽 제거</b><small>있는 장 살려서 냉장고 2대 자리로</small><em>1명 · 3시간 · 방문 당일</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="jpick" data-job="식기세척기·로봇청소기 자리" data-href="/dishwasher-cabinet/" data-cbw="하부장·식세기"><img src="/img/224382210661_a.jpg?v=2" alt="식기세척기·로봇청소기 자리 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>식기세척기·로봇청소기 자리</b><small>하부장 한 칸을 맞춤으로 개조</small><em>직배수·콘센트 연결까지</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="jpick" data-job="하부장 수리·싱크볼 교체" data-href="/sink-cabinet/" data-cbw="하부장·식세기"><img src="/img/224363907375_a.jpg?v=2" alt="하부장 수리·싱크볼 교체 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>하부장 수리·싱크볼 교체</b><small>물먹어 부푼 밑판, 오래된 수전</small><em>제품 안 바꾸고 부분 수리</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="jpick" data-job="신발장·붙박이장 리폼" data-href="/storage-cabinet/" data-cbw="신발장·붙박이장"><img src="/img/224391806058_a.jpg?v=2" alt="신발장·붙박이장 리폼 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>신발장·붙박이장 리폼</b><small>오픈장, 중문 자리, 붙박이 옷장</small><em>신발장 오픈장 1명 · 2시간</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button><button type="button" class="jpick" data-job="펫도어·문 아래 자르기" data-href="/pet-door/" data-cbw="펫도어·문"><img src="/img/224360769598_a.jpg?v=2" alt="펫도어·문 아래 자르기 시공 사진" loading="lazy" decoding="async" width="675" height="900"><span class="pk-t"><b>펫도어·문 아래 자르기</b><small>강아지·고양이문, 매트에 걸리는 문</small><em>1명 · 1시간 안팎</em></span><span class="pk-go" aria-hidden="true">상담 →</span></button></div>
     <p class="pick-etc">목록에 없는 집수리도 해요. 후드 교체, 문 달기, 울타리 기둥 고정까지 <a href="tel:01021938204">전화로 먼저 물어보세요 →</a></p>
   </div>
 </section>
@@ -1061,10 +1064,10 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 <nav class="mcta m4" aria-label="빠른 문의"><a class="p" href="tel:01021938204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>전화 상담</a><a class="cbm" href="#cb" data-cb>번호 남기기</a><a id="mSms" href="sms:01021938204">문자</a><a href="https://talk.naver.com/w5v40h" target="_blank" rel="noopener">톡톡</a></nav>
 <button class="fcb" type="button" data-cb>번호 남기면 전화드려요</button>
 <form name="callback" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="tel"><input name="work"><input name="area"><input name="when"><input name="page"><input name="bot-field"></form>
-<script src="/assets/cb.js?v=2" defer></script>
+<script src="/assets/cb.js?v=3" defer></script>
 <script>(function(){var d=document.getElementById("psheet");if(!d)return;var T="010-2193-8204";
 function sms(j){return "sms:01021938204?&body="+encodeURIComponent("[네모자리 견적 문의]\n작업: "+j+"\n지역: (동네를 적어주세요)\n내용: \n※ 현장 사진 2~3장 첨부합니다")}
-document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".pick");if(!b)return;var j=b.getAttribute("data-job");
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".jpick");if(!b)return;var j=b.getAttribute("data-job");
 d.querySelector("#psH").textContent=j;d.querySelector(".ps-sms").href=sms(j);d.querySelector(".ps-cb").setAttribute("data-cb",b.getAttribute("data-cbw"));
 var m=d.querySelector(".ps-more");m.href=b.getAttribute("data-href");m.textContent=j+" 사례 먼저 보기 →";
 if(d.showModal)d.showModal();else d.setAttribute("open","")});
