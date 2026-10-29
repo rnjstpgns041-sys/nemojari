@@ -528,6 +528,42 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
  .hero-ba .ba{aspect-ratio:1/1}.hero{padding-top:28px}
  .psheet{margin:auto auto 0;border-radius:24px 24px 0 0;width:100%;max-width:100%;padding-bottom:calc(22px + env(safe-area-inset-bottom))}
 }
+
+/* trust-v1 (2026-10-29): 처음 맡기시는 분께 */
+#trust{padding-bottom:72px}
+.tr-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.tr-nums div{background:var(--accent-soft);border-radius:20px;padding:18px 16px}
+.tr-nums b{display:block;font-family:var(--font-display);font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1;color:var(--accent-ink)}
+.tr-nums span{display:block;font-size:13.5px;color:var(--muted);margin-top:8px}
+.tr-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tr-card{background:var(--surface);border-radius:24px;padding:24px 22px;display:flex;flex-direction:column;gap:8px}
+.tr-card .ic{width:44px;height:44px;border-radius:14px;background:var(--bg);display:grid;place-items:center;color:var(--accent-ink)}
+.tr-card .ic svg{width:24px;height:24px}
+.tr-card h3{font-size:19px;margin-top:6px}
+.tr-card p{font-size:14.5px;color:var(--muted);line-height:1.65;flex:1}
+.tr-card a{font-size:14px;font-weight:600;color:var(--accent-ink);text-decoration:none}
+.story{margin-top:40px;border:1px solid var(--line);border-radius:28px;padding:32px 28px}
+.story-head h3{font-size:clamp(22px,3vw,30px);line-height:1.3;margin:6px 0 16px;word-break:keep-all}
+.story-req{font-size:15px;line-height:1.7;color:var(--fg);margin:0 0 8px}
+.story-req b{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:2px 10px;margin-right:8px}
+.story-steps{list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.story-steps li{display:flex;flex-direction:column;gap:6px;min-width:0}
+.story-steps img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:16px;background:var(--surface-2);display:block}
+.story-steps b{font-size:15px;display:flex;align-items:center;gap:6px;margin-top:4px}
+.story-steps i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:12px;display:grid;place-items:center;flex:none}
+.story-steps span{font-size:13.5px;color:var(--muted);line-height:1.55}
+.story-quote{margin:24px 0 0;background:var(--surface);border-radius:20px;padding:20px 22px}
+.story-quote blockquote{margin:0;font-size:16px;line-height:1.7}
+.story-quote figcaption{font-size:13.5px;color:var(--muted);margin-top:10px}
+.story-quote a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+@media (max-width:900px){.tr-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){
+ .tr-nums{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tr-nums div{padding:14px}
+ .tr-cards{grid-template-columns:1fr}
+ .story{padding:22px 16px;border-radius:22px}
+ .story-steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-inline:-16px;padding:0 16px 6px}
+ .story-steps li{flex:0 0 62%;scroll-snap-align:start}
+}
 </style>
 
 </head>
@@ -540,6 +576,7 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
     </a>
     <div class="nav-links">
       <a href="#pick">상담할 작업</a>
+      <a href="#trust">처음이신 분</a>
       <a href="#services">하는 일</a>
       <a href="/cases/">작업 기록</a>
       <a href="#price">비용</a>
@@ -564,7 +601,7 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
     <p class="call-note rise d3"><b>누르면 바로 전화가 걸려요.</b> 통화가 부담되시면 번호만 남겨주세요. 작업 끝나는 대로 전화드려요.</p>
     <ul class="trust rise d3" aria-label="네모자리 약속">
       <li class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>시공 후 1년 무상 A/S</li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5h16v14z"/><path d="M8 9h8M8 13h5"/></svg>현장 기록 791건</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5h16v14z"/><path d="M8 9h8M8 13h5"/></svg>현장 기록 795건</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>충청·경기 당일 예약</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>전국 출동</li>
     </ul>
@@ -603,6 +640,33 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
   <p class="ps-note">현장 작업 중엔 전화를 못 받을 때가 있어요. 못 받으면 작업 끝나는 대로 다시 연락드려요.</p>
   <a class="ps-more" href="/">이 작업 사례 먼저 보기 →</a>
 </dialog>
+
+<section id="trust" aria-labelledby="trust-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-kicker">처음 맡기시는 분께</p>
+      <h2 id="trust-h">2023년부터 다녀온 현장,<br><span style="color:var(--accent)">하나하나 기록</span>해 왔어요</h2>
+      <p>네모자리는 네이버 블로그 '행운집수리'를 쓰는 그 업체예요. 2023년 7월부터 다녀온 집마다 공사 전후 사진과 작업 과정을 올려 왔어요.</p>
+    </div>
+    <div class="tr-nums">
+      <div><b>795</b><span>블로그 현장 기록</span></div>
+      <div><b>2023.07</b><span>첫 기록</span></div>
+      <div><b>2,039</b><span>블로그 이웃</span></div>
+      <div><b>1년</b><span>무상 A/S</span></div>
+    </div>
+    <div class="tr-cards"><article class="tr-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><h3>블로그 프로필과 같은 번호</h3><p>네이버 블로그 '수리보수 전문가의 행운집수리' 프로필에 적힌 010-2193-8204 그대로예요. 상담부터 방문 약속까지 이 번호로 이어져요.</p><a href="https://blog.naver.com/ykd7411" target="_blank" rel="noopener">블로그 프로필 확인하기 →</a></article><article class="tr-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><circle cx="9" cy="10.5" r="1"/><circle cx="12.5" cy="10.5" r="1"/><circle cx="16" cy="10.5" r="1"/></svg></span><h3>방문 전에 먼저 알려드려요</h3><p>사진 2~3장 보고 리폼으로 될지 새로 짜야 할지, 몇 명이 몇 시간 걸릴 일인지부터 말씀드려요. 가격표 대신 우리 집 기준으로 안내해요.</p><a href="#price">비용이 정해지는 기준 →</a></article><article class="tr-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5h16v14z"/><path d="M8 9h8M8 13h5"/></svg></span><h3>작업 순서까지 다 공개해요</h3><p>어떤 요청이었는지, 현장이 어땠는지, 어떤 순서로 고쳤는지 27개 현장을 사진과 함께 정리해 뒀어요. 맡기기 전에 미리 보실 수 있어요.</p><a href="/cases/">현장 기록 27건 보기 →</a></article><article class="tr-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><h3>끝난 뒤에도 1년</h3><p>시공 후 1년 동안 무상으로 A/S 해드려요. 단차나 흔들림이 보이면 사진과 함께 문자 주세요. 확인하고 다시 방문해요.</p><a href="#faq">자주 묻는 질문 →</a></article></div>
+    <div class="story">
+      <div class="story-head">
+        <p class="sec-kicker">한 현장, 처음부터 끝까지</p>
+        <h3>구로 신도림 · 튀어나오는 냉장고를 쏙 들어가게</h3>
+        <p class="story-req"><b>고객님 요청</b>대용량 냉장고가 냉장고장 밖으로 툭 튀어나와 보기 싫다며, 안 튀어나오게 냉장고장을 다시 짜 달라고 하셨어요.</p>
+        <p class="story-req"><b>현장 상황</b>키친핏 냉장고는 용량이 작아 사지 않으셨대요. 기존 냉장고장이 작고 좁아서, 큰 냉장고가 꽉 끼어 앞으로 돌출된 상태였어요. 옆쪽 넓은 공간까지 활용해 냉장고장을 새로 맞추고 싶어 하셨어요.</p>
+      </div>
+      <ol class="story-steps"><li><img src="/img/224240636177_b.jpg?v=2" alt="구로 신도림 냉장고장 공사 전" loading="lazy" decoding="async" width="600" height="800"><b><i>1</i>공사 전</b><span>기존 냉장고장이 작고 좁아 큰 냉장고가 앞으로 튀어나왔어요</span></li><li><img src="/img/cases/224240636177_02.jpg" alt="구로 신도림 냉장고장 보양 후 철거" loading="lazy" decoding="async" width="600" height="800"><b><i>2</i>보양 후 철거</b><span>벽과 바닥을 덮어 두고 기존 냉장고장을 뜯어냈어요</span></li><li><img src="/img/cases/224240636177_05.jpg" alt="구로 신도림 냉장고장 새 장 세우기" loading="lazy" decoding="async" width="600" height="800"><b><i>3</i>새 장 세우기</b><span>실측한 치수로 짠 장을 세우고 수평계로 맞췄어요</span></li><li><img src="/img/cases/224240636177_07.jpg" alt="구로 신도림 냉장고장 상부장 보강" loading="lazy" decoding="async" width="600" height="800"><b><i>4</i>상부장 보강</b><span>천장 지지대로 받쳐 상부장을 달고 단차를 확인했어요</span></li><li><img src="/img/224240636177_a.jpg?v=2" alt="구로 신도림 냉장고장 새 자리 완성" loading="lazy" decoding="async" width="600" height="800"><b><i>5</i>새 자리 완성</b><span>큰 냉장고를 넣어도 여유 있는 냉장고장이 완성돼서, 키친핏처럼 깔끔해졌다며 아주 만족하셨어요.</span></li></ol>
+      <figure class="story-quote"><blockquote>앞으로 튀어나온 부위가 계속 신경 쓰이고 용량이 너무 작아서 몇 달을 고민한 끝에 문의한 건데, 너무 잘 시공해 주셔서 만족하면서 지내요.</blockquote><figcaption>구로 신도림 고객님 · 블로그 상담 글 <a href="https://blog.naver.com/ykd7411/224240636177" target="_blank" rel="noopener">원문 보기</a> · <a href="/cases/224240636177/">이 현장 기록 전체 보기 →</a></figcaption></figure>
+    </div>
+  </div>
+</section>
 
 <section class="band" aria-labelledby="rev-h">
   <div class="wrap">
@@ -825,7 +889,7 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
     <div class="case-links"><p><b>현장별 상세 기록</b> 요청 내용, 작업 순서, 현장 사진까지 정리했어요.</p><div><a href="/cases/224375219889/">당진 냉장고장 중앙벽 제거</a><a href="/cases/224398949820/">청주 칸막이 제거, 냉장고 2대 설치</a><a href="/cases/224384780745/">동탄 삼성 1도어 3대 키친핏</a><a href="/cases/224240636177/">구로 안 튀어나오는 냉장고장</a><a href="/cases/224382210661/">내포 오븐 옮기고 식세기 자리</a><a href="/cases/224388915091/">내포 로봇청소기장</a><a href="/cases/224385958044/">화성 붙박이장을 TV장으로</a><a href="/cases/224360769598/">서산 방문 펫도어</a><a class="all" href="/cases/">시공 사례 27건 전체 →</a></div></div>
     <div class="log-foot">
       <span id="logCount"></span><button type="button" class="btn btn-soft btn-sm" id="logMore">더 보기</button>
-      <a class="btn btn-soft btn-sm" href="/cases/">시공 사례 상세 보기</a><a class="btn btn-soft btn-sm" href="https://blog.naver.com/ykd7411" target="_blank" rel="noopener">블로그에서 791편 전체 보기</a>
+      <a class="btn btn-soft btn-sm" href="/cases/">시공 사례 상세 보기</a><a class="btn btn-soft btn-sm" href="https://blog.naver.com/ykd7411" target="_blank" rel="noopener">블로그에서 795편 전체 보기</a>
     </div>
   </div>
 </section>
