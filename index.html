@@ -29,10 +29,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css">
 <style>
 /* Layout: 배민식 민트 + 도현체 큰 말장난 헤드라인, 넉넉한 여백과 둥근 카드. 로켓집수리식 작업일지와 문자 견적은 그대로 */
 :root{
@@ -55,9 +52,9 @@
   --lucky-ink:#3d2e00;
   --bubble-me:#2ac1bc;
   --bubble-me-ink:#08302e;
-  --font-hand:"Jua","IBM Plex Sans KR",sans-serif;
-  --font-display:"Do Hyeon","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --font-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --font-hand:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --font-display:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --font-body:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   --r-lg:32px; --r-md:18px; --r-sm:12px;
   --wrap:1080px;
 }
@@ -108,7 +105,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:64px}
 .stat{background:var(--surface);border-radius:var(--r-md);padding:22px 22px 20px}
-.stat b{display:block;font-family:var(--font-display);font-size:clamp(34px,4.6vw,48px);font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat b{display:block;font-family:var(--font-display);font-weight:800;font-size:clamp(34px,4.6vw,48px);font-weight:400;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;line-height:1.1}
 .stat span{color:var(--muted);font-size:14px}
 @media (max-width:600px){.stats{grid-template-columns:1fr}.hero{padding-block:56px 48px}}
 
@@ -260,7 +257,7 @@ footer .links{display:flex;gap:18px;flex-wrap:wrap}
 .photo-row span{width:58px;height:58px;border-radius:12px;background:linear-gradient(135deg,var(--surface-2),var(--accent-soft));display:grid;place-items:center;font-size:11px;color:var(--muted)}
 .est{background:var(--bg);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;align-self:flex-start;width:92%}
 .est .h{font-size:12px;color:var(--muted)}
-.est .big{font-family:var(--font-display);font-size:26px;line-height:1.1}
+.est .big{font-family:var(--font-display);font-weight:800;font-size:26px;line-height:1.1}
 .est dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:13px}
 .est dt{color:var(--muted)}.est dd{margin:0;text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
 .est .ok{background:var(--accent);color:var(--on-accent);border-radius:10px;text-align:center;padding:9px;font-family:var(--font-hand);font-size:15px}
@@ -303,7 +300,7 @@ footer .links{display:flex;gap:18px;flex-wrap:wrap}
 .why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .why-card .ic{width:48px;height:48px;border-radius:14px;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center}
 .why-card .ic svg{width:26px;height:26px}
-.why-card .no{font-family:var(--font-display);font-size:15px;color:var(--muted)}
+.why-card .no{font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--muted)}
 .why-card h3{font-size:26px;line-height:1.25}
 .why-card p{color:var(--muted);font-size:15.5px}
 .why-card a{margin-top:auto;padding-top:6px;color:var(--accent-ink);font-weight:600;text-decoration:none;font-size:14px}
@@ -620,6 +617,14 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 .m-t{font-size:12.5px;font-weight:600;fill:var(--fg)}
 @media (max-width:900px){.ills{grid-template-columns:1fr 1fr}.area-grid{grid-template-columns:1fr}}
 @media (max-width:600px){.ills{grid-template-columns:1fr}.ill{padding:14px 14px 16px}}
+
+/* font-v2 (2026-10-30): 프리텐다드 하나로, 굵기로 위계 */
+body{letter-spacing:-0.012em}
+h1,h2,h3{font-weight:800!important;letter-spacing:-0.045em}
+.logo,.big-nums b,.est .big,.num,.stat b,.tr-nums b,.why-card .no{font-weight:800!important;letter-spacing:-0.04em}
+.m-r{font-weight:800}
+.btn-primary,.btn-soft,.eyebrow,.chip,.sec-kicker,.est .ok,.areas span,.ba .knob,.ba .lab,.log .pair i,.pcard .pn,.svc-card .more,.svc-card .tag,.track .tag,.step::before{font-weight:700!important;letter-spacing:-0.02em}
+.review blockquote{font-weight:600;letter-spacing:-0.025em}
 </style>
 
 </head>
@@ -1047,7 +1052,7 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 <footer>
   <div class="wrap">
     <div>
-      <p style="font-family:var(--font-display);font-size:24px;color:var(--fg);margin-bottom:6px">네모자리</p>
+      <p style="font-family:var(--font-display);font-weight:800;font-size:24px;color:var(--fg);margin-bottom:6px">네모자리</p>
       <p>주방 · 거실 · 욕실 · 베란다 · 실외 수리 보수 · 시공 후 1년 무상 A/S</p>
       <p style="font-size:14px">네이버 블로그 <a href="https://blog.naver.com/ykd7411" target="_blank" rel="noopener">행운집수리</a>와 같은 팀이에요. 현장마다 작업 기록을 올려요.</p>
       <p>전화·문자 <a href="tel:01021938204">010-2193-8204</a></p>
