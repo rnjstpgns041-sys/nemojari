@@ -496,7 +496,10 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 
 /* 네이버 앱: 오른쪽 아래 '맨 위로' 버튼 자리 비우기, 문자는 빼고 3칸 */
 .nv-app .mcta.m4{grid-template-columns:1.25fr 1.15fr .8fr;padding-right:72px}
-.nv-app .mcta.m4 a[href^="sms:"]{display:none}
+.nv-app .mcta.m4 a[href*="talk.naver"]{display:none}
+.cb-share{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border:0;background:none;color:inherit;opacity:.85;font:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:6px 0;cursor:pointer;flex-basis:100%;justify-content:flex-start}
+.cb-done .cb-tip{background:var(--accent-soft,#e6f7f5);border-radius:12px;padding:12px 14px;margin-top:12px;color:var(--fg)}
+.cb-done .cb-sms{display:flex;justify-content:center;width:100%}
 /* trust-v1 (2026-10-29): 처음 맡기시는 분께 */
 #trust{padding-bottom:72px}
 .tr-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}

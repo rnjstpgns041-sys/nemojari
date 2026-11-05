@@ -33,7 +33,9 @@
       '<p class="cb-err" role="alert"></p>' +
       '<button class="btn btn-primary cb-go" type="submit">전화 요청 보내기</button>' +
       '<p class="cb-or">바로 통화하고 싶으시면 <a href="tel:' + TEL.replace(/-/g, "") + '">' + TEL + "</a></p></form>" +
-      '<div class="cb-done" hidden><h2>접수됐어요</h2><p class="cb-sub"><b class="cb-num"></b> 번호로 작업 끝나는 대로 전화드려요. ' + TEL + ' 번호로 걸려 가니 꼭 받아주세요.</p><p class="cb-sub">사진이 있으면 문자로 같이 보내주시면 더 정확하게 말씀드릴 수 있어요.</p><a class="btn btn-soft" href="sms:' + TEL.replace(/-/g, "") + '">사진 문자로 보내기</a> <button type="button" class="btn btn-soft cb-close">닫기</button></div>';
+      '<div class="cb-done" hidden><h2>접수됐어요</h2><p class="cb-sub"><b class="cb-num"></b> 번호로 전화드려요. ' + TEL + ' 번호로 걸려 가니 꼭 받아주세요.</p>' +
+      '<p class="cb-sub cb-tip"><b>더 빨리 연락받으려면</b> 아래 버튼을 눌러 주세요. 요청 내용이 적힌 문자가 열려요. <b>보내기</b>만 누르시면 현장에 계신 사장님 휴대폰에 바로 떠요. 사진도 같이 붙이시면 더 정확해요.</p>' +
+      '<a class="btn btn-primary cb-sms" href="sms:' + TEL.replace(/-/g, "") + '">사장님께 문자로 바로 알리기</a> <button type="button" class="btn btn-soft cb-close">닫기</button></div>';
     document.body.appendChild(dlg);
     form = dlg.querySelector("form");
     done = dlg.querySelector(".cb-done");
@@ -73,15 +75,21 @@
     var fd = new URLSearchParams({ "form-name": "callback", tel: tel, work: data.work, area: data.area, when: data.when, page: data.page, "bot-field": data.hp });
     fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: fd.toString() }).catch(function () {});
     fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
-      .then(function (r) { if (!r.ok) throw 0; ok(tel); })
+      .then(function (r) { if (!r.ok) throw 0; ok(tel, data); })
       .catch(function () {
         btn.disabled = false; btn.textContent = "전화 요청 보내기";
-        err.innerHTML = '보내지 못했어요. 번거로우시겠지만 <a href="sms:' + TEL.replace(/-/g, "") + '">문자</a>나 <a href="tel:' + TEL.replace(/-/g, "") + '">전화</a>로 연락 주세요.';
+        err.innerHTML = '보내지 못했어요. 번거로우시겠지만 <a href="' + smsHref(data).replace(/"/g, "&quot;") + '">문자(내용 자동 입력)</a>나 <a href="tel:' + TEL.replace(/-/g, "") + '">전화</a>로 연락 주세요.';
       });
   }
-  function ok(tel) {
+  function smsHref(d) {
+    var body = "[네모자리 전화 요청]\n번호: " + fmt(d.tel) + "\n작업: " + (d.work || "-") + "\n동네: " + (d.area || "-") + "\n통화 편한 때: " + (d.when || "-") + "\n이 번호로 전화 부탁드려요.";
+    return "sms:" + TEL.replace(/-/g, "") + "?&body=" + encodeURIComponent(body);
+  }
+  function fmt(t) { return String(t).replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3"); }
+  function ok(tel, d) {
     form.hidden = true; done.hidden = false;
-    done.querySelector(".cb-num").textContent = tel.replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
+    done.querySelector(".cb-sms").href = smsHref(d);
+    done.querySelector(".cb-num").textContent = fmt(tel);
     try { sessionStorage.setItem("nj-cb", "1"); } catch (x) {}
     var n = document.querySelector(".cb-nudge"); if (n) n.remove();
   }
@@ -101,6 +109,27 @@
     document.body.appendChild(b);
     b.querySelector(".cb-nx").onclick = function () { b.remove(); };
   }
+  // 아직 결정 못 한 사람(가족과 상의 등)이 페이지를 카톡 등으로 보내두고 나중에 다시 연락하게
+  function addShare() {
+    var spots = document.querySelectorAll(".cta-band, .callband .in");
+    for (var i = 0; i < spots.length; i++) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "cb-share";
+      b.textContent = "가족에게 보내기 · 나중에 다시 보기";
+      spots[i].appendChild(b);
+    }
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".cb-share");
+    if (!b) return;
+    var h = document.querySelector("h1"), url = location.origin + location.pathname;
+    var text = "네모자리 " + (h ? h.textContent.replace(/\s+/g, " ").trim() : "") + " (전화 " + TEL + ")";
+    if (navigator.share) { navigator.share({ title: document.title, text: text, url: url }).catch(function () {}); return; }
+    var done2 = function () { b.textContent = "링크를 복사했어요. 카톡에 붙여 보내세요"; };
+    try { navigator.clipboard.writeText(text + "\n" + url).then(done2, function () { prompt("이 주소를 복사해 보내세요", url); }); }
+    catch (x) { prompt("이 주소를 복사해 보내세요", url); }
+  });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addShare); else addShare();
   var timer = setTimeout(nudge, 45000);
   addEventListener("scroll", function onS() {
     if (scrollY > (document.documentElement.scrollHeight - innerHeight) * 0.5) { removeEventListener("scroll", onS); clearTimeout(timer); setTimeout(nudge, 1500); }
