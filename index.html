@@ -529,7 +529,6 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 /* 네이버 앱: 오른쪽 아래 '맨 위로' 버튼 자리 비우기, 문자는 빼고 3칸 */
 .nv-app .mcta.m4{grid-template-columns:1.4fr 1fr;padding-right:72px}
 .nv-app .mcta.m4 a[href*="talk.naver"]{display:none}
-.cb-share{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border:0;background:none;color:inherit;opacity:.85;font:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:6px 0;cursor:pointer;flex-basis:100%;justify-content:flex-start}
 .cb-done .cb-tip{background:var(--accent-soft,#e6f7f5);border-radius:12px;padding:12px 14px;margin-top:12px;color:var(--fg)}
 .cb-done .cb-sms{display:flex;justify-content:center;width:100%}
 /* trust-v1 (2026-10-29): 처음 맡기시는 분께 */
@@ -1072,7 +1071,7 @@ h1,h2,h3{font-weight:800!important;letter-spacing:-0.045em}
 <a class="fcall" href="tel:01021938204" aria-label="전화 상담 010-2193-8204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><small>전화 상담</small>010-2193-8204</span></a>
 <nav class="mcta m4" aria-label="빠른 문의"><a class="p" href="tel:01021938204"><svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>전화 상담</a><a id="mSms" href="sms:01021938204">문자</a><a href="https://talk.naver.com/w5v40h" target="_blank" rel="noopener">톡톡</a></nav>
 <form name="callback" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="tel"><input name="work"><input name="area"><input name="when"><input name="page"><input name="bot-field"></form>
-<script src="/assets/cb.js?v=5" defer></script>
+<script src="/assets/cb.js?v=6" defer></script>
 <script>(function(){var d=document.getElementById("psheet");if(!d)return;var T="010-2193-8204";
 function sms(j){return "sms:01021938204?&body="+encodeURIComponent("[네모자리 견적 문의]\n작업: "+j+"\n지역: (동네를 적어주세요)\n내용: \n※ 현장 사진 2~3장 첨부합니다")}
 document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".jpick");if(!b)return;var j=b.getAttribute("data-job");
