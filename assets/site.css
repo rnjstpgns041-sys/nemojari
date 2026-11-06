@@ -422,7 +422,7 @@ svg.ph{width:1.2em;height:1.2em;flex:none}
 /* callback: 번호 남기기 */
 .hero-cta .btn-soft.cbb{background:var(--accent-ink);color:var(--bg)}
 @media (max-width:600px){.hero-cta .btn-soft{width:auto;flex:1 1 0;padding-inline:8px;font-size:16px;white-space:nowrap}}
-.mcta.m4{grid-template-columns:1.35fr 1.15fr .8fr .7fr}
+.mcta.m4{grid-template-columns:1.5fr 1.1fr .8fr}
 .mcta.m4 a,.mcta.m4 button{font-size:15px;padding-inline:4px}
 .mcta.m4 a.p{font-size:16px}
 .mcta.m4 .cbm{background:var(--accent-ink);color:var(--bg)}
@@ -495,7 +495,7 @@ dialog.cb::backdrop{background:rgba(0,0,0,.45)}
 }
 
 /* 네이버 앱: 오른쪽 아래 '맨 위로' 버튼 자리 비우기, 문자는 빼고 3칸 */
-.nv-app .mcta.m4{grid-template-columns:1.25fr 1.15fr .8fr;padding-right:72px}
+.nv-app .mcta.m4{grid-template-columns:1.4fr 1fr;padding-right:72px}
 .nv-app .mcta.m4 a[href*="talk.naver"]{display:none}
 .cb-share{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border:0;background:none;color:inherit;opacity:.85;font:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:6px 0;cursor:pointer;flex-basis:100%;justify-content:flex-start}
 .cb-done .cb-tip{background:var(--accent-soft,#e6f7f5);border-radius:12px;padding:12px 14px;margin-top:12px;color:var(--fg)}
